@@ -60,7 +60,7 @@ const theme = useCookie<ThemesList>('theme', {
         height: 100%;
         border-radius: 8px;
 
-        background: $primary400;
+        background: $primary600;
 
         transition: 0.5s ease-in-out;
     }

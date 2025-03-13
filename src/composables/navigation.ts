@@ -3,7 +3,7 @@ import HomeIcon from 'assets/icons/home.svg?component';
 export interface HeaderItem {
     text: string;
     active?: boolean;
-    action?: () => any;
+    action?: () => void;
     path?: string;
     disabled?: boolean;
     hide?: boolean;
@@ -17,7 +17,7 @@ export const useHeaderMenu = () => computed<HeaderItem[]>(() => {
 
     const menu: HeaderItem[] = [
         {
-            text: 'home',
+            text: 'Home',
             path: '/',
             icon: HomeIcon,
         },

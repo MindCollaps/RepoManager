@@ -61,6 +61,20 @@ useHead(() => {
             key: 'pageStyles',
             innerHTML: `:root {${ css }}`,
         }],
+        link: [
+            {
+                rel: 'preconnect',
+                href: 'https://fonts.googleapis.com',
+            },
+            {
+                rel: 'preconnect',
+                href: 'https://fonts.gstatic.com',
+            },
+            {
+                rel: 'stylesheet',
+                href: 'https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wdth,wght@0,62.5..100,100..900;1,62.5..100,100..900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap',
+            },
+        ],
     };
 });
 </script>
@@ -94,7 +108,12 @@ html, body {
     margin: 0;
     padding: 0;
 
-    font-family: $defaultFont;
+    font-family: "Noto Sans", sans-serif;
+    font-variation-settings:
+    "wdth" 100;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
     color: $lightgray150;
     text-size-adjust: 100%;
 

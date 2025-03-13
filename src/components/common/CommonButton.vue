@@ -152,7 +152,6 @@ const getAttrs = computed(() => {
     border: none;
     border-radius: 8px;
 
-    font-family: $defaultFont;
     font-size: 13px;
     font-weight: 600;
     color: $lightgray50Orig;
