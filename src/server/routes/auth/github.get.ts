@@ -6,7 +6,7 @@ export default defineOAuthGitHubEventHandler({
         scope: ['repo'],
     },
     async onSuccess(event, { user, tokens }) {
-        const dbUser = await prisma.user.findUnique({
+        let dbUser = await prisma.user.findUnique({
             where: {
                 email: user.email,
             },
@@ -23,7 +23,7 @@ export default defineOAuthGitHubEventHandler({
             });
         }
         else {
-            await prisma.user.create({
+            dbUser = await prisma.user.create({
                 data: {
                     email: user.email,
                     username: user.login,
@@ -35,6 +35,7 @@ export default defineOAuthGitHubEventHandler({
 
         await setUserSession(event, {
             user: {
+                id: dbUser.id,
                 username: user.login,
                 email: user.email,
                 loggedIn: new Date(Date.now()),

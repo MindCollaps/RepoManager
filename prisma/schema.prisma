@@ -11,9 +11,53 @@ datasource db {
 }
 
 model User {
-  id               Int     @id @default(autoincrement())
-  email            String  @unique
+  id               Int            @id @default(autoincrement())
+  email            String         @unique
+  name             String?
   username         String?
   git_access_token String?
+  created          DateTime       @default(now())
+  GitUser          GitUser?       @relation(fields: [gitUserId], references: [id])
+  gitUserId        Int?
+  GitGroups        GitGroup[]
+  Notifications    Notification[]
+}
+
+model GitUser {
+  id               Int       @id @default(autoincrement())
+  git_access_token String?
+  email            String    @unique
+  username         String?
   name             String?
+  expires          Boolean
+  expiryDate       DateTime?
+  repoState        Int
+  owner            User[]
+  created          DateTime  @default(now())
+  GitGroup         GitGroup? @relation(fields: [gitGroupId], references: [id])
+  gitGroupId       Int?
+}
+
+model GitGroup {
+  id          Int       @id @default(autoincrement())
+  users       GitUser[]
+  expires     Boolean
+  expiryDate  DateTime?
+  deleteUsers Boolean   @default(true)
+  deleteSelf  Boolean   @default(true)
+  repoOwner   String
+  repoName    String
+  owner       User      @relation(fields: [userId], references: [id])
+  created     DateTime  @default(now())
+  userId      Int
+}
+
+model Notification {
+  id      Int      @id @default(autoincrement())
+  title   String
+  content String
+  read    Boolean
+  owner   User     @relation(fields: [userId], references: [id])
+  created DateTime @default(now())
+  userId  Int
 }
