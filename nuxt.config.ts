@@ -11,15 +11,15 @@ export default defineNuxtConfig({
             ],
         },
     },
+    runtimeConfig: {
+        oauth: {
+            github: {},
+        },
+    },
     compatibilityDate: '2024-11-01',
     devtools: { enabled: true },
     srcDir: 'src/',
-    modules: [
-        '@nuxt/devtools',
-        '@nuxt/eslint',
-        '@nuxtjs/stylelint-module',
-        '@pinia/nuxt',
-    ],
+    modules: ['@nuxt/devtools', '@nuxt/eslint', '@nuxtjs/stylelint-module', '@pinia/nuxt', 'nuxt-auth-utils', '@prisma/nuxt'],
     eslint: {
         checker: {
             configType: 'flat',

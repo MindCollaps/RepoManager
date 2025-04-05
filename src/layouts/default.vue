@@ -4,6 +4,7 @@
             class="header"
         >
             <view-menu/>
+            <view-login/>
             <view-theme/>
         </div>
         <div class="app_content">
@@ -17,6 +18,7 @@
 import { useStore } from '~/store';
 import ViewMenu from '~/components/views/ViewMenu.vue';
 import ViewTheme from '~/components/views/ViewTheme.vue';
+import ViewLogin from '~/components/views/ViewLogin.vue';
 
 defineSlots<{ default: () => any }>();
 
@@ -84,8 +86,9 @@ useHead(() => {
     position: sticky;
 
     display: grid;
-    grid-template-areas: "1 1";
-    grid-template-columns: 90% 10%;
+    grid-template-areas: "1 1 1";
+    grid-template-columns: 2fr 0.3fr 0.3fr;
+    gap: 12px;
     align-items: center;
 
     width: 100%;

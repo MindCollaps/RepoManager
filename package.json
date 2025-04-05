@@ -11,14 +11,16 @@
     "postinstall": "nuxt prepare",
     "lint:ts": "eslint .",
     "lint:ts:fix": "eslint . --fix",
-    "stylelint": "stylelint --max-warnings=0 ./src/**/*{.css,scss,.vue}",
-    "stylelint:fix": "stylelint --fix ./src/**/*{.css,scss,.vue}",
+    "stylelint": "stylelint --max-warnings=0 './src/**/*.{vue,scss,css}'",
+    "stylelint:fix": "stylelint --fix './src/**/*.{vue,scss,css}'",
     "lint:fix": "yarn stylelint:fix && yarn lint:ts:fix",
     "lint": "yarn stylelint && yarn lint:ts",
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
+    "@prisma/nuxt": "^0.3.0",
     "nuxt": "^3.15.4",
+    "nuxt-auth-utils": "^0.5.18",
     "pinia": "^3.0.1",
     "vite-svg-loader": "^5.1.0",
     "vue": "^3.5.13",

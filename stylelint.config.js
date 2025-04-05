@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     defaultSeverity: 'warning',
     plugins: [
         '@stylistic/stylelint-plugin',
@@ -7,6 +7,7 @@ module.exports = {
         'stylelint-config-standard',
         'stylelint-config-recommended-scss',
         'stylelint-config-recommended-vue/scss',
+        'stylelint-config-recommended-vue',
         'stylelint-config-clean-order',
     ],
     rules: {
@@ -48,5 +49,6 @@ module.exports = {
         'no-duplicate-selectors': null,
         'declaration-property-value-no-unknown': null,
         'at-rule-descriptor-value-no-unknown': null,
+        'at-rule-no-unknown': null,
     },
 };

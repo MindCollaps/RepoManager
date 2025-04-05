@@ -1,0 +1,18 @@
+services:
+    manager:
+        build:
+            context: .
+            dockerfile: .config/Dockerfile
+        image: repomanager-1.0.0
+        container_name: repomanager
+        ports:
+            - "80:8080"
+        healthcheck:
+            test: "bash -c 'echo -n > /dev/tcp/127.0.0.1/8080'"
+            interval: 1s
+            retries: 360
+        volumes:
+            - db:/app/db
+
+volumes:
+    db:

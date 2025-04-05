@@ -16,6 +16,7 @@
             '--icon-width': iconWidth,
             '--primary-color': colorsList[primaryColor],
             '--link-color': colorsList[linkColor],
+            '--icon-color': colorsList[iconColor],
             '--hover-color': colorsList[hoverColor],
             '--focus-color': colorsList[focusColor],
         }"
@@ -86,15 +87,19 @@ const props = defineProps({
     },
     primaryColor: {
         type: String as PropType<ColorsList>,
-        default: 'primary500',
+        default: 'primary400',
     },
     linkColor: {
         type: String as PropType<ColorsList>,
         default: 'lightgray150',
     },
+    iconColor: {
+        type: String as PropType<ColorsList>,
+        default: 'lightgray150',
+    },
     hoverColor: {
         type: String as PropType<ColorsList>,
-        default: 'primary400',
+        default: 'primary200',
     },
     focusColor: {
         type: String as PropType<ColorsList>,
@@ -152,7 +157,8 @@ const getAttrs = computed(() => {
     border: none;
     border-radius: 8px;
 
-    font-size: 13px;
+    font-family: $defaultFont;
+    font-size: 14px;
     font-weight: 600;
     color: $lightgray50Orig;
     text-align: v-bind(textAlign);
@@ -161,7 +167,7 @@ const getAttrs = computed(() => {
     appearance: none;
     background: var(--primary-color);
     outline: none;
-    box-shadow: 3px 3px 5px rgba(0,0,0, 0.25);
+    box-shadow: 2px 2px 2px rgba(0,0,0, 0.25);
 
     &_content {
         width: 100%;
@@ -174,17 +180,16 @@ const getAttrs = computed(() => {
         &:hover {
             background: var(--hover-color);
         }
-
-        &:focus, &:active {
-            background: var(--focus-color);
-        }
     }
 
     &_icon {
-        width: var(--icon-width);
-        min-width: var(--icon-width);
         display: flex;
         justify-content: center;
+
+        width: var(--icon-width);
+        min-width: var(--icon-width);
+
+        fill: var(--icon-color);
     }
 
     &--type-secondary, &--type-secondary-flat, &--type-secondary-875 {
@@ -224,15 +229,17 @@ const getAttrs = computed(() => {
 
     &--type-transparent {
         color: $lightgray150;
-        background: transparent !important;
+        background: transparent;
+        box-shadow: none;
+
+        .button_icon {
+            fill: $lightgray150;
+        }
 
         @include hover {
             &:hover {
                 color: $primary500;
-            }
-
-            &:focus, &:active {
-                color: $primary600;
+                background: $darkgray800;
             }
         }
     }
