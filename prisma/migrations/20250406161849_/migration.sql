@@ -7,6 +7,7 @@ CREATE TABLE "User" (
     "git_access_token" TEXT,
     "created" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "gitUserId" INTEGER,
+    "avatar_url" TEXT,
     CONSTRAINT "User_gitUserId_fkey" FOREIGN KEY ("gitUserId") REFERENCES "GitUser" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
 
@@ -22,6 +23,7 @@ CREATE TABLE "GitUser" (
     "repoState" INTEGER NOT NULL,
     "created" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "gitGroupId" INTEGER,
+    "avatar_url" TEXT,
     CONSTRAINT "GitUser_gitGroupId_fkey" FOREIGN KEY ("gitGroupId") REFERENCES "GitGroup" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
 

@@ -1,15 +1,24 @@
 <template>
-    <div v-if="loggedIn">
-        <h1>Welcome {{ user?.username }}</h1>
+    <div
+        v-if="loggedIn"
+        class="profile"
+    >
+        <div class="profile-hello">
+            <common-git-profile-pic width="128px"/>
+            <h1>Welcome {{ user?.username }}</h1>
+        </div>
         <ul>
-            <li>Email: {{ user?.email }}</li>
+            <li>Email: {{ session?.email }}</li>
         </ul>
         <common-button
             width="128px"
             @click="clear"
         >Logout</common-button>
     </div>
-    <div v-else>
+    <div
+        v-else
+        class="profile"
+    >
         <h1>You are not logged in!</h1>
         <common-button
             href="/login"
@@ -20,6 +29,25 @@
 
 <script setup lang="ts">
 import CommonButton from '~/components/common/CommonButton.vue';
+import CommonGitProfilePic from '~/components/common/CommonGitProfilePic.vue';
 
-const { loggedIn, user, clear } = useUserSession();
+const { loggedIn, user, session, clear } = useUserSession();
 </script>
+
+<style scoped lang="scss">
+.profile {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+
+    margin-top: 32px;
+
+    &-hello {
+        display: flex;
+        flex-direction: row;
+        gap: 32px;
+        align-items: center;
+    }
+}
+</style>

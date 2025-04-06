@@ -16,10 +16,13 @@ export default defineNuxtConfig({
             github: {},
         },
     },
+    prisma: {
+        autoSetupPrisma: true,
+    },
     compatibilityDate: '2024-11-01',
     devtools: { enabled: true },
     srcDir: 'src/',
-    modules: ['@nuxt/devtools', '@nuxt/eslint', '@nuxtjs/stylelint-module', '@pinia/nuxt', 'nuxt-auth-utils', '@prisma/nuxt'],
+    modules: ['@nuxt/devtools', '@nuxt/eslint', '@nuxtjs/stylelint-module', '@pinia/nuxt', 'nuxt-auth-utils', '@prisma/nuxt', '@nuxt/image'],
     eslint: {
         checker: {
             configType: 'flat',

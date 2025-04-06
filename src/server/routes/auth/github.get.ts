@@ -19,6 +19,7 @@ export default defineOAuthGitHubEventHandler({
                 },
                 data: {
                     git_access_token: tokens.access_token,
+                    avatar_url: user.avatar_url,
                 },
             });
         }
@@ -29,6 +30,7 @@ export default defineOAuthGitHubEventHandler({
                     username: user.login,
                     name: user.name,
                     git_access_token: tokens.access_token,
+                    avatar_url: user.avatar_url,
                 },
             });
         }
@@ -37,9 +39,10 @@ export default defineOAuthGitHubEventHandler({
             user: {
                 id: dbUser.id,
                 username: user.login,
-                email: user.email,
                 loggedIn: new Date(Date.now()),
             },
+            email: user.email,
+            avatar_url: user.avatar_url,
         });
         return sendRedirect(event, '/login/success');
     },

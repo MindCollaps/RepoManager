@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -17,10 +14,11 @@ model User {
   username         String?
   git_access_token String?
   created          DateTime       @default(now())
-  GitUser          GitUser?       @relation(fields: [gitUserId], references: [id])
   gitUserId        Int?
+  avatar_url       String?
   GitGroups        GitGroup[]
   Notifications    Notification[]
+  GitUser          GitUser?       @relation(fields: [gitUserId], references: [id])
 }
 
 model GitUser {
@@ -32,24 +30,25 @@ model GitUser {
   expires          Boolean
   expiryDate       DateTime?
   repoState        Int
-  owner            User[]
   created          DateTime  @default(now())
-  GitGroup         GitGroup? @relation(fields: [gitGroupId], references: [id])
   gitGroupId       Int?
+  avatar_url       String?
+  GitGroup         GitGroup? @relation(fields: [gitGroupId], references: [id])
+  owner            User[]
 }
 
 model GitGroup {
   id          Int       @id @default(autoincrement())
-  users       GitUser[]
   expires     Boolean
   expiryDate  DateTime?
   deleteUsers Boolean   @default(true)
   deleteSelf  Boolean   @default(true)
   repoOwner   String
   repoName    String
-  owner       User      @relation(fields: [userId], references: [id])
   created     DateTime  @default(now())
   userId      Int
+  owner       User      @relation(fields: [userId], references: [id])
+  users       GitUser[]
 }
 
 model Notification {
@@ -57,7 +56,7 @@ model Notification {
   title   String
   content String
   read    Boolean
-  owner   User     @relation(fields: [userId], references: [id])
   created DateTime @default(now())
   userId  Int
+  owner   User     @relation(fields: [userId], references: [id])
 }

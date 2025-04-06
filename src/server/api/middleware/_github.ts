@@ -5,10 +5,6 @@ import { makeOctokit } from '~/utils/github';
 const cachedOcto: Map<number, Octokit> = new Map();
 
 export default defineEventHandler(async event => {
-    if (!event.path.startsWith('/api/v1/gh')) {
-        return;
-    }
-
     try {
         const session = await requireUserSession(event);
 
