@@ -1,22 +1,22 @@
-import UsersDashboard from "~/components/dashboard/UsersDashboard.vue";
-import GroupDashboard from "~/components/dashboard/GroupDashboard.vue";
+import UsersDashboard from '~/components/dashboard/UsersDashboard.vue';
+import GroupDashboard from '~/components/dashboard/GroupDashboard.vue';
 
 export interface DashboardPage {
-  title: String;
-  content: Component;
+    title: string;
+    content: Component;
 }
 
 export const useDashboard = () => computed<DashboardPage[]>(() => {
-  const dashboard: DashboardPage[] = [
-      {
-          title: "Users",
-          content: UsersDashboard,
-      },
-      {
-        title: "Groups",
-        content: GroupDashboard,
-      }
-  ];
+    const dashboard: DashboardPage[] = [
+        {
+            title: 'Users',
+            content: UsersDashboard,
+        },
+        {
+            title: 'Groups',
+            content: GroupDashboard,
+        },
+    ];
 
-  return dashboard;
+    return dashboard;
 });

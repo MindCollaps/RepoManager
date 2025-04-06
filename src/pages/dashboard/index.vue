@@ -1,16 +1,24 @@
 <template>
     <div class="dashboard">
         <div class="dashboard-side">
-          <CommonButton v-for="(d, i) in dashboard" @click="activeId = i" :key="i" :type="activeId === i ? 'primary' : 'transparent'">{{ d.title }}</CommonButton>
+            <common-button
+                v-for="(d, i) in dashboard"
+                :key="i"
+                :type="activeId === i ? 'primary' : 'transparent'"
+                @click="activeId = i"
+            >{{ d.title }}</common-button>
         </div>
         <div class="dashboard-top">
-          <template v-if="activeId >= 0 && activeId < dashboard.length">{{ dashboard[activeId].title }}</template>
+            <template v-if="activeId >= 0 && activeId < dashboard.length">{{ dashboard[activeId].title }}</template>
         </div>
         <div class="dashboard-topside">
-          Repo-Manager
+            Repo-Manager
         </div>
         <div class="dashboard-content">
-          <component v-if="activeId >= 0 && activeId < dashboard.length" :is="dashboard[activeId].content"/>
+            <component
+                :is="dashboard[activeId].content"
+                v-if="activeId >= 0 && activeId < dashboard.length"
+            />
         </div>
     </div>
 </template>
