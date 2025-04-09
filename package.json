@@ -20,6 +20,8 @@
   "dependencies": {
     "@nuxt/image": "1.10.0",
     "@prisma/nuxt": "^0.3.0",
+    "@zenstackhq/runtime": "2.13.2",
+    "@zenstackhq/server": "^2.13.2",
     "croner": "^9.0.0",
     "nuxt": "^3.15.4",
     "nuxt-auth-utils": "^0.5.18",
@@ -38,13 +40,14 @@
     "@pinia/nuxt": "^0.10.1",
     "@stylistic/eslint-plugin": "^4.2.0",
     "@stylistic/stylelint-plugin": "^3.1.2",
+    "@zenstackhq/openapi": "^2.13.2",
     "eslint": "^9.22.0",
     "eslint-plugin-vue": "^10.0.0",
     "globals": "^16.0.0",
     "postcss": "^8.5.3",
     "postcss-html": "^1.8.0",
     "prettier": "3.5.3",
-    "prisma": "^6.5.0",
+    "prisma": "6.5.x",
     "sass-embedded": "^1.85.1",
     "stylelint": "^16.15.0",
     "stylelint-config-clean-order": "^7.0.0",
@@ -54,6 +57,7 @@
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.26.1",
     "vite-plugin-eslint2": "^5.0.3",
-    "vue-tsc": "^2.2.8"
+    "vue-tsc": "^2.2.8",
+    "zenstack": "2.13.2"
   }
 }

@@ -5,17 +5,21 @@ import { makeOctokit } from '~/utils/github';
 const cachedOcto: Map<number, Octokit> = new Map();
 
 export default defineEventHandler(async event => {
+    if (!event.path.startsWith('/api/v1/gh')) {
+        return;
+    }
+
     try {
         const session = await requireUserSession(event);
 
-        if (!session.user.id) {
+        if (!session.secure?.userId) {
             throw createError({
                 statusCode: 400,
-                statusMessage: 'Invalid ID format. Expected numeric string',
+                statusMessage: 'ID is missing!',
             });
         }
 
-        const userId = session.user.id;
+        const userId = session.secure.userId;
 
         const dbUser = await prisma.user.findUnique({
             where: {

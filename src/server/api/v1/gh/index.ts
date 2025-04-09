@@ -1,5 +1,5 @@
 import type { Octokit } from 'octokit';
-import requireGithub from '~/server/api/middleware/_github';
+import requireGithub from '~/server/middleware/github';
 import { octoListRepos } from '~/utils/github';
 
 export default defineEventHandler(async event => {

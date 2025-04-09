@@ -6,7 +6,17 @@
                 :key="i"
                 :type="activeId === i ? 'primary' : 'transparent'"
                 @click="activeId = i"
-            >{{ d.title }}</common-button>
+            >
+                <template #default>
+                    {{ d.title }}
+                </template>
+                <template
+                    v-if="d.icon"
+                    #icon
+                >
+                    <component :is="d.icon"/>
+                </template>
+            </common-button>
         </div>
         <div class="dashboard-top">
             <template v-if="activeId >= 0 && activeId < dashboard.length">{{ dashboard[activeId].title }}</template>

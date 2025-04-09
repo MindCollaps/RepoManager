@@ -37,12 +37,14 @@ export default defineOAuthGitHubEventHandler({
 
         await setUserSession(event, {
             user: {
-                id: dbUser.id,
                 username: user.login,
-                loggedIn: new Date(Date.now()),
+                logon: new Date(Date.now()),
             },
-            email: user.email,
             avatar_url: user.avatar_url,
+            secure: {
+                email: user.email,
+                userId: dbUser.id,
+            },
         });
         return sendRedirect(event, '/login/success');
     },

@@ -1,15 +1,17 @@
 declare module '#auth-utils' {
     interface User {
-        id: number;
         username: string;
-        loggedIn: Date;
+        logon: Date;
     }
 
     interface UserSession {
-        email: string;
         avatar_url?: string;
     }
 
+    interface SecureSessionData {
+        userId: number;
+        email: string;
+    }
 }
 
 export {};
