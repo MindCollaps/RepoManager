@@ -1,10 +1,10 @@
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
 }
 
 plugin openapi {
@@ -17,63 +17,64 @@ plugin openapi {
 }
 
 model User {
-  id               Int            @id @default(autoincrement())
-  email            String         @unique
-  name             String?
-  username         String?
-  git_access_token String?
-  created          DateTime       @default(now())
-  gitUserId        Int?
-  avatar_url       String?
-  GitGroups        GitGroup[]
-  Notifications    Notification[]
-  GitUser          GitUser?       @relation(fields: [gitUserId], references: [id])
+    id               Int            @id @default(autoincrement())
+    email            String         @unique
+    name             String?
+    username         String?
+    git_access_token String?
+    created          DateTime       @default(now())
+    gitUserId        Int?
+    avatar_url       String?
+    GitGroups        GitGroup[]
+    Notifications    Notification[]
+    GitUser          GitUser?       @relation(fields: [gitUserId], references: [id])
 
-   @@allow('all', auth().id == id)
+    @@allow('all', auth().id == id)
 }
 
 model GitUser {
-  id               Int       @id @default(autoincrement())
-  git_access_token String?
-  email            String    @unique
-  username         String?
-  name             String?
-  expires          Boolean
-  expiryDate       DateTime?
-  repoState        Int
-  created          DateTime  @default(now())
-  gitGroupId       Int?
-  avatar_url       String?
-  GitGroup         GitGroup? @relation(fields: [gitGroupId], references: [id])
-  owner            User[]
+    id               Int       @id @default(autoincrement())
+    git_access_token String?
+    email            String    @unique
+    username         String?
+    name             String?
+    expires          Boolean
+    expiryDate       DateTime?
+    repoState        Int
+    created          DateTime  @default(now())
+    gitGroupId       Int?
+    avatar_url       String?
+    GitGroup         GitGroup? @relation(fields: [gitGroupId], references: [id])
+    owner            User[]
+    custom           Boolean?
 
-   @@allow('all', owner?[id == auth().id])
+    @@allow('all', owner?[id == auth().id])
 }
 
 model GitGroup {
-  id          Int       @id @default(autoincrement())
-  expires     Boolean
-  expiryDate  DateTime?
-  deleteUsers Boolean   @default(true)
-  deleteSelf  Boolean   @default(true)
-  repoOwner   String
-  repoName    String
-  created     DateTime  @default(now())
-  userId      Int
-  owner       User      @relation(fields: [userId], references: [id])
-  users       GitUser[]
+    id          Int       @id @default(autoincrement())
+    expires     Boolean
+    expiryDate  DateTime?
+    deleteUsers Boolean   @default(true)
+    deleteSelf  Boolean   @default(true)
+    repoOwner   String
+    repoName    String
+    created     DateTime  @default(now())
+    userId      Int
+    owner       User      @relation(fields: [userId], references: [id])
+    users       GitUser[]
 
-   @@allow('all', owner.id == auth().id)
+    @@allow('all', owner.id == auth().id)
 }
 
 model Notification {
-  id      Int      @id @default(autoincrement())
-  title   String
-  content String
-  read    Boolean
-  created DateTime @default(now())
-  userId  Int
-  owner   User     @relation(fields: [userId], references: [id])
+    id      Int      @id @default(autoincrement())
+    title   String
+    content String
+    read    Boolean
+    created DateTime @default(now())
+    userId  Int
+    owner   User     @relation(fields: [userId], references: [id])
 
-  @@allow('all', owner.id == auth().id)
+    @@allow('all', owner.id == auth().id)
 }

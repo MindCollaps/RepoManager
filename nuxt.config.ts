@@ -22,14 +22,7 @@ export default defineNuxtConfig({
     compatibilityDate: '2024-11-01',
     devtools: { enabled: true },
     srcDir: 'src/',
-    modules: ['@nuxt/devtools', '@nuxt/eslint', '@nuxtjs/stylelint-module', '@pinia/nuxt', 'nuxt-auth-utils', '@prisma/nuxt', '@nuxt/image', 'nuxt-openapi-docs-module'],
-    openApiDocs: {
-        name: 'OpenApiDocs',
-        folder: './docs/openapi',
-        files: () => ({
-            'api-docs.yaml': 'API',
-        }),
-    },
+    modules: ['@nuxt/devtools', '@nuxt/eslint', '@nuxtjs/stylelint-module', '@pinia/nuxt', 'nuxt-auth-utils', '@prisma/nuxt', '@nuxt/image'],
     eslint: {
         checker: {
             configType: 'flat',

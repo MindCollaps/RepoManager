@@ -52,7 +52,6 @@ defineProps({
     },
     isVisible: {
         type: Boolean,
-        default: false,
     },
     submitText: {
         type: String,
@@ -111,6 +110,7 @@ defineSlots<{
     &-content {
         padding: 32px;
         background: $darkgray950;
+        border-radius: 8px;
     }
 
     &-control {

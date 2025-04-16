@@ -2634,6 +2634,14 @@ paths:
             type: array
             items:
               type: string
+        - name: filter[custom]
+          required: false
+          description: Equality filter for "custom"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: boolean
       responses:
         "200":
           description: Successful operation
@@ -3333,6 +3341,14 @@ paths:
             type: array
             items:
               type: string
+        - name: filter[custom]
+          required: false
+          description: Equality filter for "custom"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: boolean
       responses:
         "200":
           description: Successful operation
@@ -3767,6 +3783,14 @@ paths:
             type: array
             items:
               type: string
+        - name: filter[custom]
+          required: false
+          description: Equality filter for "custom"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: boolean
       responses:
         "200":
           description: Successful operation
@@ -5966,6 +5990,7 @@ components:
             - created
             - gitGroupId
             - avatar_url
+            - custom
           properties:
             git_access_token:
               oneOf:
@@ -6001,6 +6026,10 @@ components:
               oneOf:
                 - type: "null"
                 - type: string
+            custom:
+              oneOf:
+                - type: "null"
+                - type: boolean
         relationships:
           type: object
           properties:
@@ -6062,6 +6091,10 @@ components:
                   oneOf:
                     - type: "null"
                     - type: string
+                custom:
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
             relationships:
               type: object
               properties:
@@ -6124,6 +6157,10 @@ components:
                   oneOf:
                     - type: "null"
                     - type: string
+                custom:
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
             relationships:
               type: object
               properties:
