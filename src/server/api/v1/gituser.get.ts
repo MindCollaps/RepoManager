@@ -1,4 +1,4 @@
-import requireGithub from '~/server/middleware/github';
+import requireGithub from '~/server/requirements/github';
 import type { Octokit } from 'octokit';
 import { z } from 'zod';
 
@@ -9,7 +9,7 @@ const QuerySchema = z.object({
 export default defineEventHandler(async event => {
     const session = await requireUserSession(event);
 
-    if (!session.secure?.userId) {
+    if (!session.user?.userId) {
         throw createError({
             statusCode: 400,
             statusMessage: 'ID is missing!',

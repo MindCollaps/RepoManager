@@ -1,12 +1,13 @@
 import { prisma } from '~/server/prisma';
-import requireGithub from '~/server/middleware/github';
+import requireGithub from '~/server/requirements/github';
 import type { Octokit } from 'octokit';
 import { z } from 'zod';
+import { Prisma } from '@prisma/client';
 
 const PostBodySchema = z.object({
-    username: z.string(),
-    name: z.string(),
-    email: z.string(),
+    username: z.string().min(2, 'Username must contain 2 letters'),
+    name: z.string().min(2, 'Name must contain 2 letters').max(32, 'Name must not be longer than 32 letters'),
+    email: z.string().email(),
     expires: z.boolean(),
     expiryDate: z.date().optional(),
 });
@@ -14,7 +15,7 @@ const PostBodySchema = z.object({
 export default defineEventHandler(async event => {
     const session = await requireUserSession(event);
 
-    if (!session.secure?.userId) {
+    if (!session.user?.userId) {
         throw createError({
             statusCode: 400,
             statusMessage: 'ID is missing!',
@@ -27,7 +28,7 @@ export default defineEventHandler(async event => {
         throw createError({
             statusCode: 400,
             statusMessage: 'Request body invalid!',
-            data: body.error.issues,
+            data: body.error.issues.map(x => x.message).join(', '),
         });
     }
 
@@ -45,22 +46,39 @@ export default defineEventHandler(async event => {
         });
     }
 
-    const dbUser = await prisma.gitUser.create({
-        data: {
-            email: body.data.email,
-            avatar_url: response.data.avatar_url,
-            name: body.data.name,
-            username: body.data.username,
-            expires: body.data.expires,
-            repoState: 0,
-            custom: true,
-            owner: {
-                connect: [
-                    { id: session.secure.userId },
-                ],
+    try {
+        const dbUser = await prisma.gitUser.create({
+            data: {
+                email: body.data.email,
+                avatar_url: response.data.avatar_url,
+                name: body.data.name,
+                username: body.data.username,
+                expires: body.data.expires,
+                repoState: 0,
+                custom: true,
+                owner: {
+                    connect: [
+                        { id: session.user.userId },
+                    ],
+                },
             },
-        },
-    });
+        });
 
-    return dbUser;
+        return dbUser;
+    }
+    catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+            if (error.code === 'P2002') {
+                throw createError({
+                    statusCode: 403,
+                    statusMessage: 'A user with this email exists!',
+                });
+            }
+        }
+        throw createError({
+            statusCode: 500,
+            statusMessage: 'Unknown Database Error occured!',
+            cause: error,
+        });
+    }
 });

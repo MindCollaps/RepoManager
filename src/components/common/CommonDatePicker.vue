@@ -1,6 +1,12 @@
 <template>
     <div class="time-picker">
         <div class="time-picker-container">
+            <div
+                v-if="$slots.default"
+                class="time-picker_label"
+            >
+                <slot/>
+            </div>
             <common-button
                 type="secondary-flat"
                 @click="adjustTime(-30)"
@@ -25,6 +31,8 @@
 <script setup lang="ts">
 import CommonInputText from '~/components/common/CommonInputText.vue';
 import CommonButton from '~/components/common/CommonButton.vue';
+
+defineSlots<{ default?: () => string }>();
 
 const date = defineModel<Date>({ required: true });
 
@@ -59,6 +67,12 @@ const adjustTime = (minutes: number) => {
     justify-content: center;
 
     width: 100%;
+
+    &_label {
+        margin-bottom: 8px;
+        font-size: 13px;
+        font-weight: 600;
+    }
 
     &-container {
         display: flex;

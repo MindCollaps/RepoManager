@@ -47,6 +47,21 @@
                 </template>
             </common-button>
         </div>
+        <div class="dashboard-user--users-list">
+            <div
+                v-for="g in gitUsers"
+                :key="g.id"
+                class="dashboard-user--users-list-item"
+            >
+                {{ g.name }}
+            </div>
+            <div
+                v-if="gitUsers?.length === 0"
+                class="dashboard-user--users-list-item"
+            >
+                Empty
+            </div>
+        </div>
     </div>
 </template>
 
@@ -58,6 +73,9 @@ import CommonCheckbox from '../common/CommonCheckbox.vue';
 import CommonDatePicker from '../common/CommonDatePicker.vue';
 import CommonGitProfilePic from '../common/CommonGitProfilePic.vue';
 import AddIcon from '~/assets/icons/add.svg?component';
+import { useFindManyGitUser } from '~~/lib/hooks';
+
+const { data: gitUsers } = useFindManyGitUser({});
 
 const popupVisible = ref(false);
 
@@ -76,7 +94,7 @@ const newUser = ref({ ...defaultUser });
 
 const getGitStyle = computed(() => {
     if (!newUser.value.confirmed) {
-        return { };
+        return {};
     }
 
     if (newUser.value.confirmStatus) {
@@ -124,9 +142,12 @@ async function createUser() {
             expires: newUser.value.expires,
             expryDate: newUser.value.expiryDate,
         },
+    }).then(data => {
+        alert('User created!');
+        closePopup();
     }).catch(error => {
         if (error.statusCode === 400) {
-            alert(error.data);
+            alert(error.data.data);
         }
     });
 }
@@ -141,6 +162,23 @@ async function createUser() {
         display: flex;
         flex-direction: row;
         width: 100%;
+    }
+
+    &--users-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        margin-top: 16px;
+        padding: 16px;
+
+        background: $darkgray900;
+
+        &-item {
+            padding: 16px;
+            border-radius: 8px;
+            background: $darkgray850;
+        }
     }
 
     &--popup-content {

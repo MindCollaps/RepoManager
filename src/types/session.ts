@@ -2,6 +2,7 @@ declare module '#auth-utils' {
     interface User {
         username: string;
         logon: Date;
+        userId: number;
     }
 
     interface UserSession {
@@ -9,7 +10,6 @@ declare module '#auth-utils' {
     }
 
     interface SecureSessionData {
-        userId: number;
         email: string;
     }
 }

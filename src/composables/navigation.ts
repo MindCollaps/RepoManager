@@ -14,12 +14,18 @@ export interface HeaderItem {
 
 export const useHeaderMenu = () => computed<HeaderItem[]>(() => {
     const route = useRoute();
+    const { loggedIn } = useUserSession();
 
     const menu: HeaderItem[] = [
         {
             text: 'Home',
             path: '/',
             icon: HomeIcon,
+        },
+        {
+            text: 'Dashboard',
+            path: '/dashboard',
+            hide: !loggedIn.value,
         },
     ];
 

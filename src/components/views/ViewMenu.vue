@@ -66,7 +66,12 @@
 import { useHeaderMenu } from '~/composables/navigation';
 import DropDownIcon from 'assets/icons/dropdown.svg?component';
 
-const headerMenu = useHeaderMenu();
+const headerMenu = computed(() => {
+    const menu = useHeaderMenu();
+    return menu.value.filter(x => {
+        return !(x.hide ?? false);
+    });
+});
 </script>
 
 <style scoped lang="scss">

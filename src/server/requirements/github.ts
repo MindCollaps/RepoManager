@@ -8,14 +8,14 @@ export default defineEventHandler(async event => {
     try {
         const session = await requireUserSession(event);
 
-        if (!session.secure?.userId) {
+        if (!session.user?.userId) {
             throw createError({
                 statusCode: 400,
                 statusMessage: 'ID is missing!',
             });
         }
 
-        const userId = session.secure.userId;
+        const userId = session.user.userId;
 
         const dbUser = await prisma.user.findUnique({
             where: {

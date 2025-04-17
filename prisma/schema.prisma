@@ -10,20 +10,22 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
+  output = "../.output/prisma_client"
 }
 
 model User {
-  id               Int            @id() @default(autoincrement())
-  email            String         @unique()
-  name             String?
-  username         String?
-  git_access_token String?
-  created          DateTime       @default(now())
-  gitUserId        Int?
-  avatar_url       String?
-  GitGroups        GitGroup[]
-  Notifications    Notification[]
-  GitUser          GitUser?       @relation(fields: [gitUserId], references: [id])
+  id                Int                @id() @default(autoincrement())
+  email             String             @unique()
+  name              String?
+  username          String?
+  git_access_token  String?
+  created           DateTime           @default(now())
+  gitUserId         Int?
+  avatar_url        String?
+  GitGroups         GitGroup[]
+  Notifications     Notification[]
+  GitUser           GitUser?           @relation(fields: [gitUserId], references: [id])
+  GroupInviteTokens GroupInviteToken[]
 }
 
 model GitUser {
@@ -44,17 +46,19 @@ model GitUser {
 }
 
 model GitGroup {
-  id          Int       @id() @default(autoincrement())
-  expires     Boolean
-  expiryDate  DateTime?
-  deleteUsers Boolean   @default(true)
-  deleteSelf  Boolean   @default(true)
-  repoOwner   String
-  repoName    String
-  created     DateTime  @default(now())
-  userId      Int
-  owner       User      @relation(fields: [userId], references: [id])
-  users       GitUser[]
+  id                Int                @id() @default(autoincrement())
+  expires           Boolean
+  expiryDate        DateTime?
+  deleteUsers       Boolean            @default(true)
+  deleteSelf        Boolean            @default(true)
+  repoOwner         String
+  repoName          String
+  created           DateTime           @default(now())
+  ownerId           Int
+  owner             User               @relation(fields: [ownerId], references: [id])
+  users             GitUser[]
+  name              String
+  GroupInviteTokens GroupInviteToken[]
 }
 
 model Notification {
@@ -63,6 +67,20 @@ model Notification {
   content String
   read    Boolean
   created DateTime @default(now())
-  userId  Int
-  owner   User     @relation(fields: [userId], references: [id])
+  ownerId Int
+  owner   User     @relation(fields: [ownerId], references: [id])
+}
+
+model GroupInviteToken {
+  id         Int       @id() @default(autoincrement())
+  group      GitGroup  @relation(fields: [groupId], references: [id])
+  token      String    @unique()
+  used       Int       @default(0)
+  maxUse     Int
+  ownerId    Int
+  groupId    Int
+  owner      User      @relation(fields: [ownerId], references: [id])
+  name       String
+  expiryDate DateTime?
+  created    DateTime  @default(now())
 }

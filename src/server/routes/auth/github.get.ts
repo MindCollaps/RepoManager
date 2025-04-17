@@ -39,11 +39,11 @@ export default defineOAuthGitHubEventHandler({
             user: {
                 username: user.login,
                 logon: new Date(Date.now()),
+                userId: dbUser.id,
             },
             avatar_url: user.avatar_url,
             secure: {
                 email: user.email,
-                userId: dbUser.id,
             },
         });
         return sendRedirect(event, '/login/success');
