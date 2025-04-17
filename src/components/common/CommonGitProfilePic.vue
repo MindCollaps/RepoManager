@@ -10,17 +10,24 @@
 <script setup lang="ts">
 import GithubIcon from '~/assets/icons/github.svg';
 
-defineProps({
+const props = defineProps({
     width: {
         required: false,
         default: '64px',
+        type: String,
+    },
+    overrideImage: {
         type: String,
     },
 });
 
 const { session } = useUserSession();
 
-const avatarUri = session.value?.avatar_url ?? GithubIcon;
+const avatarUri = shallowRef('');
+
+onMounted(() => {
+    avatarUri.value = props.overrideImage ? props.overrideImage : session.value?.avatar_url ?? GithubIcon;
+});
 </script>
 
 <style scoped lang="scss">

@@ -1,9 +1,38 @@
 <template>
     <div class="dashboard-user">
-        <common-popup :is-visible="popupVisible">
+        <common-popup
+            :is-visible="popupVisible"
+            @close="closePopup()"
+            @submit="createUser()"
+        >
             <div class="dashboard-user--popup-content">
+                <div
+                    v-if="newUser.confirmed && newUser.confirmStatus"
+                    class="dashboard-user--popup-content--git-top"
+                >
+                    <common-git-profile-pic :override-image="newUser.avatar_url"/>
+                    {{ newUser.username }}
+                </div>
                 <common-input-text v-model="newUser.name">Clear Name</common-input-text>
-                <common-input-text v-model="newUser.username">Git User Name</common-input-text>
+                <div
+                    class="dashboard-user--popup-content--git-user-check"
+                    :style="getGitStyle"
+                >
+                    <common-input-text
+                        v-model="newUser.username"
+                        @input="newUser.confirmed = false"
+                    >
+                        <template #default>
+                            Git User Name
+                        </template>
+                    </common-input-text>
+                    <common-button
+                        v-if="!newUser.confirmed"
+                        primary-color="success400"
+                        @click="checkGit()"
+                    >Check</common-button>
+                </div>
+                <common-input-text v-model="newUser.email">Email</common-input-text>
                 <common-checkbox v-model="newUser.expires">Expires</common-checkbox>
                 <common-date-picker
                     v-if="newUser.expires"
@@ -27,17 +56,80 @@ import CommonButton from '~/components/common/CommonButton.vue';
 import CommonInputText from '~/components/common/CommonInputText.vue';
 import CommonCheckbox from '../common/CommonCheckbox.vue';
 import CommonDatePicker from '../common/CommonDatePicker.vue';
+import CommonGitProfilePic from '../common/CommonGitProfilePic.vue';
 import AddIcon from '~/assets/icons/add.svg?component';
 
 const popupVisible = ref(false);
 
-const newUser = ref({
+const defaultUser = {
     name: '',
     username: '',
+    email: '',
     expires: false,
     expiryDate: new Date(),
     avatar_url: '',
+    confirmed: false,
+    confirmStatus: false,
+};
+
+const newUser = ref({ ...defaultUser });
+
+const getGitStyle = computed(() => {
+    if (!newUser.value.confirmed) {
+        return { };
+    }
+
+    if (newUser.value.confirmStatus) {
+        return { 'border-color': colorsList.success600, 'border-style': 'solid' };
+    }
+    else {
+        return { 'border-color': colorsList.error600, 'border-style': 'solid' };
+    }
 });
+
+async function checkGit() {
+    try {
+        const { avatar_url } = await $fetch(`/api/v1/gituser?username=${ newUser.value.username }`);
+        newUser.value.confirmed = true;
+        newUser.value.confirmStatus = true;
+        newUser.value.avatar_url = avatar_url;
+    }
+    catch {
+        newUser.value.confirmed = true;
+        newUser.value.confirmStatus = false;
+    }
+}
+
+function closePopup() {
+    popupVisible.value = false;
+    newUser.value = { ...defaultUser };
+}
+
+async function createUser() {
+    if (!newUser.value.confirmed) {
+        await checkGit();
+    }
+
+    if (!newUser.value.confirmed || !newUser.value.confirmStatus) {
+        alert('Git Username Invalid!');
+        return;
+    }
+
+    $fetch(`/api/v1/gituser`, {
+        method: 'POST',
+        body: {
+            name: newUser.value.name,
+            username: newUser.value.username,
+            email: newUser.value.email,
+            expires: newUser.value.expires,
+            expryDate: newUser.value.expiryDate,
+        },
+    }).catch(error => {
+        if (error.statusCode === 400) {
+            alert(error.data);
+        }
+    });
+}
 </script>
 
 <style scoped lang="scss">
@@ -48,7 +140,6 @@ const newUser = ref({
     &--control {
         display: flex;
         flex-direction: row;
-
         width: 100%;
     }
 
@@ -56,6 +147,28 @@ const newUser = ref({
         display: flex;
         flex-direction: column;
         gap: 16px;
+
+        &--git {
+            &-top {
+                display: flex;
+                flex-direction: row;
+                gap: 16px;
+                align-items: center;
+
+                margin-bottom: 32px;
+            }
+
+            &-user-check {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+
+                padding: 16px;
+                border-radius: 16px;
+
+                background: $darkgray850;
+            }
+        }
     }
 }
 </style>

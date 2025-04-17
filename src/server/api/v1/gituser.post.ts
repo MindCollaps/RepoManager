@@ -27,6 +27,7 @@ export default defineEventHandler(async event => {
         throw createError({
             statusCode: 400,
             statusMessage: 'Request body invalid!',
+            data: body.error.issues,
         });
     }
 

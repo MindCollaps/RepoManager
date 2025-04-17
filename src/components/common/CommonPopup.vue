@@ -1,44 +1,46 @@
 <template>
-    <div
-        v-if="isVisible"
-        class="popup"
-    >
-        <div class="popup-content">
-            <slot/>
-            <div class="popup-control">
-                <common-button
-                    :primary-color="submitColor"
-                    type="primary"
-                    @click="emit('submit')"
-                >
-                    <template #default>
-                        {{ submitText }}
-                    </template>
-                    <template
-                        v-if="submitIcon"
-                        #icon
+    <transition>
+        <div
+            v-if="isVisible"
+            class="popup"
+        >
+            <div class="popup-content">
+                <slot/>
+                <div class="popup-control">
+                    <common-button
+                        :primary-color="submitColor"
+                        type="primary"
+                        @click="emit('submit')"
                     >
-                        <component :is="submitIcon"/>
-                    </template>
-                </common-button>
-                <common-button
-                    :primary-color="closeColor"
-                    type="primary"
-                    @click="emit('close')"
-                >
-                    <template #default>
-                        {{ closeText }}
-                    </template>
-                    <template
-                        v-if="closeIcon"
-                        #icon
+                        <template #default>
+                            {{ submitText }}
+                        </template>
+                        <template
+                            v-if="submitIcon"
+                            #icon
+                        >
+                            <component :is="submitIcon"/>
+                        </template>
+                    </common-button>
+                    <common-button
+                        :primary-color="closeColor"
+                        type="primary"
+                        @click="emit('close')"
                     >
-                        <component :is="closeIcon"/>
-                    </template>
-                </common-button>
+                        <template #default>
+                            {{ closeText }}
+                        </template>
+                        <template
+                            v-if="closeIcon"
+                            #icon
+                        >
+                            <component :is="closeIcon"/>
+                        </template>
+                    </common-button>
+                </div>
             </div>
         </div>
-    </div>
+    </transition>
 </template>
 
 
@@ -92,6 +94,16 @@ defineSlots<{
 </script>
 
 <style scoped lang="scss">
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
+
 .popup {
     position: absolute;
     z-index: 1000;
@@ -109,19 +121,18 @@ defineSlots<{
 
     &-content {
         padding: 32px;
-        background: $darkgray950;
         border-radius: 8px;
+        background: $darkgray950;
     }
 
     &-control {
         display: flex;
         flex-flow: row;
-        justify-content: right;
+        gap: 16px;
         align-items: center;
+        justify-content: right;
 
         margin-top: 32px;
-
-        gap: 16px;
     }
 }
 </style>
