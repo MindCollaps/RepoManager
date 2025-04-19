@@ -41,6 +41,14 @@ import HomeIcon from 'assets/icons/home.svg?component';
 
 const { loggedIn, user, clear, openInPopup } = useUserSession();
 
+const wasLoggedIn = ref(loggedIn.value);
+
+watch(loggedIn, () => {
+    if (wasLoggedIn.value !== loggedIn.value) {
+        navigateTo('/dashboard');
+    }
+});
+
 definePageMeta({
     layout: false,
 });

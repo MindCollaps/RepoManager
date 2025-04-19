@@ -1,79 +1,55 @@
 <template>
-    <div class="dashboard-user">
-        <common-popup
-            :is-visible="popupVisible"
-            @close="closePopup()"
-            @submit="createUser()"
-        >
-            <div class="dashboard-user--popup-content">
-                <div
-                    v-if="newUser.confirmed && newUser.confirmStatus"
-                    class="dashboard-user--popup-content--git-top"
-                >
-                    <common-git-profile-pic :override-image="newUser.avatar_url"/>
-                    {{ newUser.username }}
-                </div>
-                <common-input-text v-model="newUser.name">Clear Name</common-input-text>
-                <div
-                    class="dashboard-user--popup-content--git-user-check"
-                    :style="getGitStyle"
-                >
-                    <common-input-text
-                        v-model="newUser.username"
-                        @input="newUser.confirmed = false"
-                    >
-                        <template #default>
-                            Git User Name
-                        </template>
-                    </common-input-text>
-                    <common-button
-                        v-if="!newUser.confirmed"
-                        primary-color="success400"
-                        @click="checkGit()"
-                    >Check</common-button>
-                </div>
-                <common-input-text v-model="newUser.email">Email</common-input-text>
-                <common-checkbox v-model="newUser.expires">Expires</common-checkbox>
-                <common-date-picker
-                    v-if="newUser.expires"
-                    v-model="newUser.expiryDate"
-                />
-            </div>
-        </common-popup>
-        <div class="dashboard-user--control">
-            <common-button @click="popupVisible = true">
-                <template #icon>
-                    <add-icon/>
-                </template>
-            </common-button>
-        </div>
-        <div class="dashboard-user--users-list">
+    <basic-dashboard
+        :default-values="defaultUser"
+        :fetched-data="gitUsers"
+        @create="createUser()"
+    >
+        <template #popup>
             <div
-                v-for="g in gitUsers"
-                :key="g.id"
-                class="dashboard-user--users-list-item"
+                v-if="newUser.confirmed && newUser.confirmStatus"
+                class="git-top"
             >
-                {{ g.name }}
+                <common-git-profile-pic :override-image="newUser.avatar_url"/>
+                {{ newUser.username }}
             </div>
+            <common-input-text v-model="newUser.name">Clear Name</common-input-text>
             <div
-                v-if="gitUsers?.length === 0"
-                class="dashboard-user--users-list-item"
+                class="git-user-check"
+                :style="getGitStyle"
             >
-                Empty
+                <common-input-text
+                    v-model="newUser.username"
+                    @input="newUser.confirmed = false"
+                >
+                    Git User Name
+                </common-input-text>
+                <common-button
+                    v-if="!newUser.confirmed"
+                    primary-color="success400"
+                    @click="checkGit()"
+                >Check</common-button>
             </div>
-        </div>
-    </div>
+            <common-input-text v-model="newUser.email">Email</common-input-text>
+            <common-checkbox v-model="newUser.expires">Expires</common-checkbox>
+            <common-date-picker
+                v-if="newUser.expires"
+                v-model="newUser.expiryDate"
+            />
+        </template>
+        <template #item="{ item }">
+            {{ item.name }}
+        </template>
+    </basic-dashboard>
 </template>
 
 <script setup lang="ts">
-import CommonPopup from '~/components/common/CommonPopup.vue';
 import CommonButton from '~/components/common/CommonButton.vue';
 import CommonInputText from '~/components/common/CommonInputText.vue';
 import CommonCheckbox from '../common/CommonCheckbox.vue';
 import CommonDatePicker from '../common/CommonDatePicker.vue';
 import CommonGitProfilePic from '../common/CommonGitProfilePic.vue';
-import AddIcon from '~/assets/icons/add.svg?component';
 import { useFindManyGitUser } from '~~/lib/hooks';
+import BasicDashboard from './BasicDashboard.vue';
 
 const { data: gitUsers } = useFindManyGitUser({});
 
@@ -154,59 +130,25 @@ async function createUser() {
 </script>
 
 <style scoped lang="scss">
-.dashboard-user {
-    display: flex;
-    flex-direction: column;
-
-    &--control {
+.git {
+    &-top {
         display: flex;
         flex-direction: row;
-        width: 100%;
+        gap: 16px;
+        align-items: center;
+
+        margin-bottom: 32px;
     }
 
-    &--users-list {
+    &-user-check {
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 8px;
 
-        margin-top: 16px;
         padding: 16px;
+        border-radius: 16px;
 
-        background: $darkgray900;
-
-        &-item {
-            padding: 16px;
-            border-radius: 8px;
-            background: $darkgray850;
-        }
-    }
-
-    &--popup-content {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-
-        &--git {
-            &-top {
-                display: flex;
-                flex-direction: row;
-                gap: 16px;
-                align-items: center;
-
-                margin-bottom: 32px;
-            }
-
-            &-user-check {
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-
-                padding: 16px;
-                border-radius: 16px;
-
-                background: $darkgray850;
-            }
-        }
+        background: $darkgray850;
     }
 }
 </style>

@@ -1,8 +1,9 @@
 import UsersDashboard from '~/components/dashboard/UsersDashboard.vue';
 import GroupDashboard from '~/components/dashboard/GroupDashboard.vue';
+import TokenDashboard from '~/components/dashboard/TokenDashboard.vue';
 import UserIcon from '~/assets/icons/user.svg?component';
 import GroupIcon from '~/assets/icons/group.svg?component';
-import TokenDashboard from '~/components/dashboard/TokenDashboard.vue';
+import KeyIcon from '~/assets/icons/key.svg?component';
 
 export interface DashboardPage {
     title: string;
@@ -25,6 +26,7 @@ export const useDashboard = () => computed<DashboardPage[]>(() => {
         {
             title: 'Group Invites',
             content: TokenDashboard,
+            icon: KeyIcon,
         },
     ];
 

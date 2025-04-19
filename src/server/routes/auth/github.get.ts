@@ -6,6 +6,12 @@ export default defineOAuthGitHubEventHandler({
         scope: ['repo'],
     },
     async onSuccess(event, { user, tokens }) {
+        if (!user.email) {
+            throw createError({
+                statusCode: 401,
+                statusMessage: 'No Email was provided',
+            });
+        }
         let dbUser = await prisma.user.findUnique({
             where: {
                 email: user.email,

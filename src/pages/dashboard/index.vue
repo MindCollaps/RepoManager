@@ -5,7 +5,7 @@
                 v-for="(d, i) in dashboard"
                 :key="i"
                 :type="activeId === i ? 'primary' : 'transparent'"
-                @click="activeId = i"
+                @click="selectMenu(i)"
             >
                 <template #default>
                     {{ d.title }}
@@ -18,17 +18,27 @@
                 </template>
             </common-button>
         </div>
-        <div class="dashboard-top">
-            <template v-if="activeId >= 0 && activeId < dashboard.length">{{ dashboard[activeId].title }}</template>
-        </div>
-        <div class="dashboard-topside">
-            Repo-Manager
-        </div>
+        <template v-if="activeId >= 0 && activeId < dashboard.length">
+            <transition name="title">
+                <div
+                    :key="activeId"
+                    class="dashboard-top"
+                >
+                    <component
+                        :is="dashboard[activeId].icon"
+                        class="dashboard-top-icon"
+                    />{{ dashboard[activeId].title }}
+                </div>
+            </transition>
+        </template>
+        <div class="dashboard-topside"/>
         <div class="dashboard-content">
-            <component
-                :is="dashboard[activeId].content"
-                v-if="activeId >= 0 && activeId < dashboard.length"
-            />
+            <transition>
+                <component
+                    :is="dashboard[activeId].content"
+                    v-if="activeId >= 0 && activeId < dashboard.length"
+                />
+            </transition>
         </div>
     </div>
 </template>
@@ -36,15 +46,61 @@
 <script setup lang="ts">
 import CommonButton from '~/components/common/CommonButton.vue';
 
+definePageMeta({
+    middleware: ['authenticated'],
+});
+
+const router = useRouter();
+const route = useRoute();
+
+const menuNames = ['user', 'group', 'token'];
+
 const dashboard = useDashboard();
 
 const activeId = ref(-1);
+
+function selectMenu(menu: number) {
+    activeId.value = menu;
+
+    const menuName = menuNames[menu] || 'user';
+
+    router.replace({
+        path: route.path,
+        query: { ...route.query, menu: menuName },
+    });
+}
+
+onMounted(() => {
+    const menuParam = route.query.menu as string | undefined;
+    if (menuParam) {
+        const idx = menuNames.indexOf(menuParam);
+        activeId.value = idx !== -1 ? idx : 0;
+    }
+    else {
+        selectMenu(0);
+    }
+});
 </script>
 
 <style scoped lang="scss">
+.title-enter-active,
+.v-enter-active {
+    transition: all 1s ease;
+}
+
+.title-enter-from {
+    transform: translateX(100px);
+    opacity: 0;
+}
+
+.v-enter-from {
+    transform: translateY(100px);
+    opacity: 0;
+}
+
 .dashboard {
     display: grid;
-    grid-template-columns: [side] 128px [content] auto;
+    grid-template-columns: [side] 164px [content] auto;
     grid-template-rows: [top] 64px [content] auto;
 
     min-height: 80vh;
@@ -65,14 +121,20 @@ const activeId = ref(-1);
     &-topside {
         grid-column: side;
         grid-row: top;
+        font-size: 22px;
     }
 
     &-top {
         display: flex;
         grid-column: content;
         grid-row: top;
+        gap: 8px;
         align-items: center;
         justify-content: center;
+
+        &-icon {
+            width: 32px;
+        }
     }
 
     &-content {

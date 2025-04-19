@@ -1,56 +1,36 @@
 <template>
-    <div class="dashboard-token">
-        <common-popup
-            :is-visible="popupVisible"
-            @close="closePopup()"
-            @submit="createToken()"
-        >
-            <div class="dashboard-token--popup-content">
-                <common-input-text v-model="newToken.name">Name</common-input-text>
-                <common-input-text v-model="newToken.token">Token</common-input-text>
-                <common-date-picker
-                    v-model="newToken.expiryDate"
-                >Expiry Date</common-date-picker>
-            </div>
-        </common-popup>
-        <div class="dashboard-token--control">
-            <common-button @click="popupVisible = true">
-                <template #icon>
-                    <add-icon/>
-                </template>
-            </common-button>
-        </div>
-        <div class="dashboard-token--tokens-list">
-            <div
-                v-for="t in tokens"
-                :key="t.id"
-                class="dashboard-token--tokens-list-item"
-            >
-                {{ t.name }}
-            </div>
-            <div
-                v-if="tokens?.length === 0"
-                class="dashboard-token--tokens-list-item"
-            >
-                Empty
-            </div>
-        </div>
-    </div>
+    <basic-dashboard
+        :default-values="defaultToken"
+        deletable
+        :fetched-data="tokens"
+        @create="createToken()"
+        @delete="deleteToken"
+    >
+        <template #popup>
+            <common-input-text v-model="newToken.name">Name</common-input-text>
+            <common-input-text v-model="newToken.token">Token</common-input-text>
+            <common-date-picker
+                v-model="newToken.expiryDate"
+            >Expiry Date</common-date-picker>
+        </template>
+        <template #item="{ item }">
+            {{ item.name }}
+        </template>
+    </basic-dashboard>
 </template>
 
 <script setup lang="ts">
-import CommonPopup from '~/components/common/CommonPopup.vue';
-import CommonButton from '~/components/common/CommonButton.vue';
 import CommonInputText from '~/components/common/CommonInputText.vue';
 import CommonDatePicker from '../common/CommonDatePicker.vue';
-import AddIcon from '~/assets/icons/add.svg?component';
-import { useCreateGroupInviteToken, useFindManyGroupInviteToken } from '~~/lib/hooks';
+import BasicDashboard from './BasicDashboard.vue';
+import { useCreateGroupInviteToken, useFindManyGroupInviteToken, useDeleteGroupInviteToken } from '~~/lib/hooks';
 
 const createInviteToken = useCreateGroupInviteToken();
+const deleteInviteToken = useDeleteGroupInviteToken();
 const { session } = useUserSession();
 const { data: tokens } = useFindManyGroupInviteToken({
     where: {
-        ownerId: session.value.user?.userId,
+        ownerId: session.value?.user?.userId,
     },
 });
 
@@ -71,59 +51,43 @@ function closePopup() {
 }
 
 async function createToken() {
-    await createInviteToken.mutateAsync({
-        data: {
-            name: newToken.value.name,
-            maxUse: newToken.value.maxUse,
-            token: newToken.value.token,
-            expiryDate: newToken.value.expiryDate,
-            group: {
-                connect: {
-                    id: 0, // TODO: Change that duuuh~
+    try {
+        await createInviteToken.mutateAsync({
+            data: {
+                name: newToken.value.name,
+                maxUse: newToken.value.maxUse,
+                token: newToken.value.token,
+                expiryDate: newToken.value.expiryDate,
+                group: {
+                    connect: {
+                        id: 1, // TODO: Change that duuuh~
+                    },
+                },
+                owner: {
+                    connect: {
+                        id: session.value?.user?.userId,
+                    },
                 },
             },
-            owner: {
-                connect: {
-                    id: session.value.user?.userId,
-                },
+        });
+    }
+    catch (error) {
+        alert('An error occured');
+        console.log(error);
+        return;
+    }
+
+    alert('Token created!');
+    closePopup();
+}
+
+async function deleteToken(id: number) {
+    if (confirm('Are you sure you want to delete this group?')) {
+        await deleteInviteToken.mutateAsync({
+            where: {
+                id: id,
             },
-        },
-    });
+        });
+    }
 }
 </script>
-
-<style scoped lang="scss">
-.dashboard-token {
-    display: flex;
-    flex-direction: column;
-
-    &--control {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-    }
-
-    &--tokens-list {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-
-        margin-top: 16px;
-        padding: 16px;
-
-        background: $darkgray900;
-
-        &-item {
-            padding: 16px;
-            border-radius: 8px;
-            background: $darkgray850;
-        }
-    }
-
-    &--popup-content {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-    }
-}
-</style>

@@ -3,12 +3,15 @@
         <div
             class="header"
         >
+            <div class="header-text">
+                Repo-Manager
+            </div>
             <view-menu/>
             <view-login/>
             <view-theme/>
         </div>
         <div class="app_content">
-            <nuxt-loading-indicator color="rgb(var(--primary500))"/>
+            <nuxt-loading-indicator :color="colorsList.primary300"/>
             <slot/>
         </div>
     </div>
@@ -86,8 +89,7 @@ useHead(() => {
     position: sticky;
 
     display: grid;
-    grid-template-areas: "1 1 1";
-    grid-template-columns: 2fr 0.3fr 0.3fr;
+    grid-template-columns: 0.5fr 2fr 0.3fr 0.3fr;
     gap: 12px;
     align-items: center;
 
@@ -95,6 +97,16 @@ useHead(() => {
     padding: 9px;
 
     background: $darkgray1000;
+
+    &-text {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+
+        margin-left: 24px;
+
+        font-size: 24px;
+    }
 
     &-container {
         display: flex;
