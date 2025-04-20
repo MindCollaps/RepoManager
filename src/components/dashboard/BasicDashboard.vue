@@ -26,14 +26,23 @@
                     :item="i"
                     name="item"
                 />
-                <div class="basic-dashboard--list-item-controlls">
+                <div class="basic-dashboard--list-item-controls">
+                    <common-button
+                        v-if="deletable"
+                        primary-color="success500"
+                        @click="$emit('edit', i.id)"
+                    >
+                        <template #icon>
+                            <edit-icon/>
+                        </template>
+                    </common-button>
                     <common-button
                         v-if="deletable"
                         primary-color="error600"
                         @click="$emit('delete', i.id)"
                     >
                         <template #icon>
-                            <delete-button/>
+                            <delete-icon/>
                         </template>
                     </common-button>
                 </div>
@@ -51,8 +60,9 @@
 <script setup lang="ts" generic="NEW, DB extends { id: number }">
 import CommonPopup from '~/components/common/CommonPopup.vue';
 import CommonButton from '~/components/common/CommonButton.vue';
-import DeleteButton from '~/assets/icons/delete.svg?component';
+import DeleteIcon from '~/assets/icons/delete.svg?component';
 import AddIcon from '~/assets/icons/add.svg?component';
+import EditIcon from '~/assets/icons/edit.svg?component';
 import type { PropType } from 'vue';
 
 const props = defineProps({
@@ -68,10 +78,17 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    editable: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 defineEmits({
     delete(id: number) {
+        return true;
+    },
+    edit(id: number) {
         return true;
     },
     create() {
@@ -129,6 +146,12 @@ function closePopup() {
             border-radius: 8px;
 
             background: $darkgray850;
+
+            &-controls {
+                display: flex;
+                flex-direction: row;
+                gap: 8px;
+            }
 
             &-empty {
                 text-align: center;

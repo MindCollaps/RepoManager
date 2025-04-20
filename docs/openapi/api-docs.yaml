@@ -8492,13 +8492,9 @@ components:
             email:
               type: string
             username:
-              oneOf:
-                - type: "null"
-                - type: string
+              type: string
             name:
-              oneOf:
-                - type: "null"
-                - type: string
+              type: string
             expires:
               type: boolean
             expiryDate:
@@ -8551,6 +8547,8 @@ components:
               type: object
               required:
                 - email
+                - username
+                - name
                 - expires
                 - repoState
               properties:
@@ -8561,13 +8559,9 @@ components:
                 email:
                   type: string
                 username:
-                  oneOf:
-                    - type: "null"
-                    - type: string
+                  type: string
                 name:
-                  oneOf:
-                    - type: "null"
-                    - type: string
+                  type: string
                 expires:
                   type: boolean
                 expiryDate:
@@ -8627,13 +8621,9 @@ components:
                 email:
                   type: string
                 username:
-                  oneOf:
-                    - type: "null"
-                    - type: string
+                  type: string
                 name:
-                  oneOf:
-                    - type: "null"
-                    - type: string
+                  type: string
                 expires:
                   type: boolean
                 expiryDate:

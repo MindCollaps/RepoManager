@@ -15,7 +15,9 @@
     "stylelint:fix": "stylelint --fix './src/**/*.{vue,scss,css}'",
     "lint:fix": "yarn stylelint:fix && yarn lint:ts:fix",
     "lint": "yarn stylelint && yarn lint:ts",
-    "typecheck": "nuxt typecheck"
+    "typecheck": "nuxt typecheck",
+    "zen": "yarn zenstack format && yarn zenstack generate",
+    "zen-push": "yarn zen && yarn prisma db push"
   },
   "dependencies": {
     "@nuxt/image": "1.10.0",

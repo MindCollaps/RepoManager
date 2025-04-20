@@ -45,10 +45,13 @@
 
 <script setup lang="ts">
 import CommonButton from '~/components/common/CommonButton.vue';
+import { useStore } from '~/store';
 
 definePageMeta({
     middleware: ['authenticated'],
 });
+
+const store = useStore();
 
 const router = useRouter();
 const route = useRoute();
@@ -77,7 +80,8 @@ onMounted(() => {
         activeId.value = idx !== -1 ? idx : 0;
     }
     else {
-        selectMenu(0);
+        const idx = menuNames.indexOf(store.navigation);
+        activeId.value = idx !== -1 ? idx : 0;
     }
 });
 </script>

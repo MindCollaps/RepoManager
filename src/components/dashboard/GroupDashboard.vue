@@ -6,7 +6,10 @@
     >
         <template #popup>
             <common-input-text v-model="newGroup.groupName">Group Name</common-input-text>
-            <div class="git-repo-check">
+            <div
+                class="git-repo-check"
+                :style="getGitStyle"
+            >
                 <common-input-text
                     v-model="newGroup.repoName"
                     @input="newGroup.confirmed = false"
@@ -67,7 +70,29 @@ const defaultGroup = {
 
 const newGroup = ref({ ...defaultGroup });
 
+const getGitStyle = computed(() => {
+    if (!newGroup.value.confirmed) {
+        return {};
+    }
+
+    if (newGroup.value.confirmStatus) {
+        return { 'border-color': colorsList.success600, 'border-style': 'solid' };
+    }
+    else {
+        return { 'border-color': colorsList.error600, 'border-style': 'solid' };
+    }
+});
+
 async function createGroup() {
+    if (!newGroup.value.confirmed) {
+        await checkGit();
+    }
+
+    if (!newGroup.value.confirmed || !newGroup.value.confirmStatus) {
+        alert('Repo invalid!');
+        return;
+    }
+
     try {
         await createGitGroup.mutateAsync({
             data: {

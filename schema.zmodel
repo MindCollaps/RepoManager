@@ -24,9 +24,9 @@ plugin hooks {
 
 model User {
     id                Int                @id @default(autoincrement())
-    email             String             @unique
-    name              String?
-    username          String?
+    email             String             @unique @email
+    name              String?            @length(min: 3, max: 39)
+    username          String?            @length(min: 6, max: 39)
     git_access_token  String?
     created           DateTime           @default(now())
     gitUserId         Int?
@@ -42,9 +42,9 @@ model User {
 model GitUser {
     id               Int       @id @default(autoincrement())
     git_access_token String?
-    email            String    @unique
-    username         String?
-    name             String?
+    email            String    @unique @email
+    username         String    @length(min: 6, max: 39)
+    name             String    @length(min: 3, max: 39)
     expires          Boolean
     expiryDate       DateTime?
     repoState        Int
@@ -91,13 +91,13 @@ model Notification {
 model GroupInviteToken {
     id         Int       @id @default(autoincrement())
     group      GitGroup  @relation(fields: [groupId], references: [id])
-    token      String    @unique
+    token      String    @unique @length(min: 6, max: 12, message: 'The tokens length can only be between 6 and 12 lettets')
     used       Int       @default(0)
     maxUse     Int
     ownerId    Int
     groupId    Int
     owner      User      @relation(fields: [ownerId], references: [id])
-    name       String
+    name       String    @length(min: 3, max: 39, message: 'The tokens name must be between 3 and 39 letters')
     expiryDate DateTime?
     created    DateTime  @default(now())
 
