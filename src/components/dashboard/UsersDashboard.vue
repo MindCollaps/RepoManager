@@ -119,7 +119,6 @@ async function createUser() {
             expryDate: newUser.value.expiryDate,
         },
     }).then(data => {
-        alert('User created!');
         refetch();
     }).catch(error => {
         if (error.statusCode === 400) {

@@ -25,6 +25,7 @@
     "@nuxt/image": "1.10.0",
     "@prisma/nuxt": "^0.3.0",
     "@tanstack/vue-query": "^5.74.4",
+    "@vueuse/motion": "^3.0.3",
     "@zenstackhq/runtime": "2.13.2",
     "@zenstackhq/server": "^2.13.2",
     "@zenstackhq/tanstack-query": "^2.14.0",

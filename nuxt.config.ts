@@ -22,7 +22,7 @@ export default defineNuxtConfig({
     compatibilityDate: '2024-11-01',
     devtools: { enabled: true },
     srcDir: 'src/',
-    modules: ['@nuxt/devtools', '@nuxt/eslint', '@nuxtjs/stylelint-module', '@pinia/nuxt', 'nuxt-auth-utils', '@prisma/nuxt', '@nuxt/image'],
+    modules: ['@nuxt/devtools', '@nuxt/eslint', '@nuxtjs/stylelint-module', '@pinia/nuxt', 'nuxt-auth-utils', '@prisma/nuxt', '@nuxt/image', '@vueuse/motion/nuxt'],
     eslint: {
         checker: {
             configType: 'flat',
