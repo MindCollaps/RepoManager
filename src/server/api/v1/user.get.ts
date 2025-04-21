@@ -5,27 +5,29 @@ export default defineEventHandler(async event => {
 
     if (!session.user?.userId) {
         throw createError({
-            statusCode: 400,
-            statusMessage: 'ID is missing!',
+            statusCode: 401, // Changed from 400 to 401 Unauthorized
+            statusMessage: 'Not authenticated',
         });
     }
 
-    const userId = session.user.userId;
-
-    const gitUsers = await prisma.gitUser.findMany({
-        where: {
-            owner: {
-                some: {
-                    id: userId,
+    try {
+        const gitUsers = await prisma.gitUser.findMany({
+            where: {
+                owners: {
+                    some: {
+                        ownerId: session.user.userId,
+                    },
                 },
             },
-        },
-    });
+        });
 
-    if (gitUsers) {
-        return gitUsers;
+        return gitUsers || [];
     }
-    else {
-        return [];
+    catch (error) {
+        console.error('Error fetching GitUsers:', error);
+        throw createError({
+            statusCode: 500,
+            statusMessage: 'Internal server error',
+        });
     }
 });

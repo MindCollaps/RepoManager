@@ -46,6 +46,8 @@ export default defineEventHandler(async event => {
         });
     }
 
+    const userId = session.user.userId;
+
     try {
         const dbUser = await prisma.gitUser.create({
             data: {
@@ -56,10 +58,14 @@ export default defineEventHandler(async event => {
                 expires: body.data.expires,
                 repoState: 0,
                 custom: true,
-                owner: {
-                    connect: [
-                        { id: session.user.userId },
-                    ],
+                owners: {
+                    create: [{
+                        owner: {
+                            connect: {
+                                id: userId,
+                            },
+                        },
+                    }],
                 },
             },
         });

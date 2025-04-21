@@ -39,6 +39,7 @@
                     v-if="activeId >= 0 && activeId < dashboard.length"
                 />
             </transition>
+            <common-loader v-if="loading"/>
         </div>
     </div>
 </template>
@@ -56,6 +57,8 @@ const store = useStore();
 const router = useRouter();
 const route = useRoute();
 
+const loading = ref(true);
+
 const menuNames = ['user', 'group', 'token'];
 
 const dashboard = useDashboard();
@@ -71,18 +74,22 @@ function selectMenu(menu: number) {
         path: route.path,
         query: { ...route.query, menu: menuName },
     });
+
+    store.navigation = (menuNames[menu] as 'menu' | 'token' | 'user') || 'user';
 }
 
 onMounted(() => {
-    const menuParam = route.query.menu as string | undefined;
+    const menuParam = route.query.menu as string;
     if (menuParam) {
         const idx = menuNames.indexOf(menuParam);
         activeId.value = idx !== -1 ? idx : 0;
     }
     else {
         const idx = menuNames.indexOf(store.navigation);
-        activeId.value = idx !== -1 ? idx : 0;
+        selectMenu(idx !== -1 ? idx : 0);
     }
+
+    loading.value = false;
 });
 </script>
 

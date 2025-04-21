@@ -16,6 +16,8 @@
     "lint:fix": "yarn stylelint:fix && yarn lint:ts:fix",
     "lint": "yarn stylelint && yarn lint:ts",
     "typecheck": "nuxt typecheck",
+    "db-push": "yarn prisma db push",
+    "db-drop": "yarn prisma db push --force-reset",
     "zen": "yarn zenstack format && yarn zenstack generate",
     "zen-push": "yarn zen && yarn prisma db push"
   },

@@ -25,9 +25,9 @@ const { session } = useUserSession();
 
 const avatarUri = shallowRef('');
 
-onMounted(() => {
-    avatarUri.value = props.overrideImage ? props.overrideImage : session.value?.avatar_url ?? GithubIcon;
-});
+watch(() => props.overrideImage, newVal => {
+    avatarUri.value = newVal ? newVal : session.value?.avatar_url ?? GithubIcon;
+}, { immediate: true });
 </script>
 
 <style scoped lang="scss">

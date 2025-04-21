@@ -3,7 +3,7 @@
         <common-popup
             :is-visible="popupVisible"
             @close="closePopup()"
-            @submit="$emit('create')"
+            @submit="create()"
         >
             <div class="basic-dashboard--popup-content">
                 <slot name="popup"/>
@@ -28,7 +28,7 @@
                 />
                 <div class="basic-dashboard--list-item-controls">
                     <common-button
-                        v-if="deletable"
+                        v-if="editable"
                         primary-color="success500"
                         @click="$emit('edit', i.id)"
                     >
@@ -71,8 +71,7 @@ const props = defineProps({
         required: true,
     },
     fetchedData: {
-        type: Object as PropType<Array<DB> | undefined>,
-        required: true,
+        type: Object as PropType<Array<DB>>,
     },
     deletable: {
         type: Boolean,
@@ -84,7 +83,7 @@ const props = defineProps({
     },
 });
 
-defineEmits({
+const emit = defineEmits({
     delete(id: number) {
         return true;
     },
@@ -105,13 +104,22 @@ const popupVisible = ref(false);
 
 const newValues = ref<NEW | undefined>(undefined);
 
-onMounted(() => {
-    newValues.value = { ...props.defaultValues };
-});
+watch(
+    () => props.defaultValues,
+    newVal => {
+        newValues.value = { ...newVal };
+    },
+    { immediate: true },
+);
 
 function closePopup() {
     popupVisible.value = false;
     newValues.value = { ...props.defaultValues };
+}
+
+function create() {
+    emit('create');
+    closePopup();
 }
 </script>
 

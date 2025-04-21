@@ -1,6 +1,6 @@
 <template>
     <div v-if="loading">
-        Loading
+        <common-loader/>
     </div>
     <div v-else>
         <template v-if="tokenError">
@@ -20,6 +20,7 @@
 <script setup lang="ts">
 import type { GroupInviteToken } from '@zenstackhq/runtime/models';
 import { useFindUniqueGroupInviteToken } from '~~/lib/hooks';
+import CommonLoader from '~/components/common/CommonLoader.vue';
 
 const route = useRoute();
 

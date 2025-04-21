@@ -29,33 +29,31 @@ model User {
     username          String?            @length(min: 6, max: 39)
     git_access_token  String?
     created           DateTime           @default(now())
-    gitUserId         Int?
     avatar_url        String?
-    GitGroups         GitGroup[]
     Notifications     Notification[]
-    GitUser           GitUser?           @relation(fields: [gitUserId], references: [id])
     GroupInviteTokens GroupInviteToken[]
+    ownedGitUsers     GitUserOwner[]
+    ownedGitGroups    GitGroupOwner[]
 
     @@allow('all', auth().id == id)
 }
 
 model GitUser {
-    id               Int       @id @default(autoincrement())
+    id               Int            @id @default(autoincrement())
     git_access_token String?
-    email            String    @unique @email
-    username         String    @length(min: 6, max: 39)
-    name             String    @length(min: 3, max: 39)
+    email            String         @unique @email
+    username         String         @length(min: 6, max: 39)
+    name             String         @length(min: 3, max: 39)
     expires          Boolean
     expiryDate       DateTime?
     repoState        Int
-    created          DateTime  @default(now())
-    gitGroupId       Int?
+    created          DateTime       @default(now())
     avatar_url       String?
-    GitGroup         GitGroup? @relation(fields: [gitGroupId], references: [id])
-    owner            User[]
+    groups           GitUserGroup[]
     custom           Boolean?
+    owners           GitUserOwner[]
 
-    @@allow('all', owner?[id == auth().id])
+    @@allow('all', owners?[owner.id == auth().id])
 }
 
 model GitGroup {
@@ -67,11 +65,50 @@ model GitGroup {
     repoOwner         String
     repoName          String
     created           DateTime           @default(now())
-    ownerId           Int
-    owner             User               @relation(fields: [ownerId], references: [id])
-    users             GitUser[]
     name              String
     GroupInviteTokens GroupInviteToken[]
+    users             GitUserGroup[]
+    owners            GitGroupOwner[]
+
+    @@allow('all', owners?[owner.id == auth().id])
+}
+
+model GitUserGroup {
+    userId    Int      @map("git_user_id")
+    groupId   Int      @map("git_group_id")
+    repoState Int
+    user      GitUser  @relation(fields: [userId], references: [id])
+    group     GitGroup @relation(fields: [groupId], references: [id])
+
+    @@allow('read,update', 
+        user.owners?[owner.id == auth().id] ||
+        group.owners?[owner.id == auth().id]
+    )
+
+    @@id([userId, groupId])
+    @@map("git_user_groups")
+}
+
+model GitUserOwner {
+    ownerId   Int     @map("owner_id")
+    gitUserId Int     @map("git_user_id")
+    owner     User    @relation(fields: [ownerId], references: [id])
+    gitUser   GitUser @relation(fields: [gitUserId], references: [id])
+
+    @@id([ownerId, gitUserId])
+    @@map("git_user_owners")
+
+    @@allow('all', owner.id == auth().id)
+}
+
+model GitGroupOwner {
+    ownerId Int      @map("owner_id")
+    groupId Int      @map("group_id")
+    owner   User     @relation(fields: [ownerId], references: [id])
+    group   GitGroup @relation(fields: [groupId], references: [id])
+
+    @@id([ownerId, groupId])
+    @@map("git_group_owners")
 
     @@allow('all', owner.id == auth().id)
 }

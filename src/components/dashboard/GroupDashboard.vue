@@ -1,8 +1,10 @@
 <template>
     <basic-dashboard
         :default-values="defaultGroup"
+        editable
         :fetched-data="gitGroups"
         @create="createGroup()"
+        @edit="editGroup"
     >
         <template #popup>
             <common-input-text v-model="newGroup.groupName">Group Name</common-input-text>
@@ -49,6 +51,8 @@ import CommonDatePicker from '../common/CommonDatePicker.vue';
 import { useCreateGitGroup, useFindManyGitGroup } from '~~/lib/hooks';
 import BasicDashboard from './BasicDashboard.vue';
 
+const router = useRouter();
+
 const createGitGroup = useCreateGitGroup();
 const { data: gitGroups } = useFindManyGitGroup({});
 
@@ -93,31 +97,42 @@ async function createGroup() {
         return;
     }
 
-    try {
-        await createGitGroup.mutateAsync({
-            data: {
-                expires: newGroup.value.expires,
-                expiryDate: newGroup.value.expiryDate,
-                deleteUsers: newGroup.value.deleteUsers,
-                deleteSelf: newGroup.value.deleteSelf,
-                repoOwner: newGroup.value.repoOwner,
-                repoName: newGroup.value.repoName,
-                name: newGroup.value.groupName,
-                owner: {
-                    connect: {
-                        id: session.value?.user?.userId,
+    const userId = session.value?.user?.userId;
+
+    if (!userId) {
+        alert('Not logged in!');
+    }
+    else {
+        try {
+            await createGitGroup.mutateAsync({
+                data: {
+                    expires: newGroup.value.expires,
+                    expiryDate: newGroup.value.expiryDate,
+                    deleteUsers: newGroup.value.deleteUsers,
+                    deleteSelf: newGroup.value.deleteSelf,
+                    repoOwner: newGroup.value.repoOwner,
+                    repoName: newGroup.value.repoName,
+                    name: newGroup.value.groupName,
+                    owners: {
+                        create: [{
+                            owner: {
+                                connect: {
+                                    id: userId,
+                                },
+                            },
+                        }],
                     },
                 },
-            },
-        });
-    }
-    catch (error) {
-        alert('An error occured');
-        console.log(error);
-        return;
-    }
+            });
+        }
+        catch (error) {
+            alert('An error occured');
+            console.log(error);
+            return;
+        }
 
-    alert('Group created!');
+        alert('Group created!');
+    }
 }
 
 async function checkGit() {
@@ -131,6 +146,10 @@ async function checkGit() {
         newGroup.value.confirmed = true;
         newGroup.value.confirmStatus = false;
     }
+}
+
+function editGroup(id: number) {
+    router.push(`/dashboard/group-${ id }`);
 }
 </script>
 

@@ -23,15 +23,17 @@ export default defineEventHandler(async event => {
 
     const owner = query.data.owner ?? session.user.username;
 
-    const repo = await octo.rest.repos.get({
-        owner: owner,
-        repo: query.data.name,
-    });
+    try {
+        const repo = await octo.rest.repos.get({
+            owner: owner,
+            repo: query.data.name,
+        });
 
-    if (repo.status === 200) {
-        return repo.data;
+        if (repo.status === 200) {
+            return repo.data;
+        }
     }
-    else {
+    catch {
         throw createError({
             statusCode: 404,
             statusMessage: 'Repo not found',

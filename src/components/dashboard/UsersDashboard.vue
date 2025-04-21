@@ -1,8 +1,12 @@
 <template>
     <basic-dashboard
         :default-values="defaultUser"
+        deletable
+        editable
         :fetched-data="gitUsers"
         @create="createUser()"
+        @delete="deleteUser"
+        @edit="editUser"
     >
         <template #popup>
             <div
@@ -48,12 +52,13 @@ import CommonInputText from '~/components/common/CommonInputText.vue';
 import CommonCheckbox from '../common/CommonCheckbox.vue';
 import CommonDatePicker from '../common/CommonDatePicker.vue';
 import CommonGitProfilePic from '../common/CommonGitProfilePic.vue';
-import { useFindManyGitUser } from '~~/lib/hooks';
+import { useFindManyGitUser, useDeleteGitUser } from '~~/lib/hooks';
 import BasicDashboard from './BasicDashboard.vue';
 
-const { data: gitUsers } = useFindManyGitUser({});
+const router = useRouter();
 
-const popupVisible = ref(false);
+const { data: gitUsers, refetch } = useFindManyGitUser({});
+const useDeleteUser = useDeleteGitUser();
 
 const defaultUser = {
     name: '',
@@ -94,11 +99,6 @@ async function checkGit() {
     }
 }
 
-function closePopup() {
-    popupVisible.value = false;
-    newUser.value = { ...defaultUser };
-}
-
 async function createUser() {
     if (!newUser.value.confirmed) {
         await checkGit();
@@ -109,7 +109,7 @@ async function createUser() {
         return;
     }
 
-    $fetch(`/api/v1/gituser`, {
+    await $fetch(`/api/v1/gituser`, {
         method: 'POST',
         body: {
             name: newUser.value.name,
@@ -120,12 +120,26 @@ async function createUser() {
         },
     }).then(data => {
         alert('User created!');
-        closePopup();
+        refetch();
     }).catch(error => {
         if (error.statusCode === 400) {
             alert(error.data.data);
         }
     });
+}
+
+async function deleteUser(id: number) {
+    if (confirm('Are you sure you want to delete this user?')) {
+        await useDeleteUser.mutateAsync({
+            where: {
+                id: id,
+            },
+        });
+    }
+}
+
+function editUser(id: number) {
+    router.push(`/dashboard/user-${ id }`);
 }
 </script>
 

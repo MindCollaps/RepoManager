@@ -7,9 +7,6 @@
             <common-git-profile-pic width="128px"/>
             <h1>Welcome {{ user?.username }}</h1>
         </div>
-        <ul>
-            <li>Email: {{ session?.email }}</li>
-        </ul>
         <common-button
             width="128px"
             @click="clear"
@@ -31,7 +28,7 @@
 import CommonButton from '~/components/common/CommonButton.vue';
 import CommonGitProfilePic from '~/components/common/CommonGitProfilePic.vue';
 
-const { loggedIn, user, session, clear } = useUserSession();
+const { loggedIn, user, clear } = useUserSession();
 </script>
 
 <style scoped lang="scss">

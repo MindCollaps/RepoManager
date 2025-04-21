@@ -39,8 +39,6 @@ const { data: tokens } = useFindManyGroupInviteToken({
     },
 });
 
-const popupVisible = ref(false);
-
 const defaultToken = {
     name: '',
     token: '',
@@ -52,11 +50,6 @@ const newToken = ref({ ...defaultToken });
 
 function editToken(id: number) {
     router.push(`/tk?id=${ id }&edit`);
-}
-
-function closePopup() {
-    popupVisible.value = false;
-    newToken.value = { ...defaultToken };
 }
 
 async function createToken() {
@@ -79,7 +72,6 @@ async function createToken() {
         },
     }).then(() => {
         alert('Token created!');
-        closePopup();
     }).catch(error => {
         if (error && error.info.zodErrors && Array.isArray(error.info.zodErrors.issues)) {
             const messages = error.info.zodErrors.issues.map((issue: ZodIssue) => `${ issue.path.join('.') }: ${ issue.message }`).join('\n');
