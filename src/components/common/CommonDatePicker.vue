@@ -1,12 +1,12 @@
 <template>
     <div class="time-picker">
+        <div
+            v-if="$slots.default"
+            class="time-picker_label"
+        >
+            <slot/>
+        </div>
         <div class="time-picker-container">
-            <div
-                v-if="$slots.default"
-                class="time-picker_label"
-            >
-                <slot/>
-            </div>
             <common-button
                 type="secondary-flat"
                 @click="adjustTime(-30)"
@@ -34,9 +34,12 @@ import CommonButton from '~/components/common/CommonButton.vue';
 
 defineSlots<{ default?: () => string }>();
 
-const date = defineModel<Date>({ required: true });
+const date = defineModel<Date | undefined>({ required: true });
 
-const formatDate = (date: Date): string => {
+const formatDate = (date: Date | undefined): string => {
+    if (!date) {
+        date = new Date();
+    }
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
@@ -45,6 +48,7 @@ const formatDate = (date: Date): string => {
 
     return `${ year }-${ month }-${ day }T${ hours }:${ minutes }`;
 };
+
 const formattedStartDate = computed(() => formatDate(date.value));
 
 const updateStartDate = (event: Event) => {
@@ -53,7 +57,11 @@ const updateStartDate = (event: Event) => {
 };
 
 const adjustTime = (minutes: number) => {
-    const newDate = new Date(date.value.getTime() + (minutes * 60000));
+    let tmpDate = date.value;
+    if (!tmpDate) {
+        tmpDate = new Date();
+    }
+    const newDate = new Date(tmpDate.getTime() + (minutes * 60000));
     date.value = newDate;
 };
 </script>
@@ -61,9 +69,9 @@ const adjustTime = (minutes: number) => {
 <style scoped lang="scss">
 .time-picker {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 5%;
-    align-items: center;
+    align-items: start;
     justify-content: center;
 
     width: 100%;

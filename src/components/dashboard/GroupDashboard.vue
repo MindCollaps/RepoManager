@@ -54,7 +54,7 @@ import BasicDashboard from './BasicDashboard.vue';
 const router = useRouter();
 
 const createGitGroup = useCreateGitGroup();
-const { data: gitGroups } = useFindManyGitGroup({});
+const { data: gitGroups, refetch } = useFindManyGitGroup({});
 
 const { session } = useUserSession();
 
@@ -131,7 +131,7 @@ async function createGroup() {
             return;
         }
 
-        alert('Group created!');
+        refetch();
     }
 }
 

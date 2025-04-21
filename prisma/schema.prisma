@@ -43,16 +43,16 @@ model GitUser {
 }
 
 model GitGroup {
-  id                Int                @id() @default(autoincrement())
+  id                Int                      @id() @default(autoincrement())
   expires           Boolean
   expiryDate        DateTime?
-  deleteUsers       Boolean            @default(true)
-  deleteSelf        Boolean            @default(true)
+  deleteUsers       Boolean                  @default(true)
+  deleteSelf        Boolean                  @default(true)
   repoOwner         String
   repoName          String
-  created           DateTime           @default(now())
+  created           DateTime                 @default(now())
   name              String
-  GroupInviteTokens GroupInviteToken[]
+  GroupInviteTokens GroupInviteTokenGroups[]
   users             GitUserGroup[]
   owners            GitGroupOwner[]
 }
@@ -99,15 +99,24 @@ model Notification {
 }
 
 model GroupInviteToken {
-  id         Int       @id() @default(autoincrement())
-  group      GitGroup  @relation(fields: [groupId], references: [id])
-  token      String    @unique()
-  used       Int       @default(0)
+  id         Int                      @id() @default(autoincrement())
+  token      String                   @unique()
+  used       Int                      @default(0)
   maxUse     Int
   ownerId    Int
-  groupId    Int
-  owner      User      @relation(fields: [ownerId], references: [id])
+  owner      User                     @relation(fields: [ownerId], references: [id])
   name       String
   expiryDate DateTime?
-  created    DateTime  @default(now())
+  created    DateTime                 @default(now())
+  groups     GroupInviteTokenGroups[]
+}
+
+model GroupInviteTokenGroups {
+  tokenId Int              @map("token_id")
+  groupId Int              @map("group_id")
+  token   GroupInviteToken @relation(fields: [tokenId], references: [id])
+  group   GitGroup         @relation(fields: [groupId], references: [id])
+
+  @@id([tokenId, groupId])
+  @@map("group_invite_token_groups")
 }

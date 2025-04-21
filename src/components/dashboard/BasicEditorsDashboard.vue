@@ -17,20 +17,36 @@
                 v-for="field in fields"
                 :key="field.key"
             >
-                <common-input-text
-                    v-if="field.type === 'text'"
-                    v-model="editState[field.key]"
-                    :placeholder="field.placeholder"
-                >{{ field.label }}</common-input-text>
+                <template v-if="!isHidden(field)">
+                    <common-input-text
+                        v-if="field.type === 'text'"
+                        v-model="editState[field.key]"
+                        :placeholder="field.placeholder"
+                    >{{ field.label }}</common-input-text>
 
-                <common-checkbox
-                    v-else-if="field.type === 'checkbox'"
-                    v-model="editState[field.key]"
-                    :label="field.label"
-                >
-                    {{ field.label }}</common-checkbox>
-                <template v-else>
-                    Type does not exist
+                    <common-input-text
+                        v-else-if="field.type === 'number'"
+                        v-model="editState[field.key]"
+                        input-type="number"
+                        :placeholder="field.placeholder"
+                    >{{ field.label }}</common-input-text>
+
+                    <common-date-picker
+                        v-else-if="field.type === 'date'"
+                        v-model="editState[field.key]"
+                    >
+                        {{ field.label }}
+                    </common-date-picker>
+
+                    <common-checkbox
+                        v-else-if="field.type === 'checkbox'"
+                        v-model="editState[field.key]"
+                        :label="field.label"
+                    >
+                        {{ field.label }}</common-checkbox>
+                    <template v-else>
+                        Type does not exist
+                    </template>
                 </template>
             </template>
         </div>
@@ -68,6 +84,7 @@ import SaveIcon from '~/assets/icons/save.svg?component';
 import CommonLoader from '../common/CommonLoader.vue';
 import CommonCheckbox from '../common/CommonCheckbox.vue';
 import CommonInputText from '../common/CommonInputText.vue';
+import CommonDatePicker from '../common/CommonDatePicker.vue';
 import type { PropType } from 'vue';
 import type { ZodIssue } from 'zod';
 
@@ -108,6 +125,7 @@ export interface FieldSchema<T extends Record<string, any> = any> {
     type: 'checkbox' | 'text' | 'date' | 'number';
     label: string;
     placeholder?: string;
+    hides?: keyof T & string;
 }
 
 const editState = ref<Record<string, any>>({});
@@ -115,6 +133,15 @@ const editState = ref<Record<string, any>>({});
 watch(() => props.defaultValues, newValue => {
     editState.value = { ...newValue };
 }, { immediate: true });
+
+function isHidden(field: FieldSchema) {
+    const hider = props.fields.find(x => x.hides === field.key);
+    if (!hider) {
+        return false;
+    }
+
+    return !editState.value[hider.key];
+}
 
 function invDelete() {
     if (props.deleteFn && confirm('Are you sure you want to delete this?')) {

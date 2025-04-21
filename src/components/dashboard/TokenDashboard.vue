@@ -33,7 +33,7 @@ const router = useRouter();
 const createInviteToken = useCreateGroupInviteToken();
 const deleteInviteToken = useDeleteGroupInviteToken();
 const { session } = useUserSession();
-const { data: tokens } = useFindManyGroupInviteToken({
+const { data: tokens, refetch } = useFindManyGroupInviteToken({
     where: {
         ownerId: session.value?.user?.userId,
     },
@@ -59,9 +59,9 @@ async function createToken() {
             maxUse: newToken.value.maxUse,
             token: newToken.value.token,
             expiryDate: newToken.value.expiryDate,
-            group: {
-                connect: {
-                    id: 1, // TODO: Change that duuuh~
+            groups: {
+                create: {
+                    groupId: 1, // TODO: Change that duuuh~
                 },
             },
             owner: {
@@ -71,7 +71,7 @@ async function createToken() {
             },
         },
     }).then(() => {
-        alert('Token created!');
+        refetch();
     }).catch(error => {
         if (error && error.info.zodErrors && Array.isArray(error.info.zodErrors.issues)) {
             const messages = error.info.zodErrors.issues.map((issue: ZodIssue) => `${ issue.path.join('.') }: ${ issue.message }`).join('\n');

@@ -36,6 +36,17 @@ const userFields: FieldSchema<GitUser>[] = [
         label: 'Email',
         type: 'text',
     },
+    {
+        key: 'expires',
+        label: 'Expires',
+        type: 'checkbox',
+        hides: 'expiryDate',
+    },
+    {
+        key: 'expiryDate',
+        label: 'Expiry Date',
+        type: 'date',
+    },
 ];
 
 const { data: gitUser, refetch } = useFindUniqueGitUser({

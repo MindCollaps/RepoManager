@@ -19,6 +19,8 @@ tags:
     description: Notification operations
   - name: groupInviteToken
     description: GroupInviteToken operations
+  - name: groupInviteTokenGroups
+    description: GroupInviteTokenGroups operations
 paths:
   /api/data/user:
     get:
@@ -7152,7 +7154,7 @@ paths:
           content:
             application/vnd.api+json:
               schema:
-                $ref: "#/components/schemas/GroupInviteTokenListResponse"
+                $ref: "#/components/schemas/GroupInviteTokenGroupsListResponse"
         "403":
           description: Request is forbidden
           content:
@@ -10875,14 +10877,6 @@ paths:
           explode: false
           schema:
             type: integer
-        - name: filter[group]
-          required: false
-          description: Equality filter for "group"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
         - name: filter[token]
           required: false
           description: Equality filter for "token"
@@ -11157,6 +11151,16 @@ paths:
           schema:
             type: string
             format: date-time
+        - name: filter[groups]
+          required: false
+          description: Equality filter for "groups"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
       responses:
         "200":
           description: Successful operation
@@ -11323,123 +11327,6 @@ paths:
             application/vnd.api+json:
               schema:
                 $ref: "#/components/schemas/_errorResponse"
-  /api/data/groupInviteToken/{id}/group:
-    get:
-      operationId: fetch-GroupInviteToken-related-group
-      description: Fetch the related "group" resource for "GroupInviteToken"
-      tags:
-        - groupInviteToken
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/include"
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/vnd.api+json:
-              schema:
-                $ref: "#/components/schemas/GitGroupResponse"
-        "403":
-          description: Request is forbidden
-          content:
-            application/vnd.api+json:
-              schema:
-                $ref: "#/components/schemas/_errorResponse"
-        "404":
-          description: Resource is not found
-          content:
-            application/vnd.api+json:
-              schema:
-                $ref: "#/components/schemas/_errorResponse"
-  /api/data/groupInviteToken/{id}/relationships/group:
-    get:
-      operationId: fetch-GroupInviteToken-relationship-group
-      description: Fetch the "group" relationships for a "GroupInviteToken"
-      tags:
-        - groupInviteToken
-      parameters:
-        - $ref: "#/components/parameters/id"
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/vnd.api+json:
-              schema:
-                $ref: "#/components/schemas/_toOneRelationshipResponse"
-        "403":
-          description: Request is forbidden
-          content:
-            application/vnd.api+json:
-              schema:
-                $ref: "#/components/schemas/_errorResponse"
-        "404":
-          description: Resource is not found
-          content:
-            application/vnd.api+json:
-              schema:
-                $ref: "#/components/schemas/_errorResponse"
-    put:
-      operationId: update-GroupInviteToken-relationship-group-put
-      description: Update "group" relationship for a "GroupInviteToken"
-      tags:
-        - groupInviteToken
-      parameters:
-        - $ref: "#/components/parameters/id"
-      requestBody:
-        content:
-          application/vnd.api+json:
-            schema:
-              $ref: "#/components/schemas/_toOneRelationshipRequest"
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/vnd.api+json:
-              schema:
-                $ref: "#/components/schemas/_toOneRelationshipResponse"
-        "403":
-          description: Request is forbidden
-          content:
-            application/vnd.api+json:
-              schema:
-                $ref: "#/components/schemas/_errorResponse"
-        "404":
-          description: Resource is not found
-          content:
-            application/vnd.api+json:
-              schema:
-                $ref: "#/components/schemas/_errorResponse"
-    patch:
-      operationId: update-GroupInviteToken-relationship-group-patch
-      description: Update "group" relationship for a "GroupInviteToken"
-      tags:
-        - groupInviteToken
-      parameters:
-        - $ref: "#/components/parameters/id"
-      requestBody:
-        content:
-          application/vnd.api+json:
-            schema:
-              $ref: "#/components/schemas/_toOneRelationshipRequest"
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/vnd.api+json:
-              schema:
-                $ref: "#/components/schemas/_toOneRelationshipResponse"
-        "403":
-          description: Request is forbidden
-          content:
-            application/vnd.api+json:
-              schema:
-                $ref: "#/components/schemas/_errorResponse"
-        "404":
-          description: Resource is not found
-          content:
-            application/vnd.api+json:
-              schema:
-                $ref: "#/components/schemas/_errorResponse"
   /api/data/groupInviteToken/{id}/owner:
     get:
       operationId: fetch-GroupInviteToken-related-owner
@@ -11531,6 +11418,1171 @@ paths:
       description: Update "owner" relationship for a "GroupInviteToken"
       tags:
         - groupInviteToken
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/_toOneRelationshipRequest"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toOneRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+  /api/data/groupInviteToken/{id}/groups:
+    get:
+      operationId: fetch-GroupInviteToken-related-groups
+      description: Fetch the related "groups" resource for "GroupInviteToken"
+      tags:
+        - groupInviteToken
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/include"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/page-offset"
+        - $ref: "#/components/parameters/page-limit"
+        - name: filter[id]
+          required: false
+          description: Id filter
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[token]
+          required: false
+          description: Equality filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[token$contains]
+          required: false
+          description: String contains filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[token$icontains]
+          required: false
+          description: String case-insensitive contains filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[token$search]
+          required: false
+          description: String full-text search filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[token$startsWith]
+          required: false
+          description: String startsWith filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[token$endsWith]
+          required: false
+          description: String endsWith filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[used]
+          required: false
+          description: Equality filter for "used"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[used$lt]
+          required: false
+          description: Less-than filter for "used"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[used$lte]
+          required: false
+          description: Less-than or equal filter for "used"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[used$gt]
+          required: false
+          description: Greater-than filter for "used"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[used$gte]
+          required: false
+          description: Greater-than or equal filter for "used"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[maxUse]
+          required: false
+          description: Equality filter for "maxUse"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[maxUse$lt]
+          required: false
+          description: Less-than filter for "maxUse"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[maxUse$lte]
+          required: false
+          description: Less-than or equal filter for "maxUse"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[maxUse$gt]
+          required: false
+          description: Greater-than filter for "maxUse"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[maxUse$gte]
+          required: false
+          description: Greater-than or equal filter for "maxUse"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[owner]
+          required: false
+          description: Equality filter for "owner"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name]
+          required: false
+          description: Equality filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$contains]
+          required: false
+          description: String contains filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$icontains]
+          required: false
+          description: String case-insensitive contains filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$search]
+          required: false
+          description: String full-text search filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$startsWith]
+          required: false
+          description: String startsWith filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$endsWith]
+          required: false
+          description: String endsWith filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[expiryDate]
+          required: false
+          description: Equality filter for "expiryDate"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[expiryDate$lt]
+          required: false
+          description: Less-than filter for "expiryDate"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[expiryDate$lte]
+          required: false
+          description: Less-than or equal filter for "expiryDate"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[expiryDate$gt]
+          required: false
+          description: Greater-than filter for "expiryDate"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[expiryDate$gte]
+          required: false
+          description: Greater-than or equal filter for "expiryDate"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created]
+          required: false
+          description: Equality filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$lt]
+          required: false
+          description: Less-than filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$lte]
+          required: false
+          description: Less-than or equal filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$gt]
+          required: false
+          description: Greater-than filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$gte]
+          required: false
+          description: Greater-than or equal filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[groups]
+          required: false
+          description: Equality filter for "groups"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/GroupInviteTokenGroupsListResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+  /api/data/groupInviteToken/{id}/relationships/groups:
+    get:
+      operationId: fetch-GroupInviteToken-relationship-groups
+      description: Fetch the "groups" relationships for a "GroupInviteToken"
+      tags:
+        - groupInviteToken
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/page-offset"
+        - $ref: "#/components/parameters/page-limit"
+        - name: filter[id]
+          required: false
+          description: Id filter
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[token]
+          required: false
+          description: Equality filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[token$contains]
+          required: false
+          description: String contains filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[token$icontains]
+          required: false
+          description: String case-insensitive contains filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[token$search]
+          required: false
+          description: String full-text search filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[token$startsWith]
+          required: false
+          description: String startsWith filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[token$endsWith]
+          required: false
+          description: String endsWith filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[used]
+          required: false
+          description: Equality filter for "used"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[used$lt]
+          required: false
+          description: Less-than filter for "used"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[used$lte]
+          required: false
+          description: Less-than or equal filter for "used"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[used$gt]
+          required: false
+          description: Greater-than filter for "used"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[used$gte]
+          required: false
+          description: Greater-than or equal filter for "used"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[maxUse]
+          required: false
+          description: Equality filter for "maxUse"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[maxUse$lt]
+          required: false
+          description: Less-than filter for "maxUse"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[maxUse$lte]
+          required: false
+          description: Less-than or equal filter for "maxUse"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[maxUse$gt]
+          required: false
+          description: Greater-than filter for "maxUse"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[maxUse$gte]
+          required: false
+          description: Greater-than or equal filter for "maxUse"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[owner]
+          required: false
+          description: Equality filter for "owner"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name]
+          required: false
+          description: Equality filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$contains]
+          required: false
+          description: String contains filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$icontains]
+          required: false
+          description: String case-insensitive contains filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$search]
+          required: false
+          description: String full-text search filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$startsWith]
+          required: false
+          description: String startsWith filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$endsWith]
+          required: false
+          description: String endsWith filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[expiryDate]
+          required: false
+          description: Equality filter for "expiryDate"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[expiryDate$lt]
+          required: false
+          description: Less-than filter for "expiryDate"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[expiryDate$lte]
+          required: false
+          description: Less-than or equal filter for "expiryDate"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[expiryDate$gt]
+          required: false
+          description: Greater-than filter for "expiryDate"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[expiryDate$gte]
+          required: false
+          description: Greater-than or equal filter for "expiryDate"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created]
+          required: false
+          description: Equality filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$lt]
+          required: false
+          description: Less-than filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$lte]
+          required: false
+          description: Less-than or equal filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$gt]
+          required: false
+          description: Greater-than filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$gte]
+          required: false
+          description: Greater-than or equal filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[groups]
+          required: false
+          description: Equality filter for "groups"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toManyRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    put:
+      operationId: update-GroupInviteToken-relationship-groups-put
+      description: Update "groups" relationships for a "GroupInviteToken"
+      tags:
+        - groupInviteToken
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/_toManyRelationshipRequest"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toManyRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    patch:
+      operationId: update-GroupInviteToken-relationship-groups-patch
+      description: Update "groups" relationships for a "GroupInviteToken"
+      tags:
+        - groupInviteToken
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/_toManyRelationshipRequest"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toManyRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    post:
+      operationId: create-GroupInviteToken-relationship-groups
+      description: Create new "groups" relationships for a "GroupInviteToken"
+      tags:
+        - groupInviteToken
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/_toManyRelationshipRequest"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toManyRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+  /api/data/groupInviteTokenGroups:
+    get:
+      operationId: list-GroupInviteTokenGroups
+      description: List "GroupInviteTokenGroups" resources
+      tags:
+        - groupInviteTokenGroups
+      parameters:
+        - $ref: "#/components/parameters/include"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/page-offset"
+        - $ref: "#/components/parameters/page-limit"
+        - name: filter[token]
+          required: false
+          description: Equality filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[group]
+          required: false
+          description: Equality filter for "group"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/GroupInviteTokenGroupsListResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    post:
+      operationId: create-GroupInviteTokenGroups
+      description: Create a "GroupInviteTokenGroups" resource
+      tags:
+        - groupInviteTokenGroups
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/GroupInviteTokenGroupsCreateRequest"
+      responses:
+        "201":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/GroupInviteTokenGroupsResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "422":
+          description: Request is unprocessable due to validation errors
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+  /api/data/groupInviteTokenGroups/{id}:
+    get:
+      operationId: fetch-GroupInviteTokenGroups
+      description: Fetch a "GroupInviteTokenGroups" resource
+      tags:
+        - groupInviteTokenGroups
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/include"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/GroupInviteTokenGroupsResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    put:
+      operationId: update-GroupInviteTokenGroups-put
+      description: Update a "GroupInviteTokenGroups" resource
+      tags:
+        - groupInviteTokenGroups
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/GroupInviteTokenGroupsUpdateRequest"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/GroupInviteTokenGroupsResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "422":
+          description: Request is unprocessable due to validation errors
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    patch:
+      operationId: update-GroupInviteTokenGroups-patch
+      description: Update a "GroupInviteTokenGroups" resource
+      tags:
+        - groupInviteTokenGroups
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/GroupInviteTokenGroupsUpdateRequest"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/GroupInviteTokenGroupsResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "422":
+          description: Request is unprocessable due to validation errors
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    delete:
+      operationId: delete-GroupInviteTokenGroups
+      description: Delete a "GroupInviteTokenGroups" resource
+      tags:
+        - groupInviteTokenGroups
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          description: Successful operation
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+  /api/data/groupInviteTokenGroups/{id}/token:
+    get:
+      operationId: fetch-GroupInviteTokenGroups-related-token
+      description: Fetch the related "token" resource for "GroupInviteTokenGroups"
+      tags:
+        - groupInviteTokenGroups
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/include"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/GroupInviteTokenResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+  /api/data/groupInviteTokenGroups/{id}/relationships/token:
+    get:
+      operationId: fetch-GroupInviteTokenGroups-relationship-token
+      description: Fetch the "token" relationships for a "GroupInviteTokenGroups"
+      tags:
+        - groupInviteTokenGroups
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toOneRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    put:
+      operationId: update-GroupInviteTokenGroups-relationship-token-put
+      description: Update "token" relationship for a "GroupInviteTokenGroups"
+      tags:
+        - groupInviteTokenGroups
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/_toOneRelationshipRequest"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toOneRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    patch:
+      operationId: update-GroupInviteTokenGroups-relationship-token-patch
+      description: Update "token" relationship for a "GroupInviteTokenGroups"
+      tags:
+        - groupInviteTokenGroups
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/_toOneRelationshipRequest"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toOneRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+  /api/data/groupInviteTokenGroups/{id}/group:
+    get:
+      operationId: fetch-GroupInviteTokenGroups-related-group
+      description: Fetch the related "group" resource for "GroupInviteTokenGroups"
+      tags:
+        - groupInviteTokenGroups
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/include"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/GitGroupResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+  /api/data/groupInviteTokenGroups/{id}/relationships/group:
+    get:
+      operationId: fetch-GroupInviteTokenGroups-relationship-group
+      description: Fetch the "group" relationships for a "GroupInviteTokenGroups"
+      tags:
+        - groupInviteTokenGroups
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toOneRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    put:
+      operationId: update-GroupInviteTokenGroups-relationship-group-put
+      description: Update "group" relationship for a "GroupInviteTokenGroups"
+      tags:
+        - groupInviteTokenGroups
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/_toOneRelationshipRequest"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toOneRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    patch:
+      operationId: update-GroupInviteTokenGroups-relationship-group-patch
+      description: Update "group" relationship for a "GroupInviteTokenGroups"
+      tags:
+        - groupInviteTokenGroups
       parameters:
         - $ref: "#/components/parameters/id"
       requestBody:
@@ -13086,7 +14138,6 @@ components:
             - used
             - maxUse
             - ownerId
-            - groupId
             - name
             - expiryDate
             - created
@@ -13098,8 +14149,6 @@ components:
             maxUse:
               type: integer
             ownerId:
-              type: integer
-            groupId:
               type: integer
             name:
               type: string
@@ -13114,10 +14163,10 @@ components:
         relationships:
           type: object
           properties:
-            group:
-              $ref: "#/components/schemas/_toOneRelationshipWithLinks"
             owner:
               $ref: "#/components/schemas/_toOneRelationshipWithLinks"
+            groups:
+              $ref: "#/components/schemas/_toManyRelationshipWithLinks"
     GroupInviteTokenCreateRequest:
       type: object
       description: Input for creating a "GroupInviteToken"
@@ -13159,10 +14208,10 @@ components:
             relationships:
               type: object
               properties:
-                group:
-                  $ref: "#/components/schemas/_toOneRelationship"
                 owner:
                   $ref: "#/components/schemas/_toOneRelationship"
+                groups:
+                  $ref: "#/components/schemas/_toManyRelationship"
         meta:
           $ref: "#/components/schemas/_meta"
     GroupInviteTokenUpdateRequest:
@@ -13205,10 +14254,10 @@ components:
             relationships:
               type: object
               properties:
-                group:
-                  $ref: "#/components/schemas/_toOneRelationship"
                 owner:
                   $ref: "#/components/schemas/_toOneRelationship"
+                groups:
+                  $ref: "#/components/schemas/_toManyRelationship"
         meta:
           $ref: "#/components/schemas/_meta"
     GroupInviteTokenResponse:
@@ -13227,10 +14276,10 @@ components:
                 relationships:
                   type: object
                   properties: &a8
-                    group:
-                      $ref: "#/components/schemas/_toOneRelationship"
                     owner:
                       $ref: "#/components/schemas/_toOneRelationship"
+                    groups:
+                      $ref: "#/components/schemas/_toManyRelationship"
         meta:
           $ref: "#/components/schemas/_meta"
         included:
@@ -13258,6 +14307,149 @@ components:
                   relationships:
                     type: object
                     properties: *a8
+        meta:
+          $ref: "#/components/schemas/_meta"
+        included:
+          type: array
+          items:
+            $ref: "#/components/schemas/_resource"
+        links:
+          allOf:
+            - $ref: "#/components/schemas/_links"
+            - $ref: "#/components/schemas/_pagination"
+    GroupInviteTokenGroups:
+      type: object
+      description: The "GroupInviteTokenGroups" model
+      required:
+        - id
+        - type
+        - attributes
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        attributes:
+          type: object
+          required:
+            - tokenId
+            - groupId
+          properties:
+            tokenId:
+              type: integer
+            groupId:
+              type: integer
+        relationships:
+          type: object
+          properties:
+            token:
+              $ref: "#/components/schemas/_toOneRelationshipWithLinks"
+            group:
+              $ref: "#/components/schemas/_toOneRelationshipWithLinks"
+    GroupInviteTokenGroupsCreateRequest:
+      type: object
+      description: Input for creating a "GroupInviteTokenGroups"
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          description: The "GroupInviteTokenGroups" model
+          required:
+            - type
+            - attributes
+          properties:
+            type:
+              type: string
+            attributes:
+              type: object
+              properties: {}
+            relationships:
+              type: object
+              properties:
+                token:
+                  $ref: "#/components/schemas/_toOneRelationship"
+                group:
+                  $ref: "#/components/schemas/_toOneRelationship"
+        meta:
+          $ref: "#/components/schemas/_meta"
+    GroupInviteTokenGroupsUpdateRequest:
+      type: object
+      description: Input for updating a "GroupInviteTokenGroups"
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          description: The "GroupInviteTokenGroups" model
+          required:
+            - id
+            - type
+            - attributes
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              type: object
+              properties: {}
+            relationships:
+              type: object
+              properties:
+                token:
+                  $ref: "#/components/schemas/_toOneRelationship"
+                group:
+                  $ref: "#/components/schemas/_toOneRelationship"
+        meta:
+          $ref: "#/components/schemas/_meta"
+    GroupInviteTokenGroupsResponse:
+      type: object
+      description: Response for a "GroupInviteTokenGroups"
+      required:
+        - data
+      properties:
+        jsonapi:
+          $ref: "#/components/schemas/_jsonapi"
+        data:
+          allOf:
+            - $ref: "#/components/schemas/GroupInviteTokenGroups"
+            - type: object
+              properties:
+                relationships:
+                  type: object
+                  properties: &a9
+                    token:
+                      $ref: "#/components/schemas/_toOneRelationship"
+                    group:
+                      $ref: "#/components/schemas/_toOneRelationship"
+        meta:
+          $ref: "#/components/schemas/_meta"
+        included:
+          type: array
+          items:
+            $ref: "#/components/schemas/_resource"
+        links:
+          $ref: "#/components/schemas/_links"
+    GroupInviteTokenGroupsListResponse:
+      type: object
+      description: Response for a list of "GroupInviteTokenGroups"
+      required:
+        - data
+        - links
+      properties:
+        jsonapi:
+          $ref: "#/components/schemas/_jsonapi"
+        data:
+          type: array
+          items:
+            allOf:
+              - $ref: "#/components/schemas/GroupInviteTokenGroups"
+              - type: object
+                properties:
+                  relationships:
+                    type: object
+                    properties: *a9
         meta:
           $ref: "#/components/schemas/_meta"
         included:
