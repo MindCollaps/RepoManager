@@ -1,6 +1,7 @@
 <template>
     <basic-dashboard
         :default-values="defaultGroup"
+
         editable
         :fetched-data="gitGroups"
         @create="createGroup()"

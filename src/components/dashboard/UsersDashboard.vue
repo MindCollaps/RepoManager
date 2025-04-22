@@ -4,6 +4,7 @@
         deletable
         editable
         :fetched-data="gitUsers"
+        :show-popup="popupVisible"
         @create="createUser()"
         @delete="deleteUser"
         @edit="editUser"
@@ -73,6 +74,8 @@ const defaultUser = {
 
 const newUser = ref({ ...defaultUser });
 
+const popupVisible = ref(true);
+
 const getGitStyle = computed(() => {
     if (!newUser.value.confirmed) {
         return {};
@@ -120,9 +123,13 @@ async function createUser() {
         },
     }).then(data => {
         refetch();
+        popupVisible.value = false;
     }).catch(error => {
         if (error.statusCode === 400) {
             alert(error.data.data);
+        }
+        else {
+            alert(error.statusMessage);
         }
     });
 }

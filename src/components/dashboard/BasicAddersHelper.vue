@@ -8,19 +8,24 @@
         </div>
         <div class="adder-helper--list-wrap">
             <div class="adder-helper--list">
-                <template
-                    v-if="selectedData"
-                >
+                <template v-if="selectedData">
                     <div
-                        v-for="selected in selectedData"
+                        v-for="(selected, selectedI) in selectedData"
                         :key="selected.id"
                         class="adder-helper--list-item"
                     >
                         <div
-                            v-for="displaying in factory.display"
-                            :key="displaying"
+                            class="adder-helper--list-item-label"
+                            :class="selectedData.length - 1 === selectedI ? 'adder-helper--list-item-label_last' : ''"
                         >
-                            {{ selected[displaying] }}
+                            <div
+                                v-for="(displaying, displayingI) in factory.display"
+                                :key="displaying"
+                                class="adder-helper--adder-list-item-label"
+                                :class="factory.display.length - 1 === displayingI ? 'adder-helper--adder-list-item-label_last' : ''"
+                            >
+                                {{ selected[displaying] }}
+                            </div>
                         </div>
                     </div>
                 </template>
@@ -46,11 +51,12 @@
                         :key="factoryData.id"
                         class="adder-helper--adder-list-item"
                     >
-                        <div  class="adder-helper--adder-list-item-labels">
+                        <div class="adder-helper--adder-list-item-labels">
                             <div
-                                v-for="displaying in factory.display"
+                                v-for="(displaying, i) in factory.display"
                                 :key="displaying"
                                 class="adder-helper--adder-list-item-label"
+                                :class="factory.display.length - 1 === i ? 'adder-helper--adder-list-item-label_last' : ''"
                             >
                                 {{ factoryData[displaying] }}
                             </div>
@@ -82,12 +88,13 @@ import CommonButton from '../common/CommonButton.vue';
 
 export interface UpdateFactory<T extends Record<string, any>> {
     updateFn: (args: {
-        where: { id: number };
+        where: any;
         data: Record<string, any>;
     }) => Promise<unknown>;
+    where: Partial<Record<keyof T, unknown>>;
     data?: T[];
     selected?: number[];
-    display: [keyof T];
+    display: Array<keyof T>;
     updateDataAddConstruct: Record<string, any>;
     updateDataAddKey: string;
     updateDataRemoveConstruct: Record<string, any>;
@@ -134,7 +141,7 @@ async function select(id: number) {
     };
 
     await props.factory.updateFn({
-        where: { id },
+        where: props.factory.where,
         data,
     });
 }
@@ -148,7 +155,7 @@ async function deSelect(id: number) {
     };
 
     await props.factory.updateFn({
-        where: { id },
+        where: props.factory.where,
         data,
     });
 }
@@ -169,14 +176,34 @@ async function deSelect(id: number) {
 
     &--list {
         display: flex;
+        gap: 8px;
+
         padding: 16px;
         border-radius: 8px;
+
         background: $darkgray800;
 
         &-wrap {
             display: flex;
             flex-direction: row;
             gap: 16px;
+        }
+
+        &-item {
+            &-label {
+                display: flex;
+                flex-direction: row;
+
+                &::after {
+                    content: ',';
+                }
+
+                &_last {
+                    &::after {
+                        content: '';
+                    }
+                }
+            }
         }
     }
 
@@ -209,6 +236,12 @@ async function deSelect(id: number) {
                 &::after {
                     content: '|';
                 }
+
+                &_last {
+                    &::after {
+                        content: '';
+                    }
+                }
             }
 
         }
@@ -217,11 +250,16 @@ async function deSelect(id: number) {
 
 .v-enter-active,
 .v-leave-active {
-    transition: opacity 0.5s ease;
+    transition: all 0.5s ease;
 }
 
-.v-enter-from,
+.v-enter-from {
+    transform: translateY(-20px);
+    opacity: 0;
+}
+
 .v-leave-to {
+    transform: translateY(20px);
     opacity: 0;
 }
 </style>

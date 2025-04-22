@@ -20,7 +20,11 @@
             <div
                 v-for="i in fetchedData"
                 :key="i.id"
+                v-motion
                 class="basic-dashboard--list-item"
+                :enter="{ opacity: 1, y: 0 }"
+                :initial="{ opacity: 0, y: 30 }"
+                :leave="{ opacity: 0, y: -30 }"
             >
                 <slot
                     :item="i"
@@ -81,6 +85,9 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    showPopup: {
+        type: Boolean,
+    },
 });
 
 const emit = defineEmits({
@@ -114,13 +121,22 @@ watch(
 
 function closePopup() {
     popupVisible.value = false;
-    newValues.value = { ...props.defaultValues };
+    newValues.value = props.defaultValues;
 }
 
 function create() {
     emit('create');
-    closePopup();
 }
+
+// TODO: Fix this
+onMounted(() => watch([props.showPopup], () => {
+    if (props.showPopup) {
+        popupVisible.value = true;
+    }
+    else {
+        closePopup();
+    }
+}));
 </script>
 
 <style scoped lang="scss">

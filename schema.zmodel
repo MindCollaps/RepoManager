@@ -53,7 +53,7 @@ model GitUser {
     custom           Boolean?
     owners           GitUserOwner[]
 
-    @@allow('create, read, update', owners?[owner.id == auth().id])
+    @@allow('all', owners?[owner.id == auth().id])
 }
 
 model GitGroup {
@@ -70,15 +70,15 @@ model GitGroup {
     users             GitUserGroup[]
     owners            GitGroupOwner[]
 
-    @@allow('create, read, update', owners?[owner.id == auth().id])
+    @@allow('all', owners?[owner.id == auth().id])
 }
 
 model GitUserGroup {
     userId    Int      @map("git_user_id")
     groupId   Int      @map("git_group_id")
     repoState Int      @default(0)
-    user      GitUser  @relation(fields: [userId], references: [id])
-    group     GitGroup @relation(fields: [groupId], references: [id])
+    user      GitUser  @relation(fields: [userId], references: [id], onDelete: Cascade)
+    group     GitGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
     @@id([userId, groupId])
     @@map("git_user_groups")
@@ -94,8 +94,8 @@ model GitUserGroup {
 model GitUserOwner {
     ownerId   Int     @map("owner_id")
     gitUserId Int     @map("git_user_id")
-    owner     User    @relation(fields: [ownerId], references: [id])
-    gitUser   GitUser @relation(fields: [gitUserId], references: [id])
+    owner     User    @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+    gitUser   GitUser @relation(fields: [gitUserId], references: [id], onDelete: Cascade)
 
     @@id([ownerId, gitUserId])
     @@map("git_user_owners")
@@ -107,8 +107,8 @@ model GitUserOwner {
 model GitGroupOwner {
     ownerId Int      @map("owner_id")
     groupId Int      @map("group_id")
-    owner   User     @relation(fields: [ownerId], references: [id])
-    group   GitGroup @relation(fields: [groupId], references: [id])
+    owner   User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+    group   GitGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
     @@id([ownerId, groupId])
     @@map("git_group_owners")
@@ -124,21 +124,21 @@ model Notification {
     read    Boolean
     created DateTime @default(now())
     ownerId Int
-    owner   User     @relation(fields: [ownerId], references: [id])
+    owner   User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 
     @@allow('read', owner.id == auth().id)
 }
 
-model GroupInviteToken {
+model GrodupInviteToken {
     id         Int                      @id @default(autoincrement())
     token      String                   @unique @length(min: 6, max: 12)
     used       Int                      @default(0)
     maxUse     Int
     ownerId    Int
-    owner      User                     @relation(fields: [ownerId], references: [id])
+    owner      User                     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
     name       String                   @length(min: 3, max: 39)
     expiryDate DateTime?
-    created    DateTime                 @default(now())
+    created    DateTime                 @efault(now())
     groups     GroupInviteTokenGroups[]
 
     @@allow('create,read,delete', owner.id == auth().id)
@@ -148,8 +148,8 @@ model GroupInviteToken {
 model GroupInviteTokenGroups {
     tokenId Int              @map("token_id")
     groupId Int              @map("group_id")
-    token   GroupInviteToken @relation(fields: [tokenId], references: [id])
-    group   GitGroup         @relation(fields: [groupId], references: [id])
+    token   GroupInviteToken @relation(fields: [tokenId], references: [id], onDelete: Cascade)
+    group   GitGroup         @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
     @@id([tokenId, groupId])
     @@map("group_invite_token_groups")

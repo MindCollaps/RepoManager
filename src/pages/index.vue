@@ -125,7 +125,7 @@
             </div>
         </section>
 
-        <!-- See It In Action Section with Apple-like Scrolling Effects -->
+        <!-- See It In Action Section -->
         <section class="showcase-section">
             <h2 class="section-title">See It In Action</h2>
 
@@ -223,7 +223,6 @@ const navigateToLogin = () => {
     background-color: $darkgray1000;
 
     section {
-        max-width: 1200px;
         margin: 0 auto;
         padding: 80px 20px;
 
@@ -357,7 +356,6 @@ const navigateToLogin = () => {
 
             background: linear-gradient(135deg, varToRgba('primary700', 0.1), varToRgba('primary400', 0.05));
             backdrop-filter: blur(5px);
-            box-shadow: 0 8px 32px varToRgba('primary700', 0.1);
 
             animation-duration: 20s;
             animation-timing-function: ease-in-out;
@@ -417,7 +415,8 @@ const navigateToLogin = () => {
 
     // Features Section
     .features-section {
-        background-color: varToRgba('darkgray950Raw', 0.5);
+        padding-right: 512px;
+        padding-left: 512px;
     }
 
     .feature-cards {
@@ -444,14 +443,13 @@ const navigateToLogin = () => {
 
         text-align: center;
 
-        background: $darkgray1000;
-        box-shadow: 0 10px 30px varToRgba('darkgray1000', 0.05);
+        box-shadow: 5px 8px 5px varToRgba('darkgray1000', 0.05);
 
         transition: transform 0.3s ease, box-shadow 0.3s ease;
 
         &:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px varToRgba('darkgray1000', 0.1);
+            box-shadow: 7px 10px 6px varToRgba('darkgray1000', 0.05);
         }
 
         h3 {
@@ -494,7 +492,7 @@ const navigateToLogin = () => {
 
     // How It Works Section
     .how-it-works-section {
-        background-color: $darkgray1000;
+        background-color: $darkgray950;
     }
 
     .steps-container {
@@ -544,11 +542,12 @@ const navigateToLogin = () => {
         }
     }
 
-    // Showcase Section (Apple-like)
+    // Showcase Section
     .showcase-section {
         overflow: hidden;
         padding: 120px 20px;
-        background-color: varToRgba('darkgray950', 0.5);
+        padding-right: 350px;
+        padding-left: 350px;
 
         @include mobile() {
             padding: 80px 16px;
@@ -648,8 +647,6 @@ const navigateToLogin = () => {
         height: 500px;
         border-radius: 24px;
 
-        box-shadow: 0 30px 60px varToRgba('darkgray1000', 0.3);
-
         transition: transform 0.5s ease;
 
         &:hover {
@@ -737,7 +734,6 @@ const navigateToLogin = () => {
 
         .cta-button {
             --primary-color: #{$darkgray1000Orig};
-            --hover-color: #{$darkgray950Orig};
             --focus-color: #{$darkgray900Orig};
             font-weight: 600;
             color: $primary700;

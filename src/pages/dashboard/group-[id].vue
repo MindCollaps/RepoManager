@@ -5,7 +5,7 @@
         :fields="userFields"
         :loading
         :save-fn="updateGroup.mutateAsync"
-        :where="{ id: userId }"
+        :where="{ id: groupId }"
     />
 </template>
 
@@ -25,13 +25,13 @@ const route = useRoute();
 
 const deleteGroup = useDeleteManyGitGroup();
 const updateGroup = useUpdateGitGroup();
-const userId = parseInt(route.params.id as string);
+const groupId = parseInt(route.params.id as string);
 
 const { data: gitUsers, refetch: loadGitUsers } = useFindManyGitUser({}, { enabled: false });
 
 const { data: gitGroup } = useFindUniqueGitGroup({
     where: {
-        id: userId,
+        id: groupId,
     },
     include: { users: true },
 }, { enabled: true });
@@ -65,9 +65,12 @@ const userChoiceFactory: Ref<UpdateFactory<GitUser>> = computed(() => ({
     updateDataRemoveConstruct: {
         users: {
             deleteMany: {
-                userId: 0,
+                userId: -1,
             },
         },
+    },
+    where: {
+        id: groupId,
     },
     updateDataRemoveKey: 'users.deleteMany.userId',
 }));
@@ -89,6 +92,11 @@ const userFields: ComputedRef<FieldSchema<GitGroup>[]> = computed(() => ([
         label: 'Expires',
         type: 'checkbox',
         hides: 'expiryDate',
+    },
+    {
+        key: 'expiryDate',
+        label: 'Expiry Date',
+        type: 'date',
     },
     userChoice.value,
 ]));
