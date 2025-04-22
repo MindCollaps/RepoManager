@@ -24,6 +24,18 @@ Make sure to install dependencies:
 yarn install
 ```
 
+## Environment 
+
+Create a .env file from .env.example
+
+## Prepare Prisma
+
+Makes sure the database is initialized and hooks are created
+
+```bash
+yarn zen-push
+```
+
 ## Development Server
 
 Start the development server on `http://localhost:3000`:
