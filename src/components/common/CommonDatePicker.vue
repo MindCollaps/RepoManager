@@ -77,9 +77,10 @@ const adjustTime = (minutes: number) => {
     width: 100%;
 
     &_label {
-        margin-bottom: 8px;
-        font-size: 13px;
+        font-family: $defaultFont;
+        font-size: 12px;
         font-weight: 600;
+        line-height: 100%;
     }
 
     &-container {

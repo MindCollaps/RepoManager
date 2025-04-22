@@ -13563,8 +13563,6 @@ components:
               type: string
             attributes:
               type: object
-              required:
-                - repoState
               properties:
                 repoState:
                   type: integer

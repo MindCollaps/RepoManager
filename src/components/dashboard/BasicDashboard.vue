@@ -131,18 +131,23 @@ function create() {
     &--control {
         display: flex;
         flex-direction: row;
+        justify-content: flex-end;
+
         width: 100%;
+        margin-bottom: 8px;
     }
 
     &--list {
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 20px;
 
-        margin-top: 16px;
-        padding: 16px;
+        margin-top: 20px;
+        padding: 24px;
+        border-radius: 12px;
 
-        background: $darkgray900;
+        background: linear-gradient(to bottom, $darkgray950, $darkgray900);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
         &-item {
             display: flex;
@@ -150,18 +155,29 @@ function create() {
             align-items: center;
             justify-content: space-between;
 
-            padding: 16px;
-            border-radius: 8px;
+            padding: 20px;
+            border-radius: 10px;
 
-            background: $darkgray850;
+            background: linear-gradient(135deg, $darkgray875, $darkgray850);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            }
 
             &-controls {
                 display: flex;
                 flex-direction: row;
-                gap: 8px;
+                gap: 12px;
             }
 
             &-empty {
+                padding: 24px;
+                font-style: italic;
+                color: $lightgray300;
                 text-align: center;
             }
         }
@@ -170,7 +186,8 @@ function create() {
     &--popup-content {
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 20px;
+        padding: 8px 4px;
     }
 }
 </style>

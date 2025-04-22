@@ -60,7 +60,7 @@ model GitGroup {
 model GitUserGroup {
   userId    Int      @map("git_user_id")
   groupId   Int      @map("git_group_id")
-  repoState Int
+  repoState Int      @default(0)
   user      GitUser  @relation(fields: [userId], references: [id])
   group     GitGroup @relation(fields: [groupId], references: [id])
 

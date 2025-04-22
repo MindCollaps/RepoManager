@@ -18,34 +18,45 @@
                 :key="field.key"
             >
                 <template v-if="!isHidden(field)">
-                    <common-input-text
-                        v-if="field.type === 'text'"
-                        v-model="editState[field.key]"
-                        :placeholder="field.placeholder"
-                    >{{ field.label }}</common-input-text>
+                    <template v-if="field.key">
+                        <common-input-text
+                            v-if="field.type === 'text'"
+                            v-model="editState[field.key]"
+                            :placeholder="field.placeholder"
+                        >{{ field.label }}</common-input-text>
 
-                    <common-input-text
-                        v-else-if="field.type === 'number'"
-                        v-model="editState[field.key]"
-                        input-type="number"
-                        :placeholder="field.placeholder"
-                    >{{ field.label }}</common-input-text>
+                        <common-input-text
+                            v-else-if="field.type === 'number'"
+                            v-model="editState[field.key]"
+                            input-type="number"
+                            :placeholder="field.placeholder"
+                        >{{ field.label }}</common-input-text>
 
-                    <common-date-picker
-                        v-else-if="field.type === 'date'"
-                        v-model="editState[field.key]"
-                    >
-                        {{ field.label }}
-                    </common-date-picker>
+                        <common-date-picker
+                            v-else-if="field.type === 'date'"
+                            v-model="editState[field.key]"
+                        >
+                            {{ field.label }}
+                        </common-date-picker>
 
-                    <common-checkbox
-                        v-else-if="field.type === 'checkbox'"
-                        v-model="editState[field.key]"
-                        :label="field.label"
-                    >
-                        {{ field.label }}</common-checkbox>
+                        <common-checkbox
+                            v-else-if="field.type === 'checkbox'"
+                            v-model="editState[field.key]"
+                            :label="field.label"
+                        >
+                            {{ field.label }}</common-checkbox>
+
+
+                        <template v-else>
+                            Type does not exist
+                        </template>
+                    </template>
                     <template v-else>
-                        Type does not exist
+                        <basic-adders-helper
+                            v-if="field.type === 'choice' && field.choiceFactory"
+                            :factory="field.choiceFactory"
+                            :label="field.label"
+                        />
                     </template>
                 </template>
             </template>
@@ -77,7 +88,7 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends Record<string, any>">
 import CommonButton from '~/components/common/CommonButton.vue';
 import DeleteIcon from '~/assets/icons/delete.svg?component';
 import SaveIcon from '~/assets/icons/save.svg?component';
@@ -85,8 +96,19 @@ import CommonLoader from '../common/CommonLoader.vue';
 import CommonCheckbox from '../common/CommonCheckbox.vue';
 import CommonInputText from '../common/CommonInputText.vue';
 import CommonDatePicker from '../common/CommonDatePicker.vue';
+import BasicAddersHelper from './BasicAddersHelper.vue';
 import type { PropType } from 'vue';
 import type { ZodIssue } from 'zod';
+import type { UpdateFactory } from './BasicAddersHelper.vue';
+
+export interface FieldSchema<T extends Record<string, any>, U extends Record<string, any> = any> {
+    key?: keyof T & string;
+    type: 'checkbox' | 'text' | 'date' | 'number' | 'choice';
+    label: string;
+    placeholder?: string;
+    hides?: keyof T & string;
+    choiceFactory?: UpdateFactory<U>;
+}
 
 const props = defineProps({
     deleteFn: {
@@ -105,28 +127,15 @@ const props = defineProps({
         required: true,
     },
     fields: {
-        type: Array as PropType<FieldSchema[]>,
+        type: Array as PropType<FieldSchema<T>[]>,
         required: true,
     },
     defaultValues: {
         type: Object as PropType<Record<string, any> | undefined>,
-        required: true,
     },
 });
 
-defineSlots<{
-    default(): any;
-}>();
-
 const router = useRouter();
-
-export interface FieldSchema<T extends Record<string, any> = any> {
-    key: keyof T & string;
-    type: 'checkbox' | 'text' | 'date' | 'number';
-    label: string;
-    placeholder?: string;
-    hides?: keyof T & string;
-}
 
 const editState = ref<Record<string, any>>({});
 
@@ -134,9 +143,9 @@ watch(() => props.defaultValues, newValue => {
     editState.value = { ...newValue };
 }, { immediate: true });
 
-function isHidden(field: FieldSchema) {
+function isHidden(field: FieldSchema<T>) {
     const hider = props.fields.find(x => x.hides === field.key);
-    if (!hider) {
+    if (!hider || !hider.key) {
         return false;
     }
 
@@ -184,12 +193,17 @@ function invSave() {
 .editors-dashboard {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 24px;
+
+    min-height: 100vh;
     padding: 64px;
+
+    background: linear-gradient(to bottom, varToRgba('darkgray950', 0.5), varToRgba('darkgray900', 0.5));
 
     &--top-control {
         display: flex;
         justify-content: end;
+        margin-bottom: 8px;
     }
 
     &--control {
@@ -201,23 +215,31 @@ function invSave() {
     &--item-list {
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 20px;
         align-items: start;
         justify-content: center;
 
-        padding: 16px;
-        border-radius: 8px;
+        padding: 24px;
+        border: 1px solid varToRgba('primary500', 0.1);
+        border-radius: 12px;
 
-        background: $darkgray850;
+        background: linear-gradient(145deg, $darkgray875, $darkgray850);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 
         &-controls {
             display: flex;
             flex-direction: row;
-            gap: 8px;
+            gap: 12px;
             justify-content: end;
+
+            margin-top: 8px;
+            padding: 8px 0;
         }
 
         &-empty {
+            padding: 16px;
+            font-style: italic;
+            color: $lightgray300;
             text-align: center;
         }
     }

@@ -12,6 +12,9 @@ export default {
     ],
     rules: {
         'no-descending-specificity': null,
+        'function-no-unknown': [true, {
+            ignoreFunctions: ['varToRgba', 'toRawRGB', 'v-bind'],
+        }],
         'selector-pseudo-class-no-unknown': [
             true,
             {
