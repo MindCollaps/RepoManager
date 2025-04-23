@@ -46,7 +46,6 @@ model GitUser {
     name             String         @length(min: 3, max: 39)
     expires          Boolean
     expiryDate       DateTime?
-    repoState        Int
     created          DateTime       @default(now())
     avatar_url       String?
     groups           GitUserGroup[]
@@ -129,7 +128,7 @@ model Notification {
     @@allow('read', owner.id == auth().id)
 }
 
-model GrodupInviteToken {
+model GroupInviteToken {
     id         Int                      @id @default(autoincrement())
     token      String                   @unique @length(min: 6, max: 12)
     used       Int                      @default(0)
@@ -138,7 +137,7 @@ model GrodupInviteToken {
     owner      User                     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
     name       String                   @length(min: 3, max: 39)
     expiryDate DateTime?
-    created    DateTime                 @efault(now())
+    created    DateTime                 @default(now())
     groups     GroupInviteTokenGroups[]
 
     @@allow('create,read,delete', owner.id == auth().id)

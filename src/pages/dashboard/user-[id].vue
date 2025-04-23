@@ -10,11 +10,12 @@
 </template>
 
 <script setup lang="ts">
-import { useFindUniqueGitUser, useDeleteManyGitUser, useUpdateGitUser } from '~~/lib/hooks';
+import { useFindUniqueGitUser, useDeleteManyGitUser, useUpdateGitUser, useFindManyGitGroup } from '~~/lib/hooks';
 import type { FieldSchema } from '~/components/dashboard/BasicEditorsDashboard.vue';
 import BasicEditorsDashboard from '~/components/dashboard/BasicEditorsDashboard.vue';
 import { useRoute } from 'vue-router';
-import type { GitUser } from '@zenstackhq/runtime/models';
+import type { GitGroup, GitUser } from '@zenstackhq/runtime/models';
+import type { UpdateFactory } from '~/components/dashboard/BasicAddersHelper.vue';
 
 const deleteUser = useDeleteManyGitUser();
 const updateUser = useUpdateGitUser();
@@ -25,7 +26,55 @@ const userId = parseInt(route.params.id as string);
 
 const loading = ref(true);
 
-const userFields: FieldSchema<GitUser>[] = [
+const { data: gitGroups } = useFindManyGitGroup({}, { enabled: true });
+
+const { data: gitUser, refetch: fetchGitUser } = useFindUniqueGitUser({
+    where: {
+        id: userId,
+    },
+    include: {
+        groups: true,
+    },
+}, { enabled: true });
+
+await fetchGitUser();
+
+const selectedGroups: ComputedRef<Array<number>> = computed(() => {
+    if (gitUser.value) {
+        return gitUser.value.groups.map(x => x.groupId);
+    }
+    return [];
+});
+
+const userChoiceFactory: Ref<UpdateFactory<GitGroup>> = computed(() => ({
+    data: gitGroups.value,
+    display: [
+        'name',
+    ],
+    selected: selectedGroups.value,
+    updateFn: updateUser.mutateAsync,
+    updateDataAddConstruct: {
+        groups: {
+            create: {
+                groupId: -1,
+            },
+        },
+    },
+    updateDataAddKey: 'groups.create.groupId',
+    updateDataRemoveConstruct: {
+        groups: {
+            deleteMany: {
+                groupId: -1,
+            },
+        },
+    },
+    where: {
+        id: userId,
+    },
+    updateDataRemoveKey: 'groups.deleteMany.groupId',
+}));
+
+const userFields: Ref<FieldSchema<GitUser>[]> = computed(() => ([
     {
         key: 'name',
         label: 'Name',
@@ -47,23 +96,21 @@ const userFields: FieldSchema<GitUser>[] = [
         label: 'Expiry Date',
         type: 'date',
     },
-];
-
-const { data: gitUser, refetch } = useFindUniqueGitUser({
-    where: {
-        id: userId,
+    {
+        label: 'Groups',
+        type: 'choice',
+        choiceFactory: userChoiceFactory.value,
     },
-}, { enabled: false });
+]));
 
 const newUser = ref<GitUser>();
 
-definePageMeta({
-    middleware: ['authenticated'],
-});
 
-await refetch();
 if (gitUser.value) {
     newUser.value = { ...gitUser.value };
 }
-loading.value = false;
+
+onMounted(() => {
+    loading.value = false;
+});
 </script>

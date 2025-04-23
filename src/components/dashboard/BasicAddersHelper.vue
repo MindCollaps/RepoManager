@@ -29,11 +29,17 @@
                         </div>
                     </div>
                 </template>
-                <div v-if="!selectedData || selectedData?.length === 0">
-                    Nothing Selected
-                </div>
+                <template v-if="!selectedData || selectedData?.length === 0">
+                    <div v-if="factory.data?.length === 0">
+                        Nothing to select
+                    </div>
+                    <div v-else>
+                        Nothing Selected
+                    </div>
+                </template>
             </div>
             <common-button
+                v-if="factory.data?.length ?? 0 > 0"
                 :primary-color="addVisible ? 'error400' : 'success400'"
                 @click="addVisible = !addVisible"
             >
@@ -167,6 +173,8 @@ async function deSelect(id: number) {
     flex-direction: column;
     gap: 8px;
 
+    min-width: 300px;
+
     &--label {
         font-family: $defaultFont;
         font-size: 12px;
@@ -183,10 +191,14 @@ async function deSelect(id: number) {
 
         background: $darkgray800;
 
+        width: 100%;
+
         &-wrap {
             display: flex;
             flex-direction: row;
+            justify-content: space-between;
             gap: 16px;
+            padding-right: 16px;
         }
 
         &-item {

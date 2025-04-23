@@ -4076,46 +4076,6 @@ paths:
           schema:
             type: string
             format: date-time
-        - name: filter[repoState]
-          required: false
-          description: Equality filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[repoState$lt]
-          required: false
-          description: Less-than filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[repoState$lte]
-          required: false
-          description: Less-than or equal filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[repoState$gt]
-          required: false
-          description: Greater-than filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[repoState$gte]
-          required: false
-          description: Greater-than or equal filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
         - name: filter[created]
           required: false
           description: Equality filter for "created"
@@ -4668,46 +4628,6 @@ paths:
           schema:
             type: string
             format: date-time
-        - name: filter[repoState]
-          required: false
-          description: Equality filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[repoState$lt]
-          required: false
-          description: Less-than filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[repoState$lte]
-          required: false
-          description: Less-than or equal filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[repoState$gt]
-          required: false
-          description: Greater-than filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[repoState$gte]
-          required: false
-          description: Greater-than or equal filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
         - name: filter[created]
           required: false
           description: Equality filter for "created"
@@ -5112,46 +5032,6 @@ paths:
           schema:
             type: string
             format: date-time
-        - name: filter[repoState]
-          required: false
-          description: Equality filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[repoState$lt]
-          required: false
-          description: Less-than filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[repoState$lte]
-          required: false
-          description: Less-than or equal filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[repoState$gt]
-          required: false
-          description: Greater-than filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[repoState$gte]
-          required: false
-          description: Greater-than or equal filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
         - name: filter[created]
           required: false
           description: Equality filter for "created"
@@ -5650,46 +5530,6 @@ paths:
           schema:
             type: string
             format: date-time
-        - name: filter[repoState]
-          required: false
-          description: Equality filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[repoState$lt]
-          required: false
-          description: Less-than filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[repoState$lte]
-          required: false
-          description: Less-than or equal filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[repoState$gt]
-          required: false
-          description: Greater-than filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[repoState$gte]
-          required: false
-          description: Greater-than or equal filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
         - name: filter[created]
           required: false
           description: Equality filter for "created"
@@ -6094,46 +5934,6 @@ paths:
           schema:
             type: string
             format: date-time
-        - name: filter[repoState]
-          required: false
-          description: Equality filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[repoState$lt]
-          required: false
-          description: Less-than filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[repoState$lte]
-          required: false
-          description: Less-than or equal filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[repoState$gt]
-          required: false
-          description: Greater-than filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[repoState$gte]
-          required: false
-          description: Greater-than or equal filter for "repoState"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
         - name: filter[created]
           required: false
           description: Equality filter for "created"
@@ -13074,7 +12874,6 @@ components:
             - name
             - expires
             - expiryDate
-            - repoState
             - created
             - avatar_url
             - custom
@@ -13096,8 +12895,6 @@ components:
                 - type: "null"
                 - type: string
                   format: date-time
-            repoState:
-              type: integer
             created:
               type: string
               format: date-time
@@ -13138,7 +12935,6 @@ components:
                 - username
                 - name
                 - expires
-                - repoState
               properties:
                 git_access_token:
                   oneOf:
@@ -13157,8 +12953,6 @@ components:
                     - type: "null"
                     - type: string
                       format: date-time
-                repoState:
-                  type: integer
                 created:
                   type: string
                   format: date-time
@@ -13217,8 +13011,6 @@ components:
                     - type: "null"
                     - type: string
                       format: date-time
-                repoState:
-                  type: integer
                 created:
                   type: string
                   format: date-time

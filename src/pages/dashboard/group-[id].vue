@@ -27,6 +27,8 @@ const deleteGroup = useDeleteManyGitGroup();
 const updateGroup = useUpdateGitGroup();
 const groupId = parseInt(route.params.id as string);
 
+const loading = ref(true);
+
 const { data: gitUsers, refetch: loadGitUsers } = useFindManyGitUser({}, { enabled: false });
 
 const { data: gitGroup } = useFindUniqueGitGroup({
@@ -38,9 +40,7 @@ const { data: gitGroup } = useFindUniqueGitGroup({
 
 await loadGitUsers();
 
-const loading = ref(true);
-
-const selectedGroups: ComputedRef<Array<number>> = computed(() => {
+const selectedUsers: ComputedRef<Array<number>> = computed(() => {
     if (gitGroup.value) {
         return gitGroup.value.users.map(x => x.userId);
     }
@@ -52,7 +52,7 @@ const userChoiceFactory: Ref<UpdateFactory<GitUser>> = computed(() => ({
     display: [
         'name',
     ],
-    selected: selectedGroups.value,
+    selected: selectedUsers.value,
     updateFn: useUpdateGitGroup().mutateAsync,
     updateDataAddConstruct: {
         users: {

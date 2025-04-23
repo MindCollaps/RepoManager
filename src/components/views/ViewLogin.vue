@@ -6,6 +6,7 @@
     <common-button
         v-if="loggedIn"
         href="/profile"
+        icon-width="45px"
         type="transparent"
     >
         <template #default>

@@ -189,6 +189,9 @@ const getAttrs = computed(() => {
         width: var(--icon-width);
         min-width: var(--icon-width);
 
+        height: var(--icon-width);
+        min-height: var(--icon-width);
+
         fill: var(--icon-color);
     }
 

@@ -69,7 +69,18 @@
                 @click="invSave"
             >
                 <template #icon>
-                    <save-icon/>
+                    <div class="editors-dashboard--item-list-controls--button-icon-wrap">
+                        <transition>
+                            <save-icon
+                                v-if="!saveAnim"
+                                class="editors-dashboard--item-list-controls--button-icon"
+                            />
+                            <check-icon
+                                v-else
+                                class="editors-dashboard--item-list-controls--button-icon"
+                            />
+                        </transition>
+                    </div>
                 </template>
             </common-button>
             <common-button
@@ -89,9 +100,10 @@
 </template>
 
 <script setup lang="ts" generic="T extends Record<string, any>">
-import CommonButton from '~/components/common/CommonButton.vue';
 import DeleteIcon from '~/assets/icons/delete.svg?component';
 import SaveIcon from '~/assets/icons/save.svg?component';
+import CheckIcon from '~/assets/icons/check.svg?component';
+import CommonButton from '~/components/common/CommonButton.vue';
 import CommonLoader from '../common/CommonLoader.vue';
 import CommonCheckbox from '../common/CommonCheckbox.vue';
 import CommonInputText from '../common/CommonInputText.vue';
@@ -137,10 +149,24 @@ const props = defineProps({
 
 const router = useRouter();
 
-const editState = ref<Record<string, any>>({});
+const saveAnim = ref(false);
 
-watch(() => props.defaultValues, newValue => {
-    editState.value = { ...newValue };
+const fieldDefaultValues: ComputedRef<Record<string, any>> = computed(() => {
+    return props.fields
+        .map(field => field.key)
+        .filter((key): key is string => !!key)
+        .reduce((acc, key) => {
+            if (props.defaultValues && key in props.defaultValues) {
+                acc[key] = props.defaultValues[key];
+            }
+            return acc;
+        }, {} as Record<string, any>);
+});
+
+const editState: Ref<Record<string, any>> = ref({});
+
+watch(fieldDefaultValues, newVal => {
+    editState.value = structuredClone(newVal);
 }, { immediate: true });
 
 function isHidden(field: FieldSchema<T>) {
@@ -185,7 +211,15 @@ function invSave() {
             alert('An unexpected error occurred.');
             console.log(error);
         }
-    });
+    }).then(() => saveAnimation());
+}
+
+function saveAnimation() {
+    saveAnim.value = true;
+
+    setTimeout(() => {
+        saveAnim.value = false;
+    }, 2000);
 }
 </script>
 
@@ -234,6 +268,19 @@ function invSave() {
 
             margin-top: 8px;
             padding: 8px 0;
+
+            &--button-icon {
+                position: absolute;
+                width: 20px;
+                left: 0;
+                top: 0;
+
+                &-wrap {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
         }
 
         &-empty {
@@ -243,5 +290,15 @@ function invSave() {
             text-align: center;
         }
     }
+}
+
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
 }
 </style>

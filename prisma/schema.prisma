@@ -34,7 +34,6 @@ model GitUser {
   name             String
   expires          Boolean
   expiryDate       DateTime?
-  repoState        Int
   created          DateTime       @default(now())
   avatar_url       String?
   groups           GitUserGroup[]
