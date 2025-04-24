@@ -1,58 +1,58 @@
 <template>
     <basic-editors-dashboard
-        :default-values="gitUser"
-        :delete-fn="deleteUser.mutateAsync"
-        :fields="userFields"
+        :default-values="gitToken"
+        :delete-fn="deleteToken.mutateAsync"
+        :fields="tokenFields"
         :loading
-        :save-fn="updateUser.mutateAsync"
-        :where="{ id: userId }"
+        :save-fn="updateToken.mutateAsync"
+        :where="{ id: tokenId }"
     />
 </template>
 
 <script setup lang="ts">
-import { useFindUniqueGitUser, useDeleteManyGitUser, useUpdateGitUser, useFindManyGitGroup } from '~~/lib/hooks';
+import { useFindManyGitGroup, useDeleteGroupInviteToken, useUpdateGroupInviteToken, useFindUniqueGroupInviteToken } from '~~/lib/hooks';
 import type { FieldSchema } from '~/components/basic/BasicEditorsDashboard.vue';
 import BasicEditorsDashboard from '~/components/basic/BasicEditorsDashboard.vue';
 import { useRoute } from 'vue-router';
-import type { GitGroup, GitUser } from '@zenstackhq/runtime/models';
+import type { GitGroup, GroupInviteToken } from '@zenstackhq/runtime/models';
 import type { UpdateFactory } from '~/components/basic/BasicAddersHelper.vue';
 
-const deleteUser = useDeleteManyGitUser();
-const updateUser = useUpdateGitUser();
+const deleteToken = useDeleteGroupInviteToken();
+const updateToken = useUpdateGroupInviteToken();
 
 const route = useRoute();
 
-const userId = parseInt(route.params.id as string);
+const tokenId = parseInt(route.params.id as string);
 
 const loading = ref(true);
 
 const { data: gitGroups } = useFindManyGitGroup({}, { enabled: true });
 
-const { data: gitUser, refetch: fetchGitUser } = useFindUniqueGitUser({
+const { data: gitToken, refetch: fetchTokens } = useFindUniqueGroupInviteToken({
     where: {
-        id: userId,
+        id: tokenId,
     },
     include: {
         groups: true,
     },
 }, { enabled: true });
 
-await fetchGitUser();
+await fetchTokens();
 
 const selectedGroups: ComputedRef<Array<number>> = computed(() => {
-    if (gitUser.value) {
-        return gitUser.value.groups.map(x => x.groupId);
+    if (gitToken.value) {
+        return gitToken.value.groups.map(x => x.groupId);
     }
     return [];
 });
 
-const userChoiceFactory: Ref<UpdateFactory<GitGroup>> = computed(() => ({
+const tokenChoiceFactory: Ref<UpdateFactory<GitGroup>> = computed(() => ({
     data: gitGroups.value,
     display: [
         'name',
     ],
     selected: selectedGroups.value,
-    updateFn: updateUser.mutateAsync,
+    updateFn: updateToken.mutateAsync,
     updateDataAddConstruct: {
         groups: {
             create: {
@@ -69,27 +69,22 @@ const userChoiceFactory: Ref<UpdateFactory<GitGroup>> = computed(() => ({
         },
     },
     where: {
-        id: userId,
+        id: tokenId,
     },
     updateDataRemoveKey: 'groups.deleteMany.groupId',
 }));
 
-const userFields: Ref<FieldSchema<GitUser>[]> = computed(() => ([
+const tokenFields: Ref<FieldSchema<GroupInviteToken>[]> = computed(() => ([
     {
         key: 'name',
         label: 'Name',
         type: 'text',
     },
     {
-        key: 'email',
-        label: 'Email',
+        key: 'token',
+        label: 'Token',
         type: 'text',
-    },
-    {
-        key: 'expires',
-        label: 'Expires',
-        type: 'checkbox',
-        hides: 'expiryDate',
+        readonly: true,
     },
     {
         key: 'expiryDate',
@@ -99,7 +94,7 @@ const userFields: Ref<FieldSchema<GitUser>[]> = computed(() => ([
     {
         label: 'Groups',
         type: 'choice',
-        choiceFactory: userChoiceFactory.value,
+        choiceFactory: tokenChoiceFactory.value,
     },
 ]));
 

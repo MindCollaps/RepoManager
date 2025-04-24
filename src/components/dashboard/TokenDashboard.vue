@@ -14,22 +14,44 @@
             <common-date-picker
                 v-model="newToken.expiryDate"
             >Expiry Date</common-date-picker>
+            <basic-create-adder
+                v-model="selectedGroups"
+                :data="gitGroups"
+                label="Git Groups"
+            >
+                <template #default="{ item }">
+                    {{ item.name }}
+                </template>
+            </basic-create-adder>
         </template>
         <template #item="{ item }">
             {{ item.name }}
+        </template>
+        <template #action="{ item }">
+            <common-button
+                :href="'/tk?tk=' + encodeURIComponent(item.token)"
+                primary-color="info500"
+            >
+                <template #icon>
+                    <search-icon/>
+                </template>
+            </common-button>
         </template>
     </basic-dashboard>
 </template>
 
 <script setup lang="ts">
+import SearchIcon from '~/assets/icons/search.svg?component';
 import CommonInputText from '~/components/common/CommonInputText.vue';
 import CommonDatePicker from '../common/CommonDatePicker.vue';
-import BasicDashboard from './BasicDashboard.vue';
-import { useCreateGroupInviteToken, useFindManyGroupInviteToken, useDeleteGroupInviteToken } from '~~/lib/hooks';
+import BasicDashboard from '../basic/BasicDashboard.vue';
+import BasicCreateAdder from '../basic/BasicCreateAdder.vue';
+import { useCreateGroupInviteToken, useFindManyGroupInviteToken, useDeleteGroupInviteToken, useFindManyGitGroup } from '~~/lib/hooks';
 import type { ZodIssue } from 'zod';
 
 const router = useRouter();
 
+const { data: gitGroups } = useFindManyGitGroup({}, { enabled: true });
 const createInviteToken = useCreateGroupInviteToken();
 const deleteInviteToken = useDeleteGroupInviteToken();
 const { session } = useUserSession();
@@ -48,8 +70,10 @@ const defaultToken = {
 
 const newToken = ref({ ...defaultToken });
 
+const selectedGroups: Ref<Array<number>> = ref([]);
+
 function editToken(id: number) {
-    router.push(`/tk?id=${ id }&edit`);
+    router.push(`/dashboard/token-${ id }`);
 }
 
 async function createToken() {
@@ -60,8 +84,8 @@ async function createToken() {
             token: newToken.value.token,
             expiryDate: newToken.value.expiryDate,
             groups: {
-                create: {
-                    groupId: 1, // TODO: Change that duuuh~
+                createMany: {
+                    data: selectedGroups.value.map(id => ({ groupId: id })),
                 },
             },
             owner: {

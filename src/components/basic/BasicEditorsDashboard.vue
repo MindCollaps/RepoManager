@@ -22,6 +22,7 @@
                         <common-input-text
                             v-if="field.type === 'text'"
                             v-model="editState[field.key]"
+                            :disabled="field.readonly"
                             :placeholder="field.placeholder"
                         >{{ field.label }}</common-input-text>
 
@@ -120,6 +121,7 @@ export interface FieldSchema<T extends Record<string, any>, U extends Record<str
     placeholder?: string;
     hides?: keyof T & string;
     choiceFactory?: UpdateFactory<U>;
+    readonly?: boolean;
 }
 
 const props = defineProps({
@@ -271,9 +273,9 @@ function saveAnimation() {
 
             &--button-icon {
                 position: absolute;
-                width: 20px;
-                left: 0;
                 top: 0;
+                left: 0;
+                width: 20px;
 
                 &-wrap {
                     position: relative;

@@ -1,6 +1,6 @@
 <template>
     <common-button
-        v-if="!loggedIn"
+        v-if="!loggedIn && !user?.isUser"
         href="/login"
     >Login</common-button>
     <common-button

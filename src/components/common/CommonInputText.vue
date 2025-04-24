@@ -20,6 +20,7 @@
                 <input
                     v-bind="inputAttrs"
                     v-model="model"
+                    :disabled="disabled"
                     :placeholder
                     :type="inputType"
                     @blur="focused = false"
@@ -48,6 +49,9 @@ defineProps({
     },
     placeholder: {
         type: String,
+    },
+    disabled: {
+        type: Boolean,
     },
 });
 

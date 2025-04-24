@@ -54,7 +54,7 @@ import CommonCheckbox from '../common/CommonCheckbox.vue';
 import CommonDatePicker from '../common/CommonDatePicker.vue';
 import CommonGitProfilePic from '../common/CommonGitProfilePic.vue';
 import { useFindManyGitUser, useDeleteGitUser } from '~~/lib/hooks';
-import BasicDashboard from './BasicDashboard.vue';
+import BasicDashboard from '../basic/BasicDashboard.vue';
 
 const router = useRouter();
 

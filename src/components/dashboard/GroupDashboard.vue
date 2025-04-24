@@ -1,7 +1,6 @@
 <template>
     <basic-dashboard
         :default-values="defaultGroup"
-
         editable
         :fetched-data="gitGroups"
         @create="createGroup()"
@@ -50,7 +49,7 @@ import CommonInputText from '~/components/common/CommonInputText.vue';
 import CommonCheckbox from '../common/CommonCheckbox.vue';
 import CommonDatePicker from '../common/CommonDatePicker.vue';
 import { useCreateGitGroup, useFindManyGitGroup } from '~~/lib/hooks';
-import BasicDashboard from './BasicDashboard.vue';
+import BasicDashboard from '../basic/BasicDashboard.vue';
 
 const router = useRouter();
 

@@ -11,11 +11,11 @@
 
 <script setup lang="ts">
 import { useFindUniqueGitGroup, useDeleteManyGitGroup, useUpdateGitGroup, useFindManyGitUser } from '~~/lib/hooks';
-import type { FieldSchema } from '~/components/dashboard/BasicEditorsDashboard.vue';
-import BasicEditorsDashboard from '~/components/dashboard/BasicEditorsDashboard.vue';
+import type { FieldSchema } from '~/components/basic/BasicEditorsDashboard.vue';
+import BasicEditorsDashboard from '~/components/basic/BasicEditorsDashboard.vue';
 import { useRoute } from 'vue-router';
 import type { GitGroup, GitUser } from '@zenstackhq/runtime/models';
-import type { UpdateFactory } from '~/components/dashboard/BasicAddersHelper.vue';
+import type { UpdateFactory } from '~/components/basic/BasicAddersHelper.vue';
 
 definePageMeta({
     middleware: ['authenticated'],
@@ -100,12 +100,6 @@ const userFields: ComputedRef<FieldSchema<GitGroup>[]> = computed(() => ([
     },
     userChoice.value,
 ]));
-
-const newGroup = ref<GitGroup>();
-
-if (gitGroup.value) {
-    newGroup.value = { ...gitGroup.value };
-}
 
 onMounted(() => {
     loading.value = false;

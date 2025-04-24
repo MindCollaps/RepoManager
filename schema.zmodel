@@ -24,7 +24,7 @@ plugin hooks {
 
 model User {
     id                Int                @id @default(autoincrement())
-    email             String             @unique @email
+    email             String             @unique @email @lower
     name              String?            @length(min: 3, max: 39)
     username          String?            @length(min: 6, max: 39)
     git_access_token  String?            @deny('read', true) @omit
@@ -41,7 +41,7 @@ model User {
 model GitUser {
     id               Int            @id @default(autoincrement())
     git_access_token String?
-    email            String         @unique @email
+    email            String         @unique @email @lower
     username         String         @length(min: 6, max: 39)
     name             String         @length(min: 3, max: 39)
     expires          Boolean

@@ -31,6 +31,10 @@
                     name="item"
                 />
                 <div class="basic-dashboard--list-item-controls">
+                    <slot
+                        :item="i"
+                        name="action"
+                    />
                     <common-button
                         v-if="editable"
                         primary-color="success500"
@@ -105,6 +109,7 @@ const emit = defineEmits({
 defineSlots<{
     item(props: { item: DB }): any;
     popup(): any;
+    action(props: { item: DB }): any;
 }>();
 
 const popupVisible = ref(false);

@@ -56,7 +56,6 @@ export default defineEventHandler(async event => {
                 name: body.data.name,
                 username: body.data.username,
                 expires: body.data.expires,
-                repoState: 0,
                 custom: true,
                 owners: {
                     create: [{

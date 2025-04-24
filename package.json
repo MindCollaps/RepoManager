@@ -19,7 +19,8 @@
     "db-push": "yarn prisma db push",
     "db-drop": "yarn prisma db push --force-reset",
     "zen": "yarn zenstack format && yarn zenstack generate",
-    "zen-push": "yarn zen && yarn prisma db push"
+    "zen-push": "yarn zen && yarn db-push",
+    "zen-drop": "yarn zen && yarn db-drop"
   },
   "dependencies": {
     "@nuxt/image": "1.10.0",
@@ -34,6 +35,7 @@
     "nuxt-auth-utils": "^0.5.18",
     "octokit": "^4.1.2",
     "pinia": "^3.0.1",
+    "qrcode.vue": "^3.6.0",
     "vite-svg-loader": "^5.1.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",

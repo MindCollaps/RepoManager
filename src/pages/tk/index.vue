@@ -1,8 +1,9 @@
 <template>
-    <div v-if="loading">
-        <common-loader/>
-    </div>
-    <div v-else>
+    <common-loader v-if="loading"/>
+    <div
+        v-else
+        class="token"
+    >
         <template v-if="tokenError">
             <template v-if="noTokenProvided">
                 No Token Provided!
@@ -12,23 +13,78 @@
             </template>
         </template>
         <template v-else>
-            {{ token?.name }} | {{ token?.token }}
+            <template v-if="user?.isUser">
+                <qrcode
+                    :size="500"
+                    :value="url.href"
+                />
+                <div class="token-copy">
+                    <common-input-text v-model="url.href"/>
+                    <common-button>
+                        Copy
+                    </common-button>
+                </div>
+            </template>
+            <template v-else-if="token">
+                <div class="token-top">
+                    <common-git-profile-pic
+                        v-if="token.owner.avatar_url"
+                        :override-image="token.owner.avatar_url"
+                    />
+                    <div class="token-top-message">
+                        <div class="token-top-message-name">{{ token.owner.name }}</div> invted you to join
+                    </div>
+                </div>
+                <div class="token-repos">
+                    <div
+                        v-for="group in token.groups"
+                        :key="group.groupId"
+                        class="token-repos-item"
+                    >
+                        {{ group.group.repoOwner }} / {{ group.group.repoName }}
+                    </div>
+                </div>
+                <common-button
+                    type="secondary"
+                    width="256px"
+                    @click="login()"
+                >
+                    <template #default>
+                        Join with GitHub
+                    </template>
+                    <template #icon>
+                        <github-icon/>
+                    </template>
+                </common-button>
+            </template>
         </template>
     </div>
 </template>
 
 <script setup lang="ts">
-import type { GroupInviteToken } from '@zenstackhq/runtime/models';
-import { useFindUniqueGroupInviteToken } from '~~/lib/hooks';
+import GithubIcon from '/assets/icons/github.svg?component';
 import CommonLoader from '~/components/common/CommonLoader.vue';
+import Qrcode from 'qrcode.vue';
+import CommonInputText from '~/components/common/CommonInputText.vue';
+import CommonButton from '~/components/common/CommonButton.vue';
+import CommonGitProfilePic from '~/components/common/CommonGitProfilePic.vue';
+import type { FetchingToken } from '~/types/fetch';
+import { TokenCookieName } from '~/types';
+
+definePageMeta({
+    layout: false,
+});
+
+const { user, openInPopup } = useUserSession();
 
 const route = useRoute();
+const url = useRequestURL();
 
 const loading = ref(true);
 const tokenError = ref(false);
 const noTokenProvided = ref(false);
 const tokenErrorMessage = ref('');
-const token = shallowRef<GroupInviteToken | undefined>();
+const token = shallowRef<FetchingToken | undefined>();
 
 function setError(message: string, noToken = false) {
     tokenError.value = true;
@@ -38,52 +94,11 @@ function setError(message: string, noToken = false) {
 
 async function fetchTokenByString(tokenString: string) {
     try {
-        const data = await $fetch<GroupInviteToken>(`/api/v1/tk?tk=${ encodeURIComponent(tokenString) }`);
+        const data = await $fetch<FetchingToken>(`/api/v1/tk?tk=${ encodeURIComponent(tokenString) }`);
         token.value = data;
     }
     catch (error: any) {
         setError(error?.statusMessage || 'Token could not be found');
-    }
-}
-
-async function fetchTokenById(tokenId: string) {
-    const id = parseInt(tokenId, 10);
-    if (isNaN(id)) {
-        setError('Invalid token ID', true);
-        return;
-    }
-    try {
-        // Silly way of fetching MANUEL
-        const { data, error, refetch } = useFindUniqueGroupInviteToken({ where: { id: id } }, { enabled: false });
-        await refetch();
-        if (error?.value) {
-            setError(error.value.message ?? 'Token could not be found');
-        }
-        else if (data?.value) {
-            token.value = data.value;
-        }
-        else {
-            setError('Token could not be found');
-        }
-    }
-    catch (error: any) {
-        setError(error?.message ?? 'Token could not be found');
-    }
-}
-
-async function editQuery() {
-    const tokenString = route.query.tk as string | undefined;
-    const tokenId = route.query.id as string | undefined;
-
-    if (!tokenString && !tokenId) {
-        setError('No token provided', true);
-        return;
-    }
-    if (tokenString) {
-        await fetchTokenByString(tokenString);
-    }
-    else if (tokenId) {
-        await fetchTokenById(tokenId);
     }
 }
 
@@ -96,14 +111,16 @@ async function loadQuery() {
     await fetchTokenByString(tokenString);
 }
 
+function login() {
+    const tokenCookie = useCookie(TokenCookieName);
+    tokenCookie.value = token.value?.token;
+
+    openInPopup('/auth/github-user');
+}
+
 onMounted(async () => {
     try {
-        if ('edit' in route.query) {
-            await editQuery();
-        }
-        else {
-            await loadQuery();
-        }
+        await loadQuery();
     }
     catch {
         setError('An error occurred');
@@ -114,3 +131,41 @@ onMounted(async () => {
 });
 </script>
 
+<style scoped lang="scss">
+.token {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 64px;
+
+    &-copy {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        justify-content: center;
+
+        width: 50vw;
+    }
+
+    &-top {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        align-items: center;
+
+        &-message {
+            display: flex;
+            flex-direction: row;
+            gap: 6px;
+            align-items: center;
+
+            &-name {
+                font-size: 22px;
+            }
+        }
+    }
+}
+</style>

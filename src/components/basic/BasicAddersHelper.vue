@@ -172,7 +172,6 @@ async function deSelect(id: number) {
     display: flex;
     flex-direction: column;
     gap: 8px;
-
     min-width: 300px;
 
     &--label {
@@ -186,18 +185,18 @@ async function deSelect(id: number) {
         display: flex;
         gap: 8px;
 
+        width: 100%;
         padding: 16px;
         border-radius: 8px;
 
         background: $darkgray800;
 
-        width: 100%;
-
         &-wrap {
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
             gap: 16px;
+            justify-content: space-between;
+
             padding-right: 16px;
         }
 
