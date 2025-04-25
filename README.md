@@ -62,6 +62,5 @@ yarn preview
 
 - Built with Nuxt.js for a modern, responsive user interface
 - Leverages GitHub API for authentication and repository management
-- Features Apple-inspired design with smooth animations and parallax effects
 
 Check out the [Nuxt documentation](https://nuxt.com/docs/getting-started/deployment) for more deployment information.

@@ -21,22 +21,42 @@ export default defineEventHandler(async event => {
     await requireGithub(event);
     const octo: Octokit = event.context.octo;
 
-    const owner = query.data.owner ?? session.user.username;
-
-    try {
-        const repo = await octo.rest.repos.get({
-            owner: owner,
-            repo: query.data.name,
-        });
-
-        if (repo.status === 200) {
-            return repo.data;
-        }
+    let owner = query.data.owner;
+    if (!owner || owner.length === 0) {
+        owner = session.user.username;
     }
-    catch {
+
+    console.log(query.data.name);
+    console.log(owner);
+
+    const repo = await octo.rest.repos.get({
+        owner: owner,
+        repo: query.data.name,
+    }).catch(error => {
         throw createError({
             statusCode: 404,
             statusMessage: 'Repo not found',
+        });
+    });
+
+    const { data } = await octo.rest.repos.getCollaboratorPermissionLevel({
+        owner: owner,
+        repo: query.data.name,
+        username: session.user.username,
+    }).catch(error => {
+        throw createError({
+            statusCode: 401,
+            statusMessage: 'Insufficent permissions on repository',
+        });
+    });
+
+    if (data.permission === 'admin' || data.permission === 'maintain') {
+        return repo;
+    }
+    else {
+        throw createError({
+            statusCode: 401,
+            statusMessage: 'Insufficent permissions on repository',
         });
     }
 });

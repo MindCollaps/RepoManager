@@ -1,10 +1,10 @@
 <template>
     <common-button
-        v-if="!loggedIn && !user?.isUser"
+        v-if="!loggedIn || !user?.isUser"
         href="/login"
     >Login</common-button>
     <common-button
-        v-if="loggedIn"
+        v-else-if="loggedIn"
         href="/profile"
         icon-width="45px"
         type="transparent"

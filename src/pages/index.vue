@@ -1,217 +1,226 @@
 <template>
     <div class="landing-page">
-        <!-- Hero Section with Parallax Effect -->
-        <section class="hero-section">
-            <div class="hero-content">
-                <h1 class="hero-title">Repo Manager</h1>
-                <p class="hero-subtitle">Effortlessly manage repository access and contributors</p>
-                <common-button
-                    class="hero-cta"
-                    size="M"
-                    type="primary"
-                    @click="navigateToLogin"
-                >
-                    <template #default>Get Started</template>
-                </common-button>
-            </div>
-            <div class="hero-parallax-bg"/>
-            <!-- Floating bubbles background -->
-            <div class="floating-elements">
-                <div
-                    v-motion-slide-visible="{ distance: 80 }"
-                    class="bubble bubble-1"
-                />
-                <div
-                    v-motion-slide-visible="{ distance: 40 }"
-                    class="bubble bubble-2"
-                />
-                <div
-                    v-motion-slide-visible="{ distance: 60 }"
-                    class="bubble bubble-3"
-                />
-                <div
-                    v-motion-slide-visible="{ distance: 100 }"
-                    class="bubble bubble-4"
-                />
-                <div
-                    v-motion-slide-visible="{ distance: 50 }"
-                    class="bubble bubble-5"
-                />
-            </div>
-        </section>
-
-        <!-- Features Section with Scroll Animations -->
-        <section class="features-section">
-            <h2 class="section-title">Powerful Repository Management</h2>
-
-            <div class="feature-cards">
-                <div
-                    v-motion-slide-visible-once-bottom
-                    class="feature-card"
-                >
-                    <div class="feature-icon time-icon"/>
-                    <h3>Time-Limited Access</h3>
-                    <p>Set expiration dates for contributors and automatically revoke access when time is up</p>
+        <client-only>
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">Repo Manager</h1>
+                    <p class="hero-subtitle">Effortlessly manage repository access and contributors</p>
+                    <common-button
+                        class="hero-cta"
+                        size="M"
+                        type="primary"
+                        @click="navigateToLogin"
+                    >
+                        <template #default>Get Started</template>
+                    </common-button>
                 </div>
+                <div class="hero-parallax-bg"/>
+                <!-- Floating bubbles background -->
+                <div class="floating-elements">
+                    <motion
 
-                <div
-                    v-motion-slide-visible-once-bottom
-                    class="feature-card"
-                >
-                    <div class="feature-icon group-icon"/>
-                    <h3>Group Management</h3>
-                    <p>Organize contributors into groups with shared permissions and expiration dates</p>
-                </div>
+                        class="bubble bubble-1"
+                        :initial="{ opacity: 0, y: 100 }"
+                        :visible-once="{ opacity: 1, y: 0 }"
+                    />
+                    <motion
 
-                <div
-                    v-motion-slide-visible-once-bottom
-                    class="feature-card"
-                >
-                    <div class="feature-icon token-icon"/>
-                    <h3>Invite Tokens</h3>
-                    <p>Generate QR codes and shareable links for seamless GitHub integration</p>
+                        class="bubble bubble-2"
+                        :initial="{ opacity: 0, y: 100 }"
+                        :visible-once="{ opacity: 1, y: 0 }"
+                    />
+                    <motion
+
+                        class="bubble bubble-3"
+                        :initial="{ opacity: 0, y: 100 }"
+                        :visible-once="{ opacity: 1, y: 0 }"
+                    />
+                    <motion
+                        class="bubble bubble-4"
+                        :initial="{ opacity: 0, y: 100 }"
+                        :visible-once="{ opacity: 1, y: 0 }"
+                    />
+                    <motion
+                        class="bubble bubble-5"
+                        :initial="{ opacity: 0, y: 100 }"
+                        :visible-once="{ opacity: 1, y: 0 }"
+                    />
                 </div>
             </div>
-        </section>
 
-        <!-- How It Works Section with Scroll Animations -->
-        <section class="how-it-works-section">
-            <h2 class="section-title">How It Works</h2>
+            <!-- Features Section -->
+            <div class="features-section">
+                <h2 class="section-title">Powerful Repository Management</h2>
 
-            <div class="steps-container">
-                <div
-                    v-motion-fade-visible
-                    class="step"
+                <div class="feature-cards">
+                    <motion
+                        class="feature-card"
+                        :initial="{ opacity: 0, y: 100 }"
+                        :visible-once="{ opacity: 1, y: 0 }"
+                    >
+                        <div class="feature-icon time-icon"/>
+                        <h3>Time-Limited Access</h3>
+                        <p>Set expiration dates for contributors and automatically revoke access when time is up</p>
+                    </motion>
+
+                    <motion
+                        class="feature-card"
+                        :initial="{ opacity: 0, y: 100 }"
+                        :visible-once="{ opacity: 1, y: 0 }"
+                    >
+                        <div class="feature-icon group-icon"/>
+                        <h3>Group Management</h3>
+                        <p>Organize contributors into groups with shared permissions and expiration dates</p>
+                    </motion>
+
+                    <motion
+                        class="feature-card"
+                        :initial="{ opacity: 0, y: 100 }"
+                        :visible-once="{ opacity: 1, y: 0 }"
+                    >
+                        <div class="feature-icon token-icon"/>
+                        <h3>Invite Tokens</h3>
+                        <p>Generate QR codes and shareable links for seamless GitHub integration</p>
+                    </motion>
+                </div>
+            </div>
+
+            <!-- How It Works Section -->
+            <div class="how-it-works-section">
+                <h2 class="section-title">How It Works</h2>
+
+                <div class="steps-container">
+                    <motion
+                        v-motion-fade-visible
+                        class="step"
+                    >
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Connect Your GitHub</h3>
+                            <p>Sign in with your GitHub account to get started</p>
+                        </div>
+                    </motion>
+
+                    <motion
+                        v-motion-fade-visible
+                        class="step"
+                    >
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Create Access Groups</h3>
+                            <p>Organize contributors by project, class, or team with custom expiration dates</p>
+                        </div>
+                    </motion>
+
+                    <motion
+                        v-motion-fade-visible
+                        class="step"
+                    >
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Share Invite Tokens</h3>
+                            <p>Generate and share QR codes or links for contributors to join</p>
+                        </div>
+                    </motion>
+
+                    <motion
+                        v-motion-fade-visible
+                        class="step"
+                    >
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Automatic Management</h3>
+                            <p>Let the system handle access expiration and permission updates</p>
+                        </div>
+                    </motion>
+                </div>
+            </div>
+
+            <!-- See It In Action Section -->
+            <div class="showcase-section">
+                <h2 class="section-title">See It In Action</h2>
+
+                <!-- Dashboard Showcase -->
+                <motion
+                    class="showcase-item"
+                    :initial="{ opacity: 0, y: 100 }"
+                    :visible-once="{ opacity: 1, y: 0 }"
                 >
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Connect Your GitHub</h3>
-                        <p>Sign in with your GitHub account to get started</p>
+                    <div class="showcase-content">
+                        <h3>Intuitive Dashboard</h3>
+                        <p>Monitor all your repositories and contributor access from a single, powerful interface</p>
                     </div>
-                </div>
-
-                <div
-                    v-motion-fade-visible
-                    class="step"
-                >
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Create Access Groups</h3>
-                        <p>Organize contributors by project, class, or team with custom expiration dates</p>
+                    <div
+                        class="showcase-image-wrapper"
+                        :initial="{ opacity: 0, y: 100 }"
+                        :visible-once="{ opacity: 1, y: 0 }"
+                    >
+                        <div class="showcase-image dashboard-image">
+                            <div class="image-gradient"/>
+                        </div>
                     </div>
-                </div>
+                </motion>
 
-                <div
-                    v-motion-fade-visible
-                    class="step"
+                <!-- Group Management Showcase -->
+                <motion
+                    class="showcase-item reverse"
                 >
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>Share Invite Tokens</h3>
-                        <p>Generate and share QR codes or links for contributors to join</p>
+                    <div
+                        class="showcase-image-wrapper"
+                    >
+                        <div class="showcase-image group-image">
+                            <div class="image-gradient"/>
+                        </div>
                     </div>
-                </div>
+                    <div class="showcase-content">
+                        <h3>Effortless Group Management</h3>
+                        <p>Create, organize, and manage contributor groups with just a few clicks</p>
+                    </div>
+                </motion>
 
-                <div
-                    v-motion-fade-visible
-                    class="step"
+                <!-- Token Generation Showcase -->
+                <motion
+                    class="showcase-item"
+                    :initial="{ opacity: 0, y: 100 }"
+                    :visible-once="{ opacity: 1, y: 0 }"
                 >
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3>Automatic Management</h3>
-                        <p>Let the system handle access expiration and permission updates</p>
+                    <div class="showcase-content">
+                        <h3>Secure Token Generation</h3>
+                        <p>Generate and share secure access tokens with expiration dates and permission levels</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- See It In Action Section -->
-        <section class="showcase-section">
-            <h2 class="section-title">See It In Action</h2>
-
-            <!-- Dashboard Showcase -->
-            <div
-                v-motion-slide-visible
-                class="showcase-item"
-            >
-                <div class="showcase-content">
-                    <h3>Intuitive Dashboard</h3>
-                    <p>Monitor all your repositories and contributor access from a single, powerful interface</p>
-                </div>
-                <div
-                    v-motion-slide-visible="{ distance: 100 }"
-                    class="showcase-image-wrapper"
-                >
-                    <div class="showcase-image dashboard-image">
-                        <div class="image-gradient"/>
+                    <div
+                        class="showcase-image-wrapper"
+                    >
+                        <div class="showcase-image token-image">
+                            <div class="image-gradient"/>
+                        </div>
                     </div>
-                </div>
+                </motion>
             </div>
 
-            <!-- Group Management Showcase -->
-            <div
-                v-motion-slide-visible
-                class="showcase-item reverse"
-            >
-                <div
-                    v-motion-slide-visible="{ distance: 100 }"
-                    class="showcase-image-wrapper"
-                >
-                    <div class="showcase-image group-image">
-                        <div class="image-gradient"/>
-                    </div>
-                </div>
-                <div class="showcase-content">
-                    <h3>Effortless Group Management</h3>
-                    <p>Create, organize, and manage contributor groups with just a few clicks</p>
+            <!-- Call to Action Section -->
+            <div class="cta-section">
+                <div class="cta-content">
+                    <h2>Ready to streamline your repository management?</h2>
+                    <common-button
+                        class="cta-button"
+                        size="M"
+                        type="primary"
+                        @click="navigateToLogin"
+                    >
+                        <template #default>Get Started Now</template>
+                    </common-button>
                 </div>
             </div>
-
-            <!-- Token Generation Showcase -->
-            <div
-                v-motion-slide-visible
-                class="showcase-item"
-            >
-                <div class="showcase-content">
-                    <h3>Secure Token Generation</h3>
-                    <p>Generate and share secure access tokens with expiration dates and permission levels</p>
-                </div>
-                <div
-                    v-motion-slide-visible="{ distance: 100 }"
-                    class="showcase-image-wrapper"
-                >
-                    <div class="showcase-image token-image">
-                        <div class="image-gradient"/>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Call to Action Section -->
-        <section class="cta-section">
-            <div class="cta-content">
-                <h2>Ready to streamline your repository management?</h2>
-                <common-button
-                    class="cta-button"
-                    size="M"
-                    type="primary"
-                    @click="navigateToLogin"
-                >
-                    <template #default>Get Started Now</template>
-                </common-button>
-            </div>
-        </section>
+        </client-only>
     </div>
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
 import CommonButton from '~/components/common/CommonButton.vue';
 
-const router = useRouter();
-
 const navigateToLogin = () => {
-    router.push('/login');
+    navigateTo('/login');
 };
 </script>
 

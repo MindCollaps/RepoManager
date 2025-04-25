@@ -29,8 +29,8 @@
         </template>
         <template #action="{ item }">
             <common-button
-                :href="'/tk?tk=' + encodeURIComponent(item.token)"
                 primary-color="info500"
+                @click="navigateTo('/tk?tk=' + encodeURIComponent(item.token))"
             >
                 <template #icon>
                     <search-icon/>
@@ -48,8 +48,6 @@ import BasicDashboard from '../basic/BasicDashboard.vue';
 import BasicCreateAdder from '../basic/BasicCreateAdder.vue';
 import { useCreateGroupInviteToken, useFindManyGroupInviteToken, useDeleteGroupInviteToken, useFindManyGitGroup } from '~~/lib/hooks';
 import type { ZodIssue } from 'zod';
-
-const router = useRouter();
 
 const { data: gitGroups } = useFindManyGitGroup({}, { enabled: true });
 const createInviteToken = useCreateGroupInviteToken();
@@ -73,7 +71,7 @@ const newToken = ref({ ...defaultToken });
 const selectedGroups: Ref<Array<number>> = ref([]);
 
 function editToken(id: number) {
-    router.push(`/dashboard/token-${ id }`);
+    navigateTo(`/dashboard/token-${ id }`);
 }
 
 async function createToken() {

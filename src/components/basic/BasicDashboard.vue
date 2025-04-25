@@ -89,9 +89,6 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
-    showPopup: {
-        type: Boolean,
-    },
 });
 
 const emit = defineEmits({
@@ -131,17 +128,8 @@ function closePopup() {
 
 function create() {
     emit('create');
+    closePopup();
 }
-
-// TODO: Fix this
-onMounted(() => watch([props.showPopup], () => {
-    if (props.showPopup) {
-        popupVisible.value = true;
-    }
-    else {
-        closePopup();
-    }
-}));
 </script>
 
 <style scoped lang="scss">

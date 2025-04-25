@@ -1,7 +1,7 @@
 <template>
     <div class="login">
-        <h1 v-if="loggedIn">Welcome {{ user?.username }}!</h1>
-        <h2 v-if="!loggedIn">Login and give Access</h2>
+        <h1 v-if="isLoggedinUser">Welcome {{ user?.username }}!</h1>
+        <h2 v-else>Login and give Access</h2>
         <common-button
             href="/"
         >
@@ -13,13 +13,13 @@
             </template>
         </common-button>
         <common-button
-            v-if="loggedIn"
+            v-if="isLoggedinUser"
             type="secondary-875"
             width="128px"
             @click="clear"
         >Logout</common-button>
         <common-button
-            v-if="!loggedIn"
+            v-else
             type="secondary"
             width="256px"
             @click="openInPopup('/auth/github')"
@@ -43,9 +43,13 @@ const { loggedIn, user, clear, openInPopup } = useUserSession();
 
 const wasLoggedIn = ref(loggedIn.value);
 
+const isLoggedinUser = computed(() => loggedIn && user.value?.userId);
+
 watch(loggedIn, () => {
-    if (wasLoggedIn.value !== loggedIn.value) {
-        navigateTo('/dashboard');
+    if (!wasLoggedIn.value) {
+        if (wasLoggedIn.value !== loggedIn.value) {
+            navigateTo('/dashboard');
+        }
     }
 });
 

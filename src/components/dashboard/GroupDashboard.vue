@@ -51,8 +51,6 @@ import CommonDatePicker from '../common/CommonDatePicker.vue';
 import { useCreateGitGroup, useFindManyGitGroup } from '~~/lib/hooks';
 import BasicDashboard from '../basic/BasicDashboard.vue';
 
-const router = useRouter();
-
 const createGitGroup = useCreateGitGroup();
 const { data: gitGroups, refetch } = useFindManyGitGroup({});
 
@@ -104,6 +102,10 @@ async function createGroup() {
     }
     else {
         try {
+            if (newGroup.value.ownRepo) {
+                newGroup.value.repoName = session.value?.user?.username ?? '';
+            }
+
             await createGitGroup.mutateAsync({
                 data: {
                     expires: newGroup.value.expires,
@@ -136,20 +138,19 @@ async function createGroup() {
 }
 
 async function checkGit() {
-    try {
-        const owner = newGroup.value.repoOwner === '' ? '' : `&owner=${ encodeURIComponent(newGroup.value.repoOwner) }`;
-        await $fetch(`/api/v1/gh/repo?name=${ encodeURIComponent(newGroup.value.repoName) + owner }`);
+    const owner = newGroup.value.repoOwner === '' ? '' : `&owner=${ encodeURIComponent(newGroup.value.repoOwner) }`;
+    $fetch(`/api/v1/gh/repo?name=${ encodeURIComponent(newGroup.value.repoName) + owner }`).then(data => {
         newGroup.value.confirmed = true;
         newGroup.value.confirmStatus = true;
-    }
-    catch {
+    }).catch(error => {
+        alert(error.statusMessage);
         newGroup.value.confirmed = true;
         newGroup.value.confirmStatus = false;
-    }
+    });
 }
 
 function editGroup(id: number) {
-    router.push(`/dashboard/group-${ id }`);
+    navigateTo(`/dashboard/group-${ id }`);
 }
 </script>
 

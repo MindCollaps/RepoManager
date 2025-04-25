@@ -4,7 +4,6 @@
         deletable
         editable
         :fetched-data="gitUsers"
-        :show-popup="popupVisible"
         @create="createUser()"
         @delete="deleteUser"
         @edit="editUser"
@@ -56,8 +55,6 @@ import CommonGitProfilePic from '../common/CommonGitProfilePic.vue';
 import { useFindManyGitUser, useDeleteGitUser } from '~~/lib/hooks';
 import BasicDashboard from '../basic/BasicDashboard.vue';
 
-const router = useRouter();
-
 const { data: gitUsers, refetch } = useFindManyGitUser({});
 const useDeleteUser = useDeleteGitUser();
 
@@ -73,8 +70,6 @@ const defaultUser = {
 };
 
 const newUser = ref({ ...defaultUser });
-
-const popupVisible = ref(true);
 
 const getGitStyle = computed(() => {
     if (!newUser.value.confirmed) {
@@ -123,7 +118,6 @@ async function createUser() {
         },
     }).then(data => {
         refetch();
-        popupVisible.value = false;
     }).catch(error => {
         if (error.statusCode === 400) {
             alert(error.data.data);
@@ -145,7 +139,7 @@ async function deleteUser(id: number) {
 }
 
 function editUser(id: number) {
-    router.push(`/dashboard/user-${ id }`);
+    navigateTo(`/dashboard/user-${ id }`);
 }
 </script>
 

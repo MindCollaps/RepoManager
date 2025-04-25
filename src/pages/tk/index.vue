@@ -14,14 +14,31 @@
         </template>
         <template v-else>
             <template v-if="user?.isUser">
+                <div class="token-back">
+                    <common-button
+                        primary-color="error500"
+                        width="fit-content"
+                        @click="navigateTo('/dashboard')"
+                    >
+                        Back
+                    </common-button>
+                </div>
                 <qrcode
                     :size="500"
                     :value="url.href"
                 />
                 <div class="token-copy">
                     <common-input-text v-model="url.href"/>
-                    <common-button>
-                        Copy
+                    <common-button @click="copy()">
+                        <div class="token-copy--button-icon-wrap">
+                            <transition>
+                                <check-icon
+                                    v-if="copyAnim"
+                                    class="token-copy--button-icon"
+                                />
+                            </transition>
+                            <div class="token-copy--button-text">Copy</div>
+                        </div>
                     </common-button>
                 </div>
             </template>
@@ -62,6 +79,7 @@
 </template>
 
 <script setup lang="ts">
+import CheckIcon from '~/assets/icons/check.svg?component';
 import GithubIcon from '/assets/icons/github.svg?component';
 import CommonLoader from '~/components/common/CommonLoader.vue';
 import Qrcode from 'qrcode.vue';
@@ -85,6 +103,7 @@ const tokenError = ref(false);
 const noTokenProvided = ref(false);
 const tokenErrorMessage = ref('');
 const token = shallowRef<FetchingToken | undefined>();
+const copyAnim = ref(false);
 
 function setError(message: string, noToken = false) {
     tokenError.value = true;
@@ -118,6 +137,16 @@ function login() {
     openInPopup('/auth/github-user');
 }
 
+function copy() {
+    navigator.clipboard.writeText(url.href);
+
+    copyAnim.value = true;
+
+    setTimeout(() => {
+        copyAnim.value = false;
+    }, 2000);
+}
+
 onMounted(async () => {
     try {
         await loadQuery();
@@ -141,6 +170,13 @@ onMounted(async () => {
 
     margin-top: 64px;
 
+    &-back {
+        display: flex;
+        justify-content: end;
+        width: 100%;
+        padding: 0 64px 0 0;
+    }
+
     &-copy {
         display: flex;
         flex-direction: row;
@@ -148,6 +184,28 @@ onMounted(async () => {
         justify-content: center;
 
         width: 50vw;
+
+        &--button {
+            &-icon {
+                position: absolute;
+                top: 0;
+                left: 60px;
+
+                width: 30px;
+
+                color: $success500;
+
+                &-wrap {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            &-text {
+                position: relative;
+            }
+        }
     }
 
     &-top {
@@ -167,5 +225,15 @@ onMounted(async () => {
             }
         }
     }
+}
+
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
 }
 </style>

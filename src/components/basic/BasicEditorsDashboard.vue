@@ -7,7 +7,7 @@
             <common-button
                 primary-color="error500"
                 width="fit-content"
-                @click="router.push('/dashboard')"
+                @click="navigateTo('/dashboard')"
             >
                 Back
             </common-button>
@@ -149,8 +149,6 @@ const props = defineProps({
     },
 });
 
-const router = useRouter();
-
 const saveAnim = ref(false);
 
 const fieldDefaultValues: ComputedRef<Record<string, any>> = computed(() => {
@@ -182,7 +180,9 @@ function isHidden(field: FieldSchema<T>) {
 
 function invDelete() {
     if (props.deleteFn && confirm('Are you sure you want to delete this?')) {
-        props.deleteFn({ where: props.where }).then().catch(error => {
+        props.deleteFn({ where: props.where }).then(data => {
+            navigateTo('/dashboard');
+        }).catch(error => {
             if (error && error.info.zodErrors && Array.isArray(error.info.zodErrors.issues)) {
                 const messages = error.info.zodErrors.issues.map((issue: ZodIssue) => `${ issue.path.join('.') }: ${ issue.message }`).join('\n');
                 alert(messages);

@@ -88,6 +88,16 @@ const userFields: ComputedRef<FieldSchema<GitGroup>[]> = computed(() => ([
         type: 'text',
     },
     {
+        key: 'deleteUsers',
+        label: 'Remove users from repo when expired',
+        type: 'checkbox',
+    },
+    {
+        key: 'deleteSelf',
+        label: 'Delete group when expired',
+        type: 'checkbox',
+    },
+    {
         key: 'expires',
         label: 'Expires',
         type: 'checkbox',
