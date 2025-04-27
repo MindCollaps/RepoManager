@@ -21,6 +21,8 @@ tags:
     description: GroupInviteToken operations
   - name: groupInviteTokenGroups
     description: GroupInviteTokenGroups operations
+  - name: groupInviteTokenUsers
+    description: GroupInviteTokenUsers operations
 paths:
   /api/data/user:
     get:
@@ -326,9 +328,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[Notifications]
+        - name: filter[notifications]
           required: false
-          description: Equality filter for "Notifications"
+          description: Equality filter for "notifications"
           in: query
           style: form
           explode: false
@@ -336,9 +338,9 @@ paths:
             type: array
             items:
               type: string
-        - name: filter[GroupInviteTokens]
+        - name: filter[groupInviteTokens]
           required: false
-          description: Equality filter for "GroupInviteTokens"
+          description: Equality filter for "groupInviteTokens"
           in: query
           style: form
           explode: false
@@ -532,10 +534,10 @@ paths:
             application/vnd.api+json:
               schema:
                 $ref: "#/components/schemas/_errorResponse"
-  /api/data/user/{id}/Notifications:
+  /api/data/user/{id}/notifications:
     get:
-      operationId: fetch-User-related-Notifications
-      description: Fetch the related "Notifications" resource for "User"
+      operationId: fetch-User-related-notifications
+      description: Fetch the related "notifications" resource for "User"
       tags:
         - user
       parameters:
@@ -837,9 +839,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[Notifications]
+        - name: filter[notifications]
           required: false
-          description: Equality filter for "Notifications"
+          description: Equality filter for "notifications"
           in: query
           style: form
           explode: false
@@ -847,9 +849,9 @@ paths:
             type: array
             items:
               type: string
-        - name: filter[GroupInviteTokens]
+        - name: filter[groupInviteTokens]
           required: false
-          description: Equality filter for "GroupInviteTokens"
+          description: Equality filter for "groupInviteTokens"
           in: query
           style: form
           explode: false
@@ -896,10 +898,10 @@ paths:
             application/vnd.api+json:
               schema:
                 $ref: "#/components/schemas/_errorResponse"
-  /api/data/user/{id}/relationships/Notifications:
+  /api/data/user/{id}/relationships/notifications:
     get:
-      operationId: fetch-User-relationship-Notifications
-      description: Fetch the "Notifications" relationships for a "User"
+      operationId: fetch-User-relationship-notifications
+      description: Fetch the "notifications" relationships for a "User"
       tags:
         - user
       parameters:
@@ -1200,9 +1202,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[Notifications]
+        - name: filter[notifications]
           required: false
-          description: Equality filter for "Notifications"
+          description: Equality filter for "notifications"
           in: query
           style: form
           explode: false
@@ -1210,9 +1212,9 @@ paths:
             type: array
             items:
               type: string
-        - name: filter[GroupInviteTokens]
+        - name: filter[groupInviteTokens]
           required: false
-          description: Equality filter for "GroupInviteTokens"
+          description: Equality filter for "groupInviteTokens"
           in: query
           style: form
           explode: false
@@ -1260,8 +1262,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/_errorResponse"
     put:
-      operationId: update-User-relationship-Notifications-put
-      description: Update "Notifications" relationships for a "User"
+      operationId: update-User-relationship-notifications-put
+      description: Update "notifications" relationships for a "User"
       tags:
         - user
       parameters:
@@ -1291,8 +1293,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/_errorResponse"
     patch:
-      operationId: update-User-relationship-Notifications-patch
-      description: Update "Notifications" relationships for a "User"
+      operationId: update-User-relationship-notifications-patch
+      description: Update "notifications" relationships for a "User"
       tags:
         - user
       parameters:
@@ -1322,8 +1324,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/_errorResponse"
     post:
-      operationId: create-User-relationship-Notifications
-      description: Create new "Notifications" relationships for a "User"
+      operationId: create-User-relationship-notifications
+      description: Create new "notifications" relationships for a "User"
       tags:
         - user
       parameters:
@@ -1352,10 +1354,10 @@ paths:
             application/vnd.api+json:
               schema:
                 $ref: "#/components/schemas/_errorResponse"
-  /api/data/user/{id}/GroupInviteTokens:
+  /api/data/user/{id}/groupInviteTokens:
     get:
-      operationId: fetch-User-related-GroupInviteTokens
-      description: Fetch the related "GroupInviteTokens" resource for "User"
+      operationId: fetch-User-related-groupInviteTokens
+      description: Fetch the related "groupInviteTokens" resource for "User"
       tags:
         - user
       parameters:
@@ -1657,9 +1659,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[Notifications]
+        - name: filter[notifications]
           required: false
-          description: Equality filter for "Notifications"
+          description: Equality filter for "notifications"
           in: query
           style: form
           explode: false
@@ -1667,9 +1669,9 @@ paths:
             type: array
             items:
               type: string
-        - name: filter[GroupInviteTokens]
+        - name: filter[groupInviteTokens]
           required: false
-          description: Equality filter for "GroupInviteTokens"
+          description: Equality filter for "groupInviteTokens"
           in: query
           style: form
           explode: false
@@ -1716,10 +1718,10 @@ paths:
             application/vnd.api+json:
               schema:
                 $ref: "#/components/schemas/_errorResponse"
-  /api/data/user/{id}/relationships/GroupInviteTokens:
+  /api/data/user/{id}/relationships/groupInviteTokens:
     get:
-      operationId: fetch-User-relationship-GroupInviteTokens
-      description: Fetch the "GroupInviteTokens" relationships for a "User"
+      operationId: fetch-User-relationship-groupInviteTokens
+      description: Fetch the "groupInviteTokens" relationships for a "User"
       tags:
         - user
       parameters:
@@ -2020,9 +2022,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[Notifications]
+        - name: filter[notifications]
           required: false
-          description: Equality filter for "Notifications"
+          description: Equality filter for "notifications"
           in: query
           style: form
           explode: false
@@ -2030,9 +2032,9 @@ paths:
             type: array
             items:
               type: string
-        - name: filter[GroupInviteTokens]
+        - name: filter[groupInviteTokens]
           required: false
-          description: Equality filter for "GroupInviteTokens"
+          description: Equality filter for "groupInviteTokens"
           in: query
           style: form
           explode: false
@@ -2080,8 +2082,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/_errorResponse"
     put:
-      operationId: update-User-relationship-GroupInviteTokens-put
-      description: Update "GroupInviteTokens" relationships for a "User"
+      operationId: update-User-relationship-groupInviteTokens-put
+      description: Update "groupInviteTokens" relationships for a "User"
       tags:
         - user
       parameters:
@@ -2111,8 +2113,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/_errorResponse"
     patch:
-      operationId: update-User-relationship-GroupInviteTokens-patch
-      description: Update "GroupInviteTokens" relationships for a "User"
+      operationId: update-User-relationship-groupInviteTokens-patch
+      description: Update "groupInviteTokens" relationships for a "User"
       tags:
         - user
       parameters:
@@ -2142,8 +2144,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/_errorResponse"
     post:
-      operationId: create-User-relationship-GroupInviteTokens
-      description: Create new "GroupInviteTokens" relationships for a "User"
+      operationId: create-User-relationship-groupInviteTokens
+      description: Create new "groupInviteTokens" relationships for a "User"
       tags:
         - user
       parameters:
@@ -2477,9 +2479,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[Notifications]
+        - name: filter[notifications]
           required: false
-          description: Equality filter for "Notifications"
+          description: Equality filter for "notifications"
           in: query
           style: form
           explode: false
@@ -2487,9 +2489,9 @@ paths:
             type: array
             items:
               type: string
-        - name: filter[GroupInviteTokens]
+        - name: filter[groupInviteTokens]
           required: false
-          description: Equality filter for "GroupInviteTokens"
+          description: Equality filter for "groupInviteTokens"
           in: query
           style: form
           explode: false
@@ -2840,9 +2842,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[Notifications]
+        - name: filter[notifications]
           required: false
-          description: Equality filter for "Notifications"
+          description: Equality filter for "notifications"
           in: query
           style: form
           explode: false
@@ -2850,9 +2852,9 @@ paths:
             type: array
             items:
               type: string
-        - name: filter[GroupInviteTokens]
+        - name: filter[groupInviteTokens]
           required: false
-          description: Equality filter for "GroupInviteTokens"
+          description: Equality filter for "groupInviteTokens"
           in: query
           style: form
           explode: false
@@ -3297,9 +3299,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[Notifications]
+        - name: filter[notifications]
           required: false
-          description: Equality filter for "Notifications"
+          description: Equality filter for "notifications"
           in: query
           style: form
           explode: false
@@ -3307,9 +3309,9 @@ paths:
             type: array
             items:
               type: string
-        - name: filter[GroupInviteTokens]
+        - name: filter[groupInviteTokens]
           required: false
-          description: Equality filter for "GroupInviteTokens"
+          description: Equality filter for "groupInviteTokens"
           in: query
           style: form
           explode: false
@@ -3660,9 +3662,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[Notifications]
+        - name: filter[notifications]
           required: false
-          description: Equality filter for "Notifications"
+          description: Equality filter for "notifications"
           in: query
           style: form
           explode: false
@@ -3670,9 +3672,9 @@ paths:
             type: array
             items:
               type: string
-        - name: filter[GroupInviteTokens]
+        - name: filter[groupInviteTokens]
           required: false
-          description: Equality filter for "GroupInviteTokens"
+          description: Equality filter for "groupInviteTokens"
           in: query
           style: form
           explode: false
@@ -4023,59 +4025,6 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[expires]
-          required: false
-          description: Equality filter for "expires"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: boolean
-        - name: filter[expiryDate]
-          required: false
-          description: Equality filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
-        - name: filter[expiryDate$lt]
-          required: false
-          description: Less-than filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
-        - name: filter[expiryDate$lte]
-          required: false
-          description: Less-than or equal filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
-        - name: filter[expiryDate$gt]
-          required: false
-          description: Greater-than filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
-        - name: filter[expiryDate$gte]
-          required: false
-          description: Greater-than or equal filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
         - name: filter[created]
           required: false
           description: Equality filter for "created"
@@ -4190,6 +4139,16 @@ paths:
         - name: filter[owners]
           required: false
           description: Equality filter for "owners"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: filter[usedTokens]
+          required: false
+          description: Equality filter for "usedTokens"
           in: query
           style: form
           explode: false
@@ -4575,59 +4534,6 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[expires]
-          required: false
-          description: Equality filter for "expires"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: boolean
-        - name: filter[expiryDate]
-          required: false
-          description: Equality filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
-        - name: filter[expiryDate$lt]
-          required: false
-          description: Less-than filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
-        - name: filter[expiryDate$lte]
-          required: false
-          description: Less-than or equal filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
-        - name: filter[expiryDate$gt]
-          required: false
-          description: Greater-than filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
-        - name: filter[expiryDate$gte]
-          required: false
-          description: Greater-than or equal filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
         - name: filter[created]
           required: false
           description: Equality filter for "created"
@@ -4742,6 +4648,16 @@ paths:
         - name: filter[owners]
           required: false
           description: Equality filter for "owners"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: filter[usedTokens]
+          required: false
+          description: Equality filter for "usedTokens"
           in: query
           style: form
           explode: false
@@ -4979,59 +4895,6 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[expires]
-          required: false
-          description: Equality filter for "expires"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: boolean
-        - name: filter[expiryDate]
-          required: false
-          description: Equality filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
-        - name: filter[expiryDate$lt]
-          required: false
-          description: Less-than filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
-        - name: filter[expiryDate$lte]
-          required: false
-          description: Less-than or equal filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
-        - name: filter[expiryDate$gt]
-          required: false
-          description: Greater-than filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
-        - name: filter[expiryDate$gte]
-          required: false
-          description: Greater-than or equal filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
         - name: filter[created]
           required: false
           description: Equality filter for "created"
@@ -5146,6 +5009,16 @@ paths:
         - name: filter[owners]
           required: false
           description: Equality filter for "owners"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: filter[usedTokens]
+          required: false
+          description: Equality filter for "usedTokens"
           in: query
           style: form
           explode: false
@@ -5477,59 +5350,6 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[expires]
-          required: false
-          description: Equality filter for "expires"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: boolean
-        - name: filter[expiryDate]
-          required: false
-          description: Equality filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
-        - name: filter[expiryDate$lt]
-          required: false
-          description: Less-than filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
-        - name: filter[expiryDate$lte]
-          required: false
-          description: Less-than or equal filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
-        - name: filter[expiryDate$gt]
-          required: false
-          description: Greater-than filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
-        - name: filter[expiryDate$gte]
-          required: false
-          description: Greater-than or equal filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
         - name: filter[created]
           required: false
           description: Equality filter for "created"
@@ -5644,6 +5464,16 @@ paths:
         - name: filter[owners]
           required: false
           description: Equality filter for "owners"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: filter[usedTokens]
+          required: false
+          description: Equality filter for "usedTokens"
           in: query
           style: form
           explode: false
@@ -5881,59 +5711,6 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[expires]
-          required: false
-          description: Equality filter for "expires"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: boolean
-        - name: filter[expiryDate]
-          required: false
-          description: Equality filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
-        - name: filter[expiryDate$lt]
-          required: false
-          description: Less-than filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
-        - name: filter[expiryDate$lte]
-          required: false
-          description: Less-than or equal filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
-        - name: filter[expiryDate$gt]
-          required: false
-          description: Greater-than filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
-        - name: filter[expiryDate$gte]
-          required: false
-          description: Greater-than or equal filter for "expiryDate"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: string
-            format: date-time
         - name: filter[created]
           required: false
           description: Equality filter for "created"
@@ -6055,6 +5832,16 @@ paths:
             type: array
             items:
               type: string
+        - name: filter[usedTokens]
+          required: false
+          description: Equality filter for "usedTokens"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
       responses:
         "200":
           description: Successful operation
@@ -6139,6 +5926,822 @@ paths:
     post:
       operationId: create-GitUser-relationship-owners
       description: Create new "owners" relationships for a "GitUser"
+      tags:
+        - gitUser
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/_toManyRelationshipRequest"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toManyRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+  /api/data/gitUser/{id}/usedTokens:
+    get:
+      operationId: fetch-GitUser-related-usedTokens
+      description: Fetch the related "usedTokens" resource for "GitUser"
+      tags:
+        - gitUser
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/include"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/page-offset"
+        - $ref: "#/components/parameters/page-limit"
+        - name: filter[id]
+          required: false
+          description: Id filter
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_access_token]
+          required: false
+          description: Equality filter for "git_access_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_access_token$contains]
+          required: false
+          description: String contains filter for "git_access_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_access_token$icontains]
+          required: false
+          description: String case-insensitive contains filter for "git_access_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_access_token$search]
+          required: false
+          description: String full-text search filter for "git_access_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_access_token$startsWith]
+          required: false
+          description: String startsWith filter for "git_access_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_access_token$endsWith]
+          required: false
+          description: String endsWith filter for "git_access_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[email]
+          required: false
+          description: Equality filter for "email"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[email$contains]
+          required: false
+          description: String contains filter for "email"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[email$icontains]
+          required: false
+          description: String case-insensitive contains filter for "email"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[email$search]
+          required: false
+          description: String full-text search filter for "email"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[email$startsWith]
+          required: false
+          description: String startsWith filter for "email"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[email$endsWith]
+          required: false
+          description: String endsWith filter for "email"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[username]
+          required: false
+          description: Equality filter for "username"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[username$contains]
+          required: false
+          description: String contains filter for "username"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[username$icontains]
+          required: false
+          description: String case-insensitive contains filter for "username"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[username$search]
+          required: false
+          description: String full-text search filter for "username"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[username$startsWith]
+          required: false
+          description: String startsWith filter for "username"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[username$endsWith]
+          required: false
+          description: String endsWith filter for "username"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name]
+          required: false
+          description: Equality filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$contains]
+          required: false
+          description: String contains filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$icontains]
+          required: false
+          description: String case-insensitive contains filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$search]
+          required: false
+          description: String full-text search filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$startsWith]
+          required: false
+          description: String startsWith filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$endsWith]
+          required: false
+          description: String endsWith filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[created]
+          required: false
+          description: Equality filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$lt]
+          required: false
+          description: Less-than filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$lte]
+          required: false
+          description: Less-than or equal filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$gt]
+          required: false
+          description: Greater-than filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$gte]
+          required: false
+          description: Greater-than or equal filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[avatar_url]
+          required: false
+          description: Equality filter for "avatar_url"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[avatar_url$contains]
+          required: false
+          description: String contains filter for "avatar_url"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[avatar_url$icontains]
+          required: false
+          description: String case-insensitive contains filter for "avatar_url"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[avatar_url$search]
+          required: false
+          description: String full-text search filter for "avatar_url"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[avatar_url$startsWith]
+          required: false
+          description: String startsWith filter for "avatar_url"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[avatar_url$endsWith]
+          required: false
+          description: String endsWith filter for "avatar_url"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[groups]
+          required: false
+          description: Equality filter for "groups"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: filter[custom]
+          required: false
+          description: Equality filter for "custom"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: boolean
+        - name: filter[owners]
+          required: false
+          description: Equality filter for "owners"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: filter[usedTokens]
+          required: false
+          description: Equality filter for "usedTokens"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/GroupInviteTokenUsersListResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+  /api/data/gitUser/{id}/relationships/usedTokens:
+    get:
+      operationId: fetch-GitUser-relationship-usedTokens
+      description: Fetch the "usedTokens" relationships for a "GitUser"
+      tags:
+        - gitUser
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/page-offset"
+        - $ref: "#/components/parameters/page-limit"
+        - name: filter[id]
+          required: false
+          description: Id filter
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_access_token]
+          required: false
+          description: Equality filter for "git_access_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_access_token$contains]
+          required: false
+          description: String contains filter for "git_access_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_access_token$icontains]
+          required: false
+          description: String case-insensitive contains filter for "git_access_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_access_token$search]
+          required: false
+          description: String full-text search filter for "git_access_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_access_token$startsWith]
+          required: false
+          description: String startsWith filter for "git_access_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_access_token$endsWith]
+          required: false
+          description: String endsWith filter for "git_access_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[email]
+          required: false
+          description: Equality filter for "email"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[email$contains]
+          required: false
+          description: String contains filter for "email"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[email$icontains]
+          required: false
+          description: String case-insensitive contains filter for "email"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[email$search]
+          required: false
+          description: String full-text search filter for "email"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[email$startsWith]
+          required: false
+          description: String startsWith filter for "email"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[email$endsWith]
+          required: false
+          description: String endsWith filter for "email"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[username]
+          required: false
+          description: Equality filter for "username"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[username$contains]
+          required: false
+          description: String contains filter for "username"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[username$icontains]
+          required: false
+          description: String case-insensitive contains filter for "username"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[username$search]
+          required: false
+          description: String full-text search filter for "username"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[username$startsWith]
+          required: false
+          description: String startsWith filter for "username"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[username$endsWith]
+          required: false
+          description: String endsWith filter for "username"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name]
+          required: false
+          description: Equality filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$contains]
+          required: false
+          description: String contains filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$icontains]
+          required: false
+          description: String case-insensitive contains filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$search]
+          required: false
+          description: String full-text search filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$startsWith]
+          required: false
+          description: String startsWith filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$endsWith]
+          required: false
+          description: String endsWith filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[created]
+          required: false
+          description: Equality filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$lt]
+          required: false
+          description: Less-than filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$lte]
+          required: false
+          description: Less-than or equal filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$gt]
+          required: false
+          description: Greater-than filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$gte]
+          required: false
+          description: Greater-than or equal filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[avatar_url]
+          required: false
+          description: Equality filter for "avatar_url"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[avatar_url$contains]
+          required: false
+          description: String contains filter for "avatar_url"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[avatar_url$icontains]
+          required: false
+          description: String case-insensitive contains filter for "avatar_url"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[avatar_url$search]
+          required: false
+          description: String full-text search filter for "avatar_url"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[avatar_url$startsWith]
+          required: false
+          description: String startsWith filter for "avatar_url"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[avatar_url$endsWith]
+          required: false
+          description: String endsWith filter for "avatar_url"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[groups]
+          required: false
+          description: Equality filter for "groups"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: filter[custom]
+          required: false
+          description: Equality filter for "custom"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: boolean
+        - name: filter[owners]
+          required: false
+          description: Equality filter for "owners"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: filter[usedTokens]
+          required: false
+          description: Equality filter for "usedTokens"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toManyRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    put:
+      operationId: update-GitUser-relationship-usedTokens-put
+      description: Update "usedTokens" relationships for a "GitUser"
+      tags:
+        - gitUser
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/_toManyRelationshipRequest"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toManyRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    patch:
+      operationId: update-GitUser-relationship-usedTokens-patch
+      description: Update "usedTokens" relationships for a "GitUser"
+      tags:
+        - gitUser
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/_toManyRelationshipRequest"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toManyRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    post:
+      operationId: create-GitUser-relationship-usedTokens
+      description: Create new "usedTokens" relationships for a "GitUser"
       tags:
         - gitUser
       parameters:
@@ -6444,9 +7047,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[GroupInviteTokens]
+        - name: filter[groupInviteTokens]
           required: false
-          description: Equality filter for "GroupInviteTokens"
+          description: Equality filter for "groupInviteTokens"
           in: query
           style: form
           explode: false
@@ -6640,10 +7243,10 @@ paths:
             application/vnd.api+json:
               schema:
                 $ref: "#/components/schemas/_errorResponse"
-  /api/data/gitGroup/{id}/GroupInviteTokens:
+  /api/data/gitGroup/{id}/groupInviteTokens:
     get:
-      operationId: fetch-GitGroup-related-GroupInviteTokens
-      description: Fetch the related "GroupInviteTokens" resource for "GitGroup"
+      operationId: fetch-GitGroup-related-groupInviteTokens
+      description: Fetch the related "groupInviteTokens" resource for "GitGroup"
       tags:
         - gitGroup
       parameters:
@@ -6918,9 +7521,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[GroupInviteTokens]
+        - name: filter[groupInviteTokens]
           required: false
-          description: Equality filter for "GroupInviteTokens"
+          description: Equality filter for "groupInviteTokens"
           in: query
           style: form
           explode: false
@@ -6967,10 +7570,10 @@ paths:
             application/vnd.api+json:
               schema:
                 $ref: "#/components/schemas/_errorResponse"
-  /api/data/gitGroup/{id}/relationships/GroupInviteTokens:
+  /api/data/gitGroup/{id}/relationships/groupInviteTokens:
     get:
-      operationId: fetch-GitGroup-relationship-GroupInviteTokens
-      description: Fetch the "GroupInviteTokens" relationships for a "GitGroup"
+      operationId: fetch-GitGroup-relationship-groupInviteTokens
+      description: Fetch the "groupInviteTokens" relationships for a "GitGroup"
       tags:
         - gitGroup
       parameters:
@@ -7244,9 +7847,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[GroupInviteTokens]
+        - name: filter[groupInviteTokens]
           required: false
-          description: Equality filter for "GroupInviteTokens"
+          description: Equality filter for "groupInviteTokens"
           in: query
           style: form
           explode: false
@@ -7294,8 +7897,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/_errorResponse"
     put:
-      operationId: update-GitGroup-relationship-GroupInviteTokens-put
-      description: Update "GroupInviteTokens" relationships for a "GitGroup"
+      operationId: update-GitGroup-relationship-groupInviteTokens-put
+      description: Update "groupInviteTokens" relationships for a "GitGroup"
       tags:
         - gitGroup
       parameters:
@@ -7325,8 +7928,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/_errorResponse"
     patch:
-      operationId: update-GitGroup-relationship-GroupInviteTokens-patch
-      description: Update "GroupInviteTokens" relationships for a "GitGroup"
+      operationId: update-GitGroup-relationship-groupInviteTokens-patch
+      description: Update "groupInviteTokens" relationships for a "GitGroup"
       tags:
         - gitGroup
       parameters:
@@ -7356,8 +7959,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/_errorResponse"
     post:
-      operationId: create-GitGroup-relationship-GroupInviteTokens
-      description: Create new "GroupInviteTokens" relationships for a "GitGroup"
+      operationId: create-GitGroup-relationship-groupInviteTokens
+      description: Create new "groupInviteTokens" relationships for a "GitGroup"
       tags:
         - gitGroup
       parameters:
@@ -7664,9 +8267,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[GroupInviteTokens]
+        - name: filter[groupInviteTokens]
           required: false
-          description: Equality filter for "GroupInviteTokens"
+          description: Equality filter for "groupInviteTokens"
           in: query
           style: form
           explode: false
@@ -7990,9 +8593,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[GroupInviteTokens]
+        - name: filter[groupInviteTokens]
           required: false
-          description: Equality filter for "GroupInviteTokens"
+          description: Equality filter for "groupInviteTokens"
           in: query
           style: form
           explode: false
@@ -8410,9 +9013,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[GroupInviteTokens]
+        - name: filter[groupInviteTokens]
           required: false
-          description: Equality filter for "GroupInviteTokens"
+          description: Equality filter for "groupInviteTokens"
           in: query
           style: form
           explode: false
@@ -8736,9 +9339,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[GroupInviteTokens]
+        - name: filter[groupInviteTokens]
           required: false
-          description: Equality filter for "GroupInviteTokens"
+          description: Equality filter for "groupInviteTokens"
           in: query
           style: form
           explode: false
@@ -10367,6 +10970,102 @@ paths:
           schema:
             type: string
             format: date-time
+        - name: filter[style]
+          required: false
+          description: Equality filter for "style"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[style$contains]
+          required: false
+          description: String contains filter for "style"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[style$icontains]
+          required: false
+          description: String case-insensitive contains filter for "style"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[style$search]
+          required: false
+          description: String full-text search filter for "style"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[style$startsWith]
+          required: false
+          description: String startsWith filter for "style"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[style$endsWith]
+          required: false
+          description: String endsWith filter for "style"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[link]
+          required: false
+          description: Equality filter for "link"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[link$contains]
+          required: false
+          description: String contains filter for "link"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[link$icontains]
+          required: false
+          description: String case-insensitive contains filter for "link"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[link$search]
+          required: false
+          description: String full-text search filter for "link"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[link$startsWith]
+          required: false
+          description: String startsWith filter for "link"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[link$endsWith]
+          required: false
+          description: String endsWith filter for "link"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
         - name: filter[owner]
           required: false
           description: Equality filter for "owner"
@@ -10725,46 +11424,6 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[used]
-          required: false
-          description: Equality filter for "used"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[used$lt]
-          required: false
-          description: Less-than filter for "used"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[used$lte]
-          required: false
-          description: Less-than or equal filter for "used"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[used$gt]
-          required: false
-          description: Greater-than filter for "used"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[used$gte]
-          required: false
-          description: Greater-than or equal filter for "used"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
         - name: filter[maxUse]
           required: false
           description: Equality filter for "maxUse"
@@ -10954,6 +11613,16 @@ paths:
         - name: filter[groups]
           required: false
           description: Equality filter for "groups"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: filter[usedBy]
+          required: false
+          description: Equality filter for "usedBy"
           in: query
           style: form
           explode: false
@@ -11312,46 +11981,6 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[used]
-          required: false
-          description: Equality filter for "used"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[used$lt]
-          required: false
-          description: Less-than filter for "used"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[used$lte]
-          required: false
-          description: Less-than or equal filter for "used"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[used$gt]
-          required: false
-          description: Greater-than filter for "used"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[used$gte]
-          required: false
-          description: Greater-than or equal filter for "used"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
         - name: filter[maxUse]
           required: false
           description: Equality filter for "maxUse"
@@ -11541,6 +12170,16 @@ paths:
         - name: filter[groups]
           required: false
           description: Equality filter for "groups"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: filter[usedBy]
+          required: false
+          description: Equality filter for "usedBy"
           in: query
           style: form
           explode: false
@@ -11634,46 +12273,6 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[used]
-          required: false
-          description: Equality filter for "used"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[used$lt]
-          required: false
-          description: Less-than filter for "used"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[used$lte]
-          required: false
-          description: Less-than or equal filter for "used"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[used$gt]
-          required: false
-          description: Greater-than filter for "used"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
-        - name: filter[used$gte]
-          required: false
-          description: Greater-than or equal filter for "used"
-          in: query
-          style: form
-          explode: false
-          schema:
-            type: integer
         - name: filter[maxUse]
           required: false
           description: Equality filter for "maxUse"
@@ -11870,6 +12469,16 @@ paths:
             type: array
             items:
               type: string
+        - name: filter[usedBy]
+          required: false
+          description: Equality filter for "usedBy"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
       responses:
         "200":
           description: Successful operation
@@ -11954,6 +12563,684 @@ paths:
     post:
       operationId: create-GroupInviteToken-relationship-groups
       description: Create new "groups" relationships for a "GroupInviteToken"
+      tags:
+        - groupInviteToken
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/_toManyRelationshipRequest"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toManyRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+  /api/data/groupInviteToken/{id}/usedBy:
+    get:
+      operationId: fetch-GroupInviteToken-related-usedBy
+      description: Fetch the related "usedBy" resource for "GroupInviteToken"
+      tags:
+        - groupInviteToken
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/include"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/page-offset"
+        - $ref: "#/components/parameters/page-limit"
+        - name: filter[id]
+          required: false
+          description: Id filter
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[token]
+          required: false
+          description: Equality filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[token$contains]
+          required: false
+          description: String contains filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[token$icontains]
+          required: false
+          description: String case-insensitive contains filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[token$search]
+          required: false
+          description: String full-text search filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[token$startsWith]
+          required: false
+          description: String startsWith filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[token$endsWith]
+          required: false
+          description: String endsWith filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[maxUse]
+          required: false
+          description: Equality filter for "maxUse"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[maxUse$lt]
+          required: false
+          description: Less-than filter for "maxUse"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[maxUse$lte]
+          required: false
+          description: Less-than or equal filter for "maxUse"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[maxUse$gt]
+          required: false
+          description: Greater-than filter for "maxUse"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[maxUse$gte]
+          required: false
+          description: Greater-than or equal filter for "maxUse"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[owner]
+          required: false
+          description: Equality filter for "owner"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name]
+          required: false
+          description: Equality filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$contains]
+          required: false
+          description: String contains filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$icontains]
+          required: false
+          description: String case-insensitive contains filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$search]
+          required: false
+          description: String full-text search filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$startsWith]
+          required: false
+          description: String startsWith filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$endsWith]
+          required: false
+          description: String endsWith filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[expiryDate]
+          required: false
+          description: Equality filter for "expiryDate"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[expiryDate$lt]
+          required: false
+          description: Less-than filter for "expiryDate"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[expiryDate$lte]
+          required: false
+          description: Less-than or equal filter for "expiryDate"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[expiryDate$gt]
+          required: false
+          description: Greater-than filter for "expiryDate"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[expiryDate$gte]
+          required: false
+          description: Greater-than or equal filter for "expiryDate"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created]
+          required: false
+          description: Equality filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$lt]
+          required: false
+          description: Less-than filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$lte]
+          required: false
+          description: Less-than or equal filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$gt]
+          required: false
+          description: Greater-than filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$gte]
+          required: false
+          description: Greater-than or equal filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[groups]
+          required: false
+          description: Equality filter for "groups"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: filter[usedBy]
+          required: false
+          description: Equality filter for "usedBy"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/GroupInviteTokenUsersListResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+  /api/data/groupInviteToken/{id}/relationships/usedBy:
+    get:
+      operationId: fetch-GroupInviteToken-relationship-usedBy
+      description: Fetch the "usedBy" relationships for a "GroupInviteToken"
+      tags:
+        - groupInviteToken
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/page-offset"
+        - $ref: "#/components/parameters/page-limit"
+        - name: filter[id]
+          required: false
+          description: Id filter
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[token]
+          required: false
+          description: Equality filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[token$contains]
+          required: false
+          description: String contains filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[token$icontains]
+          required: false
+          description: String case-insensitive contains filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[token$search]
+          required: false
+          description: String full-text search filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[token$startsWith]
+          required: false
+          description: String startsWith filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[token$endsWith]
+          required: false
+          description: String endsWith filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[maxUse]
+          required: false
+          description: Equality filter for "maxUse"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[maxUse$lt]
+          required: false
+          description: Less-than filter for "maxUse"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[maxUse$lte]
+          required: false
+          description: Less-than or equal filter for "maxUse"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[maxUse$gt]
+          required: false
+          description: Greater-than filter for "maxUse"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[maxUse$gte]
+          required: false
+          description: Greater-than or equal filter for "maxUse"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[owner]
+          required: false
+          description: Equality filter for "owner"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name]
+          required: false
+          description: Equality filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$contains]
+          required: false
+          description: String contains filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$icontains]
+          required: false
+          description: String case-insensitive contains filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$search]
+          required: false
+          description: String full-text search filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$startsWith]
+          required: false
+          description: String startsWith filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[name$endsWith]
+          required: false
+          description: String endsWith filter for "name"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[expiryDate]
+          required: false
+          description: Equality filter for "expiryDate"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[expiryDate$lt]
+          required: false
+          description: Less-than filter for "expiryDate"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[expiryDate$lte]
+          required: false
+          description: Less-than or equal filter for "expiryDate"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[expiryDate$gt]
+          required: false
+          description: Greater-than filter for "expiryDate"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[expiryDate$gte]
+          required: false
+          description: Greater-than or equal filter for "expiryDate"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created]
+          required: false
+          description: Equality filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$lt]
+          required: false
+          description: Less-than filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$lte]
+          required: false
+          description: Less-than or equal filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$gt]
+          required: false
+          description: Greater-than filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[created$gte]
+          required: false
+          description: Greater-than or equal filter for "created"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[groups]
+          required: false
+          description: Equality filter for "groups"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: filter[usedBy]
+          required: false
+          description: Equality filter for "usedBy"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toManyRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    put:
+      operationId: update-GroupInviteToken-relationship-usedBy-put
+      description: Update "usedBy" relationships for a "GroupInviteToken"
+      tags:
+        - groupInviteToken
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/_toManyRelationshipRequest"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toManyRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    patch:
+      operationId: update-GroupInviteToken-relationship-usedBy-patch
+      description: Update "usedBy" relationships for a "GroupInviteToken"
+      tags:
+        - groupInviteToken
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/_toManyRelationshipRequest"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toManyRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    post:
+      operationId: create-GroupInviteToken-relationship-usedBy
+      description: Create new "usedBy" relationships for a "GroupInviteToken"
       tags:
         - groupInviteToken
       parameters:
@@ -12409,6 +13696,433 @@ paths:
             application/vnd.api+json:
               schema:
                 $ref: "#/components/schemas/_errorResponse"
+  /api/data/groupInviteTokenUsers:
+    get:
+      operationId: list-GroupInviteTokenUsers
+      description: List "GroupInviteTokenUsers" resources
+      tags:
+        - groupInviteTokenUsers
+      parameters:
+        - $ref: "#/components/parameters/include"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/page-offset"
+        - $ref: "#/components/parameters/page-limit"
+        - name: filter[token]
+          required: false
+          description: Equality filter for "token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[user]
+          required: false
+          description: Equality filter for "user"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/GroupInviteTokenUsersListResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    post:
+      operationId: create-GroupInviteTokenUsers
+      description: Create a "GroupInviteTokenUsers" resource
+      tags:
+        - groupInviteTokenUsers
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/GroupInviteTokenUsersCreateRequest"
+      responses:
+        "201":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/GroupInviteTokenUsersResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "422":
+          description: Request is unprocessable due to validation errors
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+  /api/data/groupInviteTokenUsers/{id}:
+    get:
+      operationId: fetch-GroupInviteTokenUsers
+      description: Fetch a "GroupInviteTokenUsers" resource
+      tags:
+        - groupInviteTokenUsers
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/include"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/GroupInviteTokenUsersResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    put:
+      operationId: update-GroupInviteTokenUsers-put
+      description: Update a "GroupInviteTokenUsers" resource
+      tags:
+        - groupInviteTokenUsers
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/GroupInviteTokenUsersUpdateRequest"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/GroupInviteTokenUsersResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "422":
+          description: Request is unprocessable due to validation errors
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    patch:
+      operationId: update-GroupInviteTokenUsers-patch
+      description: Update a "GroupInviteTokenUsers" resource
+      tags:
+        - groupInviteTokenUsers
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/GroupInviteTokenUsersUpdateRequest"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/GroupInviteTokenUsersResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "422":
+          description: Request is unprocessable due to validation errors
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    delete:
+      operationId: delete-GroupInviteTokenUsers
+      description: Delete a "GroupInviteTokenUsers" resource
+      tags:
+        - groupInviteTokenUsers
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          description: Successful operation
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+  /api/data/groupInviteTokenUsers/{id}/token:
+    get:
+      operationId: fetch-GroupInviteTokenUsers-related-token
+      description: Fetch the related "token" resource for "GroupInviteTokenUsers"
+      tags:
+        - groupInviteTokenUsers
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/include"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/GroupInviteTokenResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+  /api/data/groupInviteTokenUsers/{id}/relationships/token:
+    get:
+      operationId: fetch-GroupInviteTokenUsers-relationship-token
+      description: Fetch the "token" relationships for a "GroupInviteTokenUsers"
+      tags:
+        - groupInviteTokenUsers
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toOneRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    put:
+      operationId: update-GroupInviteTokenUsers-relationship-token-put
+      description: Update "token" relationship for a "GroupInviteTokenUsers"
+      tags:
+        - groupInviteTokenUsers
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/_toOneRelationshipRequest"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toOneRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    patch:
+      operationId: update-GroupInviteTokenUsers-relationship-token-patch
+      description: Update "token" relationship for a "GroupInviteTokenUsers"
+      tags:
+        - groupInviteTokenUsers
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/_toOneRelationshipRequest"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toOneRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+  /api/data/groupInviteTokenUsers/{id}/user:
+    get:
+      operationId: fetch-GroupInviteTokenUsers-related-user
+      description: Fetch the related "user" resource for "GroupInviteTokenUsers"
+      tags:
+        - groupInviteTokenUsers
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/include"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/GitUserResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+  /api/data/groupInviteTokenUsers/{id}/relationships/user:
+    get:
+      operationId: fetch-GroupInviteTokenUsers-relationship-user
+      description: Fetch the "user" relationships for a "GroupInviteTokenUsers"
+      tags:
+        - groupInviteTokenUsers
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toOneRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    put:
+      operationId: update-GroupInviteTokenUsers-relationship-user-put
+      description: Update "user" relationship for a "GroupInviteTokenUsers"
+      tags:
+        - groupInviteTokenUsers
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/_toOneRelationshipRequest"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toOneRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+    patch:
+      operationId: update-GroupInviteTokenUsers-relationship-user-patch
+      description: Update "user" relationship for a "GroupInviteTokenUsers"
+      tags:
+        - groupInviteTokenUsers
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: "#/components/schemas/_toOneRelationshipRequest"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_toOneRelationshipResponse"
+        "403":
+          description: Request is forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
+        "404":
+          description: Resource is not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: "#/components/schemas/_errorResponse"
 components:
   schemas:
     _jsonapi:
@@ -12675,9 +14389,9 @@ components:
         relationships:
           type: object
           properties:
-            Notifications:
+            notifications:
               $ref: "#/components/schemas/_toManyRelationshipWithLinks"
-            GroupInviteTokens:
+            groupInviteTokens:
               $ref: "#/components/schemas/_toManyRelationshipWithLinks"
             ownedGitUsers:
               $ref: "#/components/schemas/_toManyRelationshipWithLinks"
@@ -12727,9 +14441,9 @@ components:
             relationships:
               type: object
               properties:
-                Notifications:
+                notifications:
                   $ref: "#/components/schemas/_toManyRelationship"
-                GroupInviteTokens:
+                groupInviteTokens:
                   $ref: "#/components/schemas/_toManyRelationship"
                 ownedGitUsers:
                   $ref: "#/components/schemas/_toManyRelationship"
@@ -12782,9 +14496,9 @@ components:
             relationships:
               type: object
               properties:
-                Notifications:
+                notifications:
                   $ref: "#/components/schemas/_toManyRelationship"
-                GroupInviteTokens:
+                groupInviteTokens:
                   $ref: "#/components/schemas/_toManyRelationship"
                 ownedGitUsers:
                   $ref: "#/components/schemas/_toManyRelationship"
@@ -12808,9 +14522,9 @@ components:
                 relationships:
                   type: object
                   properties: &a1
-                    Notifications:
+                    notifications:
                       $ref: "#/components/schemas/_toManyRelationship"
-                    GroupInviteTokens:
+                    groupInviteTokens:
                       $ref: "#/components/schemas/_toManyRelationship"
                     ownedGitUsers:
                       $ref: "#/components/schemas/_toManyRelationship"
@@ -12872,8 +14586,6 @@ components:
             - email
             - username
             - name
-            - expires
-            - expiryDate
             - created
             - avatar_url
             - custom
@@ -12888,13 +14600,6 @@ components:
               type: string
             name:
               type: string
-            expires:
-              type: boolean
-            expiryDate:
-              oneOf:
-                - type: "null"
-                - type: string
-                  format: date-time
             created:
               type: string
               format: date-time
@@ -12912,6 +14617,8 @@ components:
             groups:
               $ref: "#/components/schemas/_toManyRelationshipWithLinks"
             owners:
+              $ref: "#/components/schemas/_toManyRelationshipWithLinks"
+            usedTokens:
               $ref: "#/components/schemas/_toManyRelationshipWithLinks"
     GitUserCreateRequest:
       type: object
@@ -12934,7 +14641,6 @@ components:
                 - email
                 - username
                 - name
-                - expires
               properties:
                 git_access_token:
                   oneOf:
@@ -12946,13 +14652,6 @@ components:
                   type: string
                 name:
                   type: string
-                expires:
-                  type: boolean
-                expiryDate:
-                  oneOf:
-                    - type: "null"
-                    - type: string
-                      format: date-time
                 created:
                   type: string
                   format: date-time
@@ -12970,6 +14669,8 @@ components:
                 groups:
                   $ref: "#/components/schemas/_toManyRelationship"
                 owners:
+                  $ref: "#/components/schemas/_toManyRelationship"
+                usedTokens:
                   $ref: "#/components/schemas/_toManyRelationship"
         meta:
           $ref: "#/components/schemas/_meta"
@@ -13004,13 +14705,6 @@ components:
                   type: string
                 name:
                   type: string
-                expires:
-                  type: boolean
-                expiryDate:
-                  oneOf:
-                    - type: "null"
-                    - type: string
-                      format: date-time
                 created:
                   type: string
                   format: date-time
@@ -13028,6 +14722,8 @@ components:
                 groups:
                   $ref: "#/components/schemas/_toManyRelationship"
                 owners:
+                  $ref: "#/components/schemas/_toManyRelationship"
+                usedTokens:
                   $ref: "#/components/schemas/_toManyRelationship"
         meta:
           $ref: "#/components/schemas/_meta"
@@ -13050,6 +14746,8 @@ components:
                     groups:
                       $ref: "#/components/schemas/_toManyRelationship"
                     owners:
+                      $ref: "#/components/schemas/_toManyRelationship"
+                    usedTokens:
                       $ref: "#/components/schemas/_toManyRelationship"
         meta:
           $ref: "#/components/schemas/_meta"
@@ -13135,7 +14833,7 @@ components:
         relationships:
           type: object
           properties:
-            GroupInviteTokens:
+            groupInviteTokens:
               $ref: "#/components/schemas/_toManyRelationshipWithLinks"
             users:
               $ref: "#/components/schemas/_toManyRelationshipWithLinks"
@@ -13187,7 +14885,7 @@ components:
             relationships:
               type: object
               properties:
-                GroupInviteTokens:
+                groupInviteTokens:
                   $ref: "#/components/schemas/_toManyRelationship"
                 users:
                   $ref: "#/components/schemas/_toManyRelationship"
@@ -13239,7 +14937,7 @@ components:
             relationships:
               type: object
               properties:
-                GroupInviteTokens:
+                groupInviteTokens:
                   $ref: "#/components/schemas/_toManyRelationship"
                 users:
                   $ref: "#/components/schemas/_toManyRelationship"
@@ -13263,7 +14961,7 @@ components:
                 relationships:
                   type: object
                   properties: &a3
-                    GroupInviteTokens:
+                    groupInviteTokens:
                       $ref: "#/components/schemas/_toManyRelationship"
                     users:
                       $ref: "#/components/schemas/_toManyRelationship"
@@ -13761,6 +15459,8 @@ components:
             - content
             - read
             - created
+            - style
+            - link
             - ownerId
           properties:
             title:
@@ -13772,6 +15472,12 @@ components:
             created:
               type: string
               format: date-time
+            style:
+              type: string
+            link:
+              oneOf:
+                - type: "null"
+                - type: string
             ownerId:
               type: integer
         relationships:
@@ -13799,7 +15505,7 @@ components:
               required:
                 - title
                 - content
-                - read
+                - style
               properties:
                 title:
                   type: string
@@ -13810,6 +15516,12 @@ components:
                 created:
                   type: string
                   format: date-time
+                style:
+                  type: string
+                link:
+                  oneOf:
+                    - type: "null"
+                    - type: string
             relationships:
               type: object
               properties:
@@ -13847,6 +15559,12 @@ components:
                 created:
                   type: string
                   format: date-time
+                style:
+                  type: string
+                link:
+                  oneOf:
+                    - type: "null"
+                    - type: string
             relationships:
               type: object
               properties:
@@ -13925,7 +15643,6 @@ components:
           type: object
           required:
             - token
-            - used
             - maxUse
             - ownerId
             - name
@@ -13934,8 +15651,6 @@ components:
           properties:
             token:
               type: string
-            used:
-              type: integer
             maxUse:
               type: integer
             ownerId:
@@ -13956,6 +15671,8 @@ components:
             owner:
               $ref: "#/components/schemas/_toOneRelationshipWithLinks"
             groups:
+              $ref: "#/components/schemas/_toManyRelationshipWithLinks"
+            usedBy:
               $ref: "#/components/schemas/_toManyRelationshipWithLinks"
     GroupInviteTokenCreateRequest:
       type: object
@@ -13981,8 +15698,6 @@ components:
               properties:
                 token:
                   type: string
-                used:
-                  type: integer
                 maxUse:
                   type: integer
                 name:
@@ -14001,6 +15716,8 @@ components:
                 owner:
                   $ref: "#/components/schemas/_toOneRelationship"
                 groups:
+                  $ref: "#/components/schemas/_toManyRelationship"
+                usedBy:
                   $ref: "#/components/schemas/_toManyRelationship"
         meta:
           $ref: "#/components/schemas/_meta"
@@ -14027,8 +15744,6 @@ components:
               properties:
                 token:
                   type: string
-                used:
-                  type: integer
                 maxUse:
                   type: integer
                 name:
@@ -14047,6 +15762,8 @@ components:
                 owner:
                   $ref: "#/components/schemas/_toOneRelationship"
                 groups:
+                  $ref: "#/components/schemas/_toManyRelationship"
+                usedBy:
                   $ref: "#/components/schemas/_toManyRelationship"
         meta:
           $ref: "#/components/schemas/_meta"
@@ -14069,6 +15786,8 @@ components:
                     owner:
                       $ref: "#/components/schemas/_toOneRelationship"
                     groups:
+                      $ref: "#/components/schemas/_toManyRelationship"
+                    usedBy:
                       $ref: "#/components/schemas/_toManyRelationship"
         meta:
           $ref: "#/components/schemas/_meta"
@@ -14240,6 +15959,149 @@ components:
                   relationships:
                     type: object
                     properties: *a9
+        meta:
+          $ref: "#/components/schemas/_meta"
+        included:
+          type: array
+          items:
+            $ref: "#/components/schemas/_resource"
+        links:
+          allOf:
+            - $ref: "#/components/schemas/_links"
+            - $ref: "#/components/schemas/_pagination"
+    GroupInviteTokenUsers:
+      type: object
+      description: The "GroupInviteTokenUsers" model
+      required:
+        - id
+        - type
+        - attributes
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        attributes:
+          type: object
+          required:
+            - tokenId
+            - userId
+          properties:
+            tokenId:
+              type: integer
+            userId:
+              type: integer
+        relationships:
+          type: object
+          properties:
+            token:
+              $ref: "#/components/schemas/_toOneRelationshipWithLinks"
+            user:
+              $ref: "#/components/schemas/_toOneRelationshipWithLinks"
+    GroupInviteTokenUsersCreateRequest:
+      type: object
+      description: Input for creating a "GroupInviteTokenUsers"
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          description: The "GroupInviteTokenUsers" model
+          required:
+            - type
+            - attributes
+          properties:
+            type:
+              type: string
+            attributes:
+              type: object
+              properties: {}
+            relationships:
+              type: object
+              properties:
+                token:
+                  $ref: "#/components/schemas/_toOneRelationship"
+                user:
+                  $ref: "#/components/schemas/_toOneRelationship"
+        meta:
+          $ref: "#/components/schemas/_meta"
+    GroupInviteTokenUsersUpdateRequest:
+      type: object
+      description: Input for updating a "GroupInviteTokenUsers"
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          description: The "GroupInviteTokenUsers" model
+          required:
+            - id
+            - type
+            - attributes
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              type: object
+              properties: {}
+            relationships:
+              type: object
+              properties:
+                token:
+                  $ref: "#/components/schemas/_toOneRelationship"
+                user:
+                  $ref: "#/components/schemas/_toOneRelationship"
+        meta:
+          $ref: "#/components/schemas/_meta"
+    GroupInviteTokenUsersResponse:
+      type: object
+      description: Response for a "GroupInviteTokenUsers"
+      required:
+        - data
+      properties:
+        jsonapi:
+          $ref: "#/components/schemas/_jsonapi"
+        data:
+          allOf:
+            - $ref: "#/components/schemas/GroupInviteTokenUsers"
+            - type: object
+              properties:
+                relationships:
+                  type: object
+                  properties: &a10
+                    token:
+                      $ref: "#/components/schemas/_toOneRelationship"
+                    user:
+                      $ref: "#/components/schemas/_toOneRelationship"
+        meta:
+          $ref: "#/components/schemas/_meta"
+        included:
+          type: array
+          items:
+            $ref: "#/components/schemas/_resource"
+        links:
+          $ref: "#/components/schemas/_links"
+    GroupInviteTokenUsersListResponse:
+      type: object
+      description: Response for a list of "GroupInviteTokenUsers"
+      required:
+        - data
+        - links
+      properties:
+        jsonapi:
+          $ref: "#/components/schemas/_jsonapi"
+        data:
+          type: array
+          items:
+            allOf:
+              - $ref: "#/components/schemas/GroupInviteTokenUsers"
+              - type: object
+                properties:
+                  relationships:
+                    type: object
+                    properties: *a10
         meta:
           $ref: "#/components/schemas/_meta"
         included:

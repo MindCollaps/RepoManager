@@ -23,11 +23,20 @@ export default defineOAuthGitHubEventHandler({
             },
             include: {
                 groups: true,
+                usedBy: {
+                    include: {
+                        user: true,
+                    },
+                },
             },
         });
 
         if (!token) {
-            return sendRedirect(event, '/login/error?msg=' + encodeURIComponent('Token Invalid!'));
+            return sendRedirect(event, '/login/error?msg=' + encodeURIComponent('Token Invalid or expired!'));
+        }
+
+        if (token.usedBy.length >= token.maxUse) {
+            return sendRedirect(event, '/login/error?msg=' + encodeURIComponent('This token cannot be used anymore - max usage'));
         }
 
         let dbUser = await prisma.gitUser.findUnique({
@@ -37,30 +46,38 @@ export default defineOAuthGitHubEventHandler({
         });
 
         if (dbUser) {
-            await prisma.gitUser.update({
+            dbUser = await prisma.gitUser.update({
                 where: {
                     email: user.email.toLowerCase(),
                 },
                 data: {
                     git_access_token: tokens.access_token,
                     avatar_url: user.avatar_url,
+                    groups: {
+                        createMany: {
+                            data: token.groups.map(x => ({ groupId: x.groupId, repoState: 0 })),
+                        },
+                    },
                 },
             });
+
+            if (token.usedBy.findIndex(x => x.userId === dbUser?.id) !== -1) {
+                return sendRedirect(event, '/login/error?msg=' + encodeURIComponent('You used this token already!'));
+            }
         }
         else {
             dbUser = await prisma.gitUser.create({
                 data: {
                     email: user.email.toLowerCase(),
                     username: user.login,
-                    name: user.name,
+                    name: user.name ?? 'No Name Provided',
                     git_access_token: tokens.access_token,
                     avatar_url: user.avatar_url,
                     groups: {
                         createMany: {
-                            data: token.groups.map(x => ({ groupId: x.groupId, repoState: -1 })),
+                            data: token.groups.map(x => ({ groupId: x.groupId, repoState: 0 })),
                         },
                     },
-                    expires: false,
                     owners: {
                         createMany: {
                             data: {
@@ -71,6 +88,19 @@ export default defineOAuthGitHubEventHandler({
                 },
             });
         }
+
+        await prisma.groupInviteToken.update({
+            where: {
+                id: token.id,
+            },
+            data: {
+                usedBy: {
+                    create: {
+                        userId: dbUser.id,
+                    },
+                },
+            },
+        });
 
         await setUserSession(event, {
             user: {

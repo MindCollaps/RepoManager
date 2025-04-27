@@ -1,0 +1,14 @@
+FROM node:23-alpine3.20
+WORKDIR /app
+RUN corepack enable
+
+COPY package.json yarn.lock ./
+RUN yarn install --immutable
+
+COPY . .
+
+RUN ["yarn", "zenstack", "generate"]
+
+RUN ["yarn", "generate"]
+
+CMD ["node", "--import=tsx", "/app/src/worker/data-worker.ts"]

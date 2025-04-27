@@ -25,7 +25,7 @@
             </basic-create-adder>
         </template>
         <template #item="{ item }">
-            {{ item.name }}
+            {{ item.name }} | Used {{ item.usedBy.length }}
         </template>
         <template #action="{ item }">
             <common-button
@@ -56,6 +56,9 @@ const { session } = useUserSession();
 const { data: tokens, refetch } = useFindManyGroupInviteToken({
     where: {
         ownerId: session.value?.user?.userId,
+    },
+    include: {
+        usedBy: true,
     },
 });
 

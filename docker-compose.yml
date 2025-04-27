@@ -6,13 +6,25 @@ services:
         image: repomanager-1.0.0
         container_name: repomanager
         ports:
-            - "80:8080"
+            - "3000:3000"
         healthcheck:
             test: "bash -c 'echo -n > /dev/tcp/127.0.0.1/8080'"
             interval: 1s
             retries: 360
         volumes:
             - db:/app/db
+
+    worker:
+        build:
+            context: .
+            dockerfile: .config/Dockerfile-worker
+        image: repomanager-worker-1.0.0
+        container_name: repomanager-worker
+        volumes:
+            - db:/app/db
+        depends_on:
+            manager:
+                condition: service_started
 
 volumes:
     db:

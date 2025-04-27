@@ -13,9 +13,30 @@ export async function makeOctokit(token: any) {
     return octokit;
 }
 
-export async function octoListRepos(octokit: Octokit, username: string) {
-    return (await octokit.rest.search.repos({
-        q: 'user:' + username,
-        per_page: 100, // TODO: Make this feteched until we have all
-    })).data;
+export async function octoRemoveCollabo(octokit: Octokit, username: string, repoName: string, repoOwner: string): Promise<boolean> {
+    try {
+        await octokit.rest.repos.removeCollaborator({
+            username: username,
+            repo: repoName,
+            owner: repoOwner,
+        });
+        return true;
+    }
+    catch {
+        return false;
+    }
+}
+
+export async function octoAddCollabo(octokit: Octokit, username: string, repoName: string, repoOwner: string): Promise<boolean> {
+    try {
+        await octokit.rest.repos.addCollaborator({
+            username: username,
+            repo: repoName,
+            owner: repoOwner,
+        });
+        return true;
+    }
+    catch {
+        return false;
+    }
 }

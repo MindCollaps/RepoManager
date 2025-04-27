@@ -26,9 +26,6 @@ export default defineEventHandler(async event => {
         owner = session.user.username;
     }
 
-    console.log(query.data.name);
-    console.log(owner);
-
     const repo = await octo.rest.repos.get({
         owner: owner,
         repo: query.data.name,

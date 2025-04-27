@@ -103,7 +103,7 @@ async function createGroup() {
     else {
         try {
             if (newGroup.value.ownRepo) {
-                newGroup.value.repoName = session.value?.user?.username ?? '';
+                newGroup.value.repoOwner = session.value?.user?.username ?? '';
             }
 
             await createGitGroup.mutateAsync({

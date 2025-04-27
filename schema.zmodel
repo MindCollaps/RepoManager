@@ -30,8 +30,8 @@ model User {
     git_access_token  String?            @deny('read', true) @omit
     created           DateTime           @default(now())
     avatar_url        String?
-    Notifications     Notification[]
-    GroupInviteTokens GroupInviteToken[]
+    notifications     Notification[]
+    groupInviteTokens GroupInviteToken[]
     ownedGitUsers     GitUserOwner[]
     ownedGitGroups    GitGroupOwner[]
 
@@ -39,18 +39,17 @@ model User {
 }
 
 model GitUser {
-    id               Int            @id @default(autoincrement())
+    id               Int                     @id @default(autoincrement())
     git_access_token String?
-    email            String         @unique @email @lower
-    username         String         @length(min: 6, max: 39)
-    name             String         @length(min: 3, max: 39)
-    expires          Boolean
-    expiryDate       DateTime?
-    created          DateTime       @default(now())
+    email            String                  @unique @email @lower
+    username         String                  @length(min: 6, max: 39)
+    name             String                  @length(min: 3, max: 39)
+    created          DateTime                @default(now())
     avatar_url       String?
     groups           GitUserGroup[]
     custom           Boolean?
     owners           GitUserOwner[]
+    usedTokens       GroupInviteTokenUsers[]
 
     @@allow('all', owners?[owner.id == auth().id])
 }
@@ -65,7 +64,7 @@ model GitGroup {
     repoName          String
     created           DateTime                 @default(now())
     name              String
-    GroupInviteTokens GroupInviteTokenGroups[]
+    groupInviteTokens GroupInviteTokenGroups[]
     users             GitUserGroup[]
     owners            GitGroupOwner[]
 
@@ -120,8 +119,10 @@ model Notification {
     id      Int      @id @default(autoincrement())
     title   String
     content String
-    read    Boolean
+    read    Boolean  @default(false)
     created DateTime @default(now())
+    style   String
+    link    String?
     ownerId Int
     owner   User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 
@@ -131,7 +132,6 @@ model Notification {
 model GroupInviteToken {
     id         Int                      @id @default(autoincrement())
     token      String                   @unique @length(min: 6, max: 12)
-    used       Int                      @default(0)
     maxUse     Int
     ownerId    Int
     owner      User                     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
@@ -139,6 +139,7 @@ model GroupInviteToken {
     expiryDate DateTime?
     created    DateTime                 @default(now())
     groups     GroupInviteTokenGroups[]
+    usedBy     GroupInviteTokenUsers[]
 
     @@allow('create,read,delete', owner.id == auth().id)
     @@allow('update', owner.id == auth().id)
@@ -159,4 +160,21 @@ model GroupInviteTokenGroups {
     )
 
     @@deny('update', true)
+}
+
+model GroupInviteTokenUsers {
+    tokenId Int              @map("token_id")
+    userId  Int              @map("user_id")
+    token   GroupInviteToken @relation(fields: [tokenId], references: [id], onDelete: Cascade)
+    user    GitUser          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@id([tokenId, userId])
+    @@map("group_invite_token_users")
+
+    @@allow('read', 
+        token.owner.id == auth().id ||
+        user.owners?[owner.id == auth().id]
+    )
+
+    @@deny('update, create, delete', true)
 }

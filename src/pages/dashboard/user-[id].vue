@@ -86,17 +86,6 @@ const userFields: Ref<FieldSchema<GitUser>[]> = computed(() => ([
         type: 'text',
     },
     {
-        key: 'expires',
-        label: 'Expires',
-        type: 'checkbox',
-        hides: 'expiryDate',
-    },
-    {
-        key: 'expiryDate',
-        label: 'Expiry Date',
-        type: 'date',
-    },
-    {
         label: 'Groups',
         type: 'choice',
         choiceFactory: userChoiceFactory.value,

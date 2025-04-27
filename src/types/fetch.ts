@@ -12,6 +12,11 @@ export const TokenFetchInclude = {
             },
         },
     },
+    usedBy: {
+        select: {
+            userId: true,
+        },
+    },
     owner: {
         select: {
             name: true,

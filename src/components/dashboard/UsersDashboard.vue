@@ -34,11 +34,6 @@
                 >Check</common-button>
             </div>
             <common-input-text v-model="newUser.email">Email</common-input-text>
-            <common-checkbox v-model="newUser.expires">Expires</common-checkbox>
-            <common-date-picker
-                v-if="newUser.expires"
-                v-model="newUser.expiryDate"
-            />
         </template>
         <template #item="{ item }">
             {{ item.name }}
@@ -49,8 +44,6 @@
 <script setup lang="ts">
 import CommonButton from '~/components/common/CommonButton.vue';
 import CommonInputText from '~/components/common/CommonInputText.vue';
-import CommonCheckbox from '../common/CommonCheckbox.vue';
-import CommonDatePicker from '../common/CommonDatePicker.vue';
 import CommonGitProfilePic from '../common/CommonGitProfilePic.vue';
 import { useFindManyGitUser, useDeleteGitUser } from '~~/lib/hooks';
 import BasicDashboard from '../basic/BasicDashboard.vue';
@@ -62,8 +55,6 @@ const defaultUser = {
     name: '',
     username: '',
     email: '',
-    expires: false,
-    expiryDate: new Date(),
     avatar_url: '',
     confirmed: false,
     confirmStatus: false,
@@ -113,8 +104,6 @@ async function createUser() {
             name: newUser.value.name,
             username: newUser.value.username,
             email: newUser.value.email,
-            expires: newUser.value.expires,
-            expryDate: newUser.value.expiryDate,
         },
     }).then(data => {
         refetch();

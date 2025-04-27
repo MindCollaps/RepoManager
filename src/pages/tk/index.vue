@@ -4,14 +4,17 @@
         v-else
         class="token"
     >
-        <template v-if="tokenError">
+        <div
+            v-if="tokenError"
+            class="token-errormessage"
+        >
             <template v-if="noTokenProvided">
                 No Token Provided!
             </template>
             <template v-else>
                 {{ tokenErrorMessage }}
             </template>
-        </template>
+        </div>
         <template v-else>
             <template v-if="user?.isUser">
                 <div class="token-back">
@@ -58,21 +61,32 @@
                         :key="group.groupId"
                         class="token-repos-item"
                     >
-                        {{ group.group.repoOwner }} / {{ group.group.repoName }}
+                        {{ group.group.repoOwner }}/{{ group.group.repoName }}
                     </div>
                 </div>
                 <common-button
+                    v-if="!loggedIn || usedToken"
                     type="secondary"
                     width="256px"
                     @click="login()"
                 >
                     <template #default>
-                        Join with GitHub
+                        {{ !loggedIn ? 'Login with GitHub' : 'Join Groups' }}
                     </template>
-                    <template #icon>
+                    <template
+                        v-if="!loggedIn"
+                        #icon
+                    >
                         <github-icon/>
                     </template>
                 </common-button>
+                <div
+                    v-else
+                    class="token-repos-error"
+                >
+                    <p>Good news!</p>
+                    <p>You already used this token!</p>
+                </div>
             </template>
         </template>
     </div>
@@ -93,7 +107,7 @@ definePageMeta({
     layout: false,
 });
 
-const { user, openInPopup } = useUserSession();
+const { loggedIn, user, openInPopup } = useUserSession();
 
 const route = useRoute();
 const url = useRequestURL();
@@ -104,6 +118,7 @@ const noTokenProvided = ref(false);
 const tokenErrorMessage = ref('');
 const token = shallowRef<FetchingToken | undefined>();
 const copyAnim = ref(false);
+const usedToken = computed(() => loggedIn ? token.value?.usedBy.findIndex(x => x.userId === user.value?.userId) === -1 : false);
 
 function setError(message: string, noToken = false) {
     tokenError.value = true;
@@ -114,10 +129,16 @@ function setError(message: string, noToken = false) {
 async function fetchTokenByString(tokenString: string) {
     try {
         const data = await $fetch<FetchingToken>(`/api/v1/tk?tk=${ encodeURIComponent(tokenString) }`);
-        token.value = data;
+
+        if (!data) {
+            setError('Token could not be found or is expired!');
+        }
+        else {
+            token.value = data;
+        }
     }
     catch (error: any) {
-        setError(error?.statusMessage || 'Token could not be found');
+        setError(error?.statusMessage ?? 'Token could not be found or is expired');
     }
 }
 
@@ -169,6 +190,35 @@ onMounted(async () => {
     justify-content: center;
 
     margin-top: 64px;
+
+    min-height: 70vh;
+
+    &-repos {
+        box-shadow: 5px 8px 5px $darkgray1000;
+        padding: 22px 32px;
+        border-radius: 8px;
+        background: $darkgray800;
+        gap: 8px;
+        display: flex;
+        flex-direction: column;
+
+        &-error {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            font-size: 18px;
+
+            p {
+                margin: 0;
+            }
+        }
+    }
+
+    &-errormessage {
+        font-size: 22px;
+    }
 
     &-back {
         display: flex;

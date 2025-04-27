@@ -8,8 +8,6 @@ const PostBodySchema = z.object({
     username: z.string().min(2, 'Username must contain 2 letters'),
     name: z.string().min(2, 'Name must contain 2 letters').max(32, 'Name must not be longer than 32 letters'),
     email: z.string().email(),
-    expires: z.boolean(),
-    expiryDate: z.date().optional(),
 });
 
 export default defineEventHandler(async event => {
@@ -55,7 +53,6 @@ export default defineEventHandler(async event => {
                 avatar_url: response.data.avatar_url,
                 name: body.data.name,
                 username: body.data.username,
-                expires: body.data.expires,
                 custom: true,
                 owners: {
                     create: [{
