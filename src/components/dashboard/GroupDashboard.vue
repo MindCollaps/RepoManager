@@ -38,7 +38,12 @@
             />
         </template>
         <template #item="{ item }">
-            {{ item.name }}
+            <div class="group-dashboard-item">
+                {{ item.name }} <common-button
+                    :href="`https://github.com/${ item.repoOwner }/${ item.repoName }`"
+                    type="transparent"
+                >{{ item.repoOwner }} / {{ item.repoName }}</common-button>
+            </div>
         </template>
     </basic-dashboard>
 </template>
@@ -164,5 +169,12 @@ function editGroup(id: number) {
     border-radius: 16px;
 
     background: $darkgray850;
+}
+
+.group-dashboard-item {
+    display: grid;
+    grid-template-columns: 240px auto;
+    gap: 16px;
+    align-items: center;
 }
 </style>

@@ -19,6 +19,7 @@ import type { UpdateFactory } from '~/components/basic/BasicAddersHelper.vue';
 
 definePageMeta({
     middleware: ['authenticated'],
+    layout: 'false',
 });
 
 const route = useRoute();

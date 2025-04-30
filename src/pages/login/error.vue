@@ -8,8 +8,10 @@
 
 <script setup lang="ts">
 definePageMeta({
-    layout: false,
+    layout: 'false',
 });
+
+// TODO: read msg parameter and display
 </script>
 
 <style scoped lang="scss">

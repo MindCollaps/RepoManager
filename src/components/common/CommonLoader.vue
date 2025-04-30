@@ -1,10 +1,19 @@
 <template>
     <div
         class="loading-screen"
+        :class="smol ? 'loading-screen-smol' : ''"
     >
         <div class="loader"/>
     </div>
 </template>
+
+<script setup lang="ts">
+defineProps({
+    smol: {
+        type: Boolean,
+    },
+});
+</script>
 
 <style scoped lang="scss">
 .loading-screen {
@@ -12,6 +21,15 @@
     align-items: center;
     justify-content: center;
     height: 300px;
+
+    &-smol{
+        height: fit-content;
+
+        .loader {
+            width: 22px;
+            height: 22px;
+        }
+    }
 }
 
 .loader {

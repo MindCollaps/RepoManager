@@ -8,6 +8,18 @@
             <h1>Welcome {{ user?.username }}</h1>
         </div>
         <common-button
+            href="/dashboard"
+        >
+            <template #default>
+                Dashboard
+            </template>
+            <template #icon>
+                <home-icon/>
+            </template>
+        </common-button>
+        <view-theme/>
+        <common-button
+            type="secondary"
             width="128px"
             @click="clear"
         >Logout</common-button>
@@ -27,8 +39,15 @@
 <script setup lang="ts">
 import CommonButton from '~/components/common/CommonButton.vue';
 import CommonGitProfilePic from '~/components/common/CommonGitProfilePic.vue';
+import HomeIcon from '~/assets/icons/home.svg?component';
+import ViewTheme from '~/components/views/ViewTheme.vue';
 
 const { loggedIn, user, clear } = useUserSession();
+
+definePageMeta({
+    layout: 'false',
+    middleware: ['authenticated'],
+});
 </script>
 
 <style scoped lang="scss">

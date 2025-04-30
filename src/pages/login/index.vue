@@ -54,7 +54,7 @@ watch(loggedIn, () => {
 });
 
 definePageMeta({
-    layout: false,
+    layout: 'false',
 });
 </script>
 

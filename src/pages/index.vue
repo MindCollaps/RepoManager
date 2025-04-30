@@ -58,7 +58,9 @@
                         :initial="{ opacity: 0, y: 100 }"
                         :visible-once="{ opacity: 1, y: 0 }"
                     >
-                        <div class="feature-icon time-icon"/>
+                        <div class="feature-icon time-icon">
+                            <schedule-icon/>
+                        </div>
                         <h3>Time-Limited Access</h3>
                         <p>Set expiration dates for contributors and automatically revoke access when time is up</p>
                     </motion>
@@ -68,7 +70,9 @@
                         :initial="{ opacity: 0, y: 100 }"
                         :visible-once="{ opacity: 1, y: 0 }"
                     >
-                        <div class="feature-icon group-icon"/>
+                        <div class="feature-icon group-icon">
+                            <group-icon/>
+                        </div>
                         <h3>Group Management</h3>
                         <p>Organize contributors into groups with shared permissions and expiration dates</p>
                     </motion>
@@ -78,7 +82,9 @@
                         :initial="{ opacity: 0, y: 100 }"
                         :visible-once="{ opacity: 1, y: 0 }"
                     >
-                        <div class="feature-icon token-icon"/>
+                        <div class="feature-icon token-icon">
+                            <token-icon/>
+                        </div>
                         <h3>Invite Tokens</h3>
                         <p>Generate QR codes and shareable links for seamless GitHub integration</p>
                     </motion>
@@ -218,6 +224,9 @@
 
 <script setup lang="ts">
 import CommonButton from '~/components/common/CommonButton.vue';
+import TokenIcon from '~/assets/icons/key.svg?component';
+import GroupIcon from '~/assets/icons/group.svg?component';
+import ScheduleIcon from '~/assets/icons/schedule.svg?component';
 
 const navigateToLogin = () => {
     navigateTo('/login');
@@ -424,8 +433,7 @@ const navigateToLogin = () => {
 
     // Features Section
     .features-section {
-        padding-right: 512px;
-        padding-left: 512px;
+        padding: 64px 512px;
     }
 
     .feature-cards {
@@ -486,6 +494,10 @@ const navigateToLogin = () => {
 
         background-color: varToRgba('primary500', 0.1);
 
+        svg {
+            width: 60px;
+        }
+
         &.time-icon {
             background-color: varToRgba('primary500', 0.5);
         }
@@ -501,6 +513,7 @@ const navigateToLogin = () => {
 
     // How It Works Section
     .how-it-works-section {
+        padding: 32px 0;
         background-color: $darkgray950;
     }
 

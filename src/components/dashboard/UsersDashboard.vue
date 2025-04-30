@@ -36,7 +36,9 @@
             <common-input-text v-model="newUser.email">Email</common-input-text>
         </template>
         <template #item="{ item }">
-            {{ item.name }}
+            <div class="user-dashboard-item">
+                <common-git-profile-pic :override-image="item.avatar_url"/> {{ item.name }} | {{ item.username }}
+            </div>
         </template>
     </basic-dashboard>
 </template>
@@ -133,6 +135,13 @@ function editUser(id: number) {
 </script>
 
 <style scoped lang="scss">
+.user-dashboard-item {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    align-items: center;
+}
+
 .git {
     &-top {
         display: flex;

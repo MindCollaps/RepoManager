@@ -104,7 +104,7 @@ import type { FetchingToken } from '~/types/fetch';
 import { TokenCookieName } from '~/types';
 
 definePageMeta({
-    layout: false,
+    layout: 'false',
 });
 
 const { loggedIn, user, openInPopup } = useUserSession();
@@ -189,25 +189,27 @@ onMounted(async () => {
     align-items: center;
     justify-content: center;
 
+    min-height: 70vh;
     margin-top: 64px;
 
-    min-height: 70vh;
-
     &-repos {
-        box-shadow: 5px 8px 5px $darkgray1000;
-        padding: 22px 32px;
-        border-radius: 8px;
-        background: $darkgray800;
-        gap: 8px;
         display: flex;
         flex-direction: column;
+        gap: 8px;
+
+        padding: 22px 32px;
+        border-radius: 8px;
+
+        background: $darkgray800;
+        box-shadow: 5px 8px 5px $darkgray1000;
 
         &-error {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
             gap: 8px;
+            align-items: center;
+            justify-content: center;
+
             font-size: 18px;
 
             p {

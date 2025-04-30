@@ -17,6 +17,11 @@ import { useRoute } from 'vue-router';
 import type { GitGroup, GitUser } from '@zenstackhq/runtime/models';
 import type { UpdateFactory } from '~/components/basic/BasicAddersHelper.vue';
 
+definePageMeta({
+    middleware: ['authenticated'],
+    layout: 'false',
+});
+
 const deleteUser = useDeleteManyGitUser();
 const updateUser = useUpdateGitUser();
 

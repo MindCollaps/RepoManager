@@ -1,37 +1,46 @@
 <template>
     <div class="dashboard">
         <div class="dashboard-side">
-            <common-button
-                v-for="(d, i) in dashboard"
-                :key="i"
-                :type="activeId === i ? 'primary' : 'transparent'"
-                @click="selectMenu(i)"
-            >
-                <template #default>
-                    {{ d.title }}
-                </template>
-                <template
-                    v-if="d.icon"
-                    #icon
+            <div class="dashboard-side-nav">
+                <common-button
+                    v-for="(d, i) in dashboard"
+                    :key="i"
+                    :type="activeId === i ? 'primary' : 'transparent'"
+                    @click="selectMenu(i)"
                 >
-                    <component :is="d.icon"/>
-                </template>
-            </common-button>
+                    <template #default>
+                        {{ d.title }}
+                    </template>
+                    <template
+                        v-if="d.icon"
+                        #icon
+                    >
+                        <component :is="d.icon"/>
+                    </template>
+                </common-button>
+            </div>
+            <div class="dashboard-side-menu">
+                <view-login/>
+            </div>
         </div>
         <template v-if="activeId >= 0 && activeId < dashboard.length">
-            <transition name="title">
-                <div
-                    :key="activeId"
-                    class="dashboard-top"
-                >
-                    <component
-                        :is="dashboard[activeId].icon"
-                        class="dashboard-top-icon"
-                    />{{ dashboard[activeId].title }}
-                </div>
-            </transition>
+            <div class="dashboard-top-wrap">
+                <transition name="title">
+                    <div
+                        :key="activeId"
+                        class="dashboard-top"
+                    >
+                        <component
+                            :is="dashboard[activeId].icon"
+                            class="dashboard-top-icon"
+                        />{{ dashboard[activeId].title }}
+                    </div>
+                </transition>
+            </div>
         </template>
-        <div class="dashboard-topside"/>
+        <div class="dashboard-topside">
+            Repo-Manager
+        </div>
         <div class="dashboard-content">
             <transition>
                 <component
@@ -47,9 +56,11 @@
 <script setup lang="ts">
 import CommonButton from '~/components/common/CommonButton.vue';
 import { useStore } from '~/store';
+import ViewLogin from '~/components/views/ViewLogin.vue';
 
 definePageMeta({
     middleware: ['authenticated'],
+    layout: 'false',
 });
 
 const store = useStore();
@@ -111,13 +122,11 @@ onMounted(() => {
 
 .dashboard {
     display: grid;
-    grid-template-columns: [side] 164px [content] auto;
+    grid-template-columns: [side] 200px [content] auto;
     grid-template-rows: [top] 64px [content] auto;
 
-    min-height: 80vh;
-    padding: 32px;
-
-    background: $darkgray900;
+    min-height: 100vh;
+    padding-top: 32px;
 
     &-side {
         display: flex;
@@ -125,13 +134,28 @@ onMounted(() => {
         grid-row: content;
         flex-direction: column;
         gap: 16px;
+        justify-content: space-between;
 
-        padding-right: 32px;
+        height: 100%;
+
+        &-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            padding-right: 32px;
+            padding-left: 32px;
+        }
+
+        &-menu {
+            background: $darkgray950;
+        }
     }
 
     &-topside {
         grid-column: side;
         grid-row: top;
+        padding-left: 32px;
         font-size: 22px;
     }
 
@@ -141,7 +165,13 @@ onMounted(() => {
         grid-row: top;
         gap: 8px;
         align-items: center;
-        justify-content: center;
+
+        width: fit-content;
+
+        &-wrap {
+            display: flex;
+            justify-content: center;
+        }
 
         &-icon {
             width: 32px;
@@ -149,9 +179,13 @@ onMounted(() => {
     }
 
     &-content {
+        overflow: hidden auto;
         grid-column: content;
         grid-row: content;
-        background: $darkgray850;
+
+        padding: 16px;
+
+        background: $darkgray900;
     }
 }
 </style>

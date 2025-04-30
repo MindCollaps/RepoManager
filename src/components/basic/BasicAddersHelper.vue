@@ -9,25 +9,7 @@
         <div class="adder-helper--list-wrap">
             <div class="adder-helper--list">
                 <template v-if="selectedData">
-                    <div
-                        v-for="(selected, selectedI) in selectedData"
-                        :key="selected.id"
-                        class="adder-helper--list-item"
-                    >
-                        <div
-                            class="adder-helper--list-item-label"
-                            :class="selectedData.length - 1 === selectedI ? 'adder-helper--list-item-label_last' : ''"
-                        >
-                            <div
-                                v-for="(displaying, displayingI) in factory.display"
-                                :key="displaying"
-                                class="adder-helper--adder-list-item-label"
-                                :class="factory.display.length - 1 === displayingI ? 'adder-helper--adder-list-item-label_last' : ''"
-                            >
-                                {{ selected[displaying] }}
-                            </div>
-                        </div>
-                    </div>
+                    {{ selectedData.length }} Selected
                 </template>
                 <template v-if="!selectedData || selectedData?.length === 0">
                     <div v-if="factory.data?.length === 0">

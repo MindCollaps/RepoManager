@@ -8,6 +8,7 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue';
 import GithubIcon from '~/assets/icons/github.svg';
 
 const props = defineProps({
@@ -17,7 +18,7 @@ const props = defineProps({
         type: String,
     },
     overrideImage: {
-        type: String,
+        type: String as PropType<string | undefined | null>,
     },
 });
 
@@ -26,7 +27,12 @@ const { session } = useUserSession();
 const avatarUri = shallowRef('');
 
 watch(() => props.overrideImage, newVal => {
-    avatarUri.value = newVal ? newVal : session.value?.avatar_url ?? GithubIcon;
+    if (newVal === null) {
+        avatarUri.value = GithubIcon;
+    }
+    else {
+        avatarUri.value = newVal ? newVal : session.value?.avatar_url ?? GithubIcon;
+    }
 }, { immediate: true });
 </script>
 
