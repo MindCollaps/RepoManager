@@ -5,8 +5,6 @@ services:
             dockerfile: .config/Dockerfile
         image: repomanager-1.0.0
         container_name: repomanager
-        ports:
-            - "3000:3000"
         healthcheck:
             test: "bash -c 'echo -n > /dev/tcp/127.0.0.1/8080'"
             interval: 1s
