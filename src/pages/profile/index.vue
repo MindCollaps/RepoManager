@@ -45,7 +45,7 @@ import ViewTheme from '~/components/views/ViewTheme.vue';
 const { loggedIn, user, clear } = useUserSession();
 
 definePageMeta({
-    layout: 'false',
+    layout: 'empty',
     middleware: ['authenticated'],
 });
 </script>

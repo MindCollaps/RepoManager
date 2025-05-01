@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 definePageMeta({
-    layout: 'false',
+    layout: 'empty',
 });
 
 // TODO: read msg parameter and display

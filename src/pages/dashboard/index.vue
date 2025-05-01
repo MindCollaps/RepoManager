@@ -60,7 +60,7 @@ import ViewLogin from '~/components/views/ViewLogin.vue';
 
 definePageMeta({
     middleware: ['authenticated'],
-    layout: 'false',
+    layout: 'empty',
 });
 
 const store = useStore();

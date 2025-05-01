@@ -104,7 +104,7 @@ import type { FetchingToken } from '~/types/fetch';
 import { TokenCookieName } from '~/types';
 
 definePageMeta({
-    layout: 'false',
+    layout: 'empty',
 });
 
 const { loggedIn, user, openInPopup } = useUserSession();
