@@ -8,6 +8,7 @@ COPY package.json yarn.lock ./
 RUN yarn install --immutable
 
 COPY prisma/ schema.zmodel ./
+RUN yarn zen
 
 COPY . .
 
