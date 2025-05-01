@@ -1,0 +1,8 @@
+FROM node:23-alpine3.20
+WORKDIR /app
+RUN corepack enable
+
+RUN apk add --no-cache curl
+
+ENV NODE_ENV=development
+ 

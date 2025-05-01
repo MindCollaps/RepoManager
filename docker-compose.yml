@@ -1,28 +1,22 @@
 services:
-    manager:
+    frontend:
         build:
             context: .
             dockerfile: .config/Dockerfile
         image: repomanager-1.0.0
-        container_name: repomanager
+        container_name: repomanager-frontend
+        entrypoint: sh -c
+        command: /app/.config/entrypoint/manager.sh
         healthcheck:
-            test: "bash -c 'echo -n > /dev/tcp/127.0.0.1/8080'"
+            test: ["CMD", "curl", "-f", "http://localhost:3000/api/check"]
             interval: 1s
             retries: 360
-        volumes:
-            - db:/app/db
 
     worker:
-        build:
-            context: .
-            dockerfile: .config/Dockerfile-worker
-        image: repomanager-worker-1.0.0
+        image: repomanager-1.0.0
         container_name: repomanager-worker
-        volumes:
-            - db:/app/db
+        entrypoint: sh -c
+        command: /app/.config/entrypoint/worker.sh
         depends_on:
-            manager:
-                condition: service_started
-
-volumes:
-    db:
+            frontend:
+                condition: service_healthy

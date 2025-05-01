@@ -1,22 +1,15 @@
-FROM node:23-alpine3.20 AS build
+FROM node:23-alpine3.20
 WORKDIR /app
 RUN corepack enable
+
+RUN apk add --no-cache curl
 
 COPY package.json yarn.lock ./
 RUN yarn install --immutable
 
+COPY prisma/ schema.zmodel ./
+
 COPY . .
 
-RUN ["yarn", "zenstack", "generate"]
-
 RUN yarn run build
-
-
-FROM node:23-alpine3.20
-
-WORKDIR /app
-
-COPY --from=build /app/.output/. .
-
-CMD ["node", "/app/server/index.mjs"]
  

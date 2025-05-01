@@ -1,0 +1,45 @@
+services:
+    frontend:
+        build:
+            dockerfile: .config/Dockerfile.dev
+        image: repomanager-dev-1.0.0
+        command: /app/.config/manager-dev.sh
+        expose:
+            - 8080
+            - 5555
+        ports:
+            - "8080:8080"
+            - "5555:5555"
+        volumes:
+            - ./:/app/
+        depends_on:
+            db:
+                condition: service_healthy
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:8080/api/check"]
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+
+    worker:
+        image: repomanager-dev-1.0.0
+        volumes:
+            - ./:/app/
+
+    db:
+        image: mysql
+        container_name: repomanager-db
+        cap_add:
+            - SYS_NICE
+        environment:
+            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_DATABASE=repomanager
+            - MYSQL_ROOT_PASSWORD=localhost
+        ports:
+            - '3306:3306'
+        healthcheck:
+            test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+            timeout: 5s
+            interval: 5s
+            retries: 40
+        volumes:
+            - ./db/mysql:/var/lib/mysql
