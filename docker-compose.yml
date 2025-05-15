@@ -11,6 +11,9 @@ services:
             test: ["CMD", "curl", "-f", "http://localhost:3000/api/check"]
             interval: 1s
             retries: 360
+        depends_on:
+            repomanager-db:
+                condition: service_healthy
 
     worker:
         image: repomanager-1.0.0
@@ -20,3 +23,19 @@ services:
         depends_on:
             frontend:
                 condition: service_healthy
+
+    repomanager-db:
+        image: mysql
+        container_name: repomanager-db
+        cap_add:
+            - SYS_NICE
+        healthcheck:
+            test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+            timeout: 5s
+            interval: 5s
+            retries: 40
+        volumes:
+            - mysql:/var/lib/mysql
+
+volumes:
+    mysql:
