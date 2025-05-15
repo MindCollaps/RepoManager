@@ -15,6 +15,7 @@
                 <common-input-text
                     v-model="newGroup.repoName"
                     @input="newGroup.confirmed = false"
+                    @keyup.enter="checkGit()"
                 >Repository
                     Name</common-input-text>
                 <common-button
@@ -55,18 +56,21 @@ import CommonCheckbox from '../common/CommonCheckbox.vue';
 import CommonDatePicker from '../common/CommonDatePicker.vue';
 import { useCreateGitGroup, useFindManyGitGroup } from '~~/lib/hooks';
 import BasicDashboard from '../basic/BasicDashboard.vue';
+import { useStore } from '~/store';
 
 const createGitGroup = useCreateGitGroup();
 const { data: gitGroups, refetch } = useFindManyGitGroup({});
 
 const { session } = useUserSession();
 
+const store = useStore();
+
 const defaultGroup = {
     expires: false,
     expiryDate: new Date(),
     deleteUsers: true,
     deleteSelf: true,
-    repoOwner: session.value?.user?.username ?? '',
+    repoOwner: store.user?.username ?? '',
     ownRepo: session.value?.user ? true : false,
     repoName: '',
     userId: session.value?.user?.userId,
@@ -108,7 +112,7 @@ async function createGroup() {
     else {
         try {
             if (newGroup.value.ownRepo) {
-                newGroup.value.repoOwner = session.value?.user?.username ?? '';
+                newGroup.value.repoOwner = store.user?.username ?? '';
             }
 
             await createGitGroup.mutateAsync({
@@ -144,14 +148,21 @@ async function createGroup() {
 
 async function checkGit() {
     const owner = newGroup.value.repoOwner === '' ? '' : `&owner=${ encodeURIComponent(newGroup.value.repoOwner) }`;
-    $fetch(`/api/v1/gh/repo?name=${ encodeURIComponent(newGroup.value.repoName) + owner }`).then(data => {
-        newGroup.value.confirmed = true;
-        newGroup.value.confirmStatus = true;
-    }).catch(error => {
-        alert(error.statusMessage);
-        newGroup.value.confirmed = true;
-        newGroup.value.confirmStatus = false;
-    });
+    $fetch(`/api/v1/gh/repo?name=${ encodeURIComponent(newGroup.value.repoName) + owner }`)
+        .then(data => {
+            newGroup.value.confirmed = true;
+            newGroup.value.confirmStatus = true;
+        })
+        .catch(async error => {
+            const errorData = error.data || error.response?._data;
+
+            console.log(JSON.stringify(errorData));
+
+            alert(errorData?.statusMessage || 'Unknown error occurred');
+
+            newGroup.value.confirmed = true;
+            newGroup.value.confirmStatus = false;
+        });
 }
 
 function editGroup(id: number) {

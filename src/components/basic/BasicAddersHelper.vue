@@ -72,7 +72,7 @@
 
 <script setup lang="ts" generic="T extends Record<string, unknown> & { id: number }">
 import type { PropType } from 'vue';
-import CommonButton from '../common/CommonButton.vue';
+import CommonButton from '~/components/common/CommonButton.vue';
 
 export interface UpdateFactory<T extends Record<string, any>> {
     updateFn: (args: {

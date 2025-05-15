@@ -29,3 +29,13 @@ export const TokenFetchInclude = {
 export type FetchingToken = Prisma.GroupInviteTokenGetPayload<{
     include: typeof TokenFetchInclude;
 }>;
+
+export const UserFetchSelect = {
+    avatar_url: true,
+    username: true,
+    hasInstallation: true,
+};
+
+export type FetchingUser = Prisma.UserGetPayload<{
+    select: typeof UserFetchSelect;
+}>;

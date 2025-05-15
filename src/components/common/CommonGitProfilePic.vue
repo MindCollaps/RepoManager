@@ -10,6 +10,7 @@
 <script setup lang="ts">
 import type { PropType } from 'vue';
 import GithubIcon from '~/assets/icons/github.svg';
+import { useStore } from '~/store';
 
 const props = defineProps({
     width: {
@@ -22,18 +23,9 @@ const props = defineProps({
     },
 });
 
-const { session } = useUserSession();
+const store = useStore();
 
-const avatarUri = shallowRef('');
-
-watch(() => props.overrideImage, newVal => {
-    if (newVal === null) {
-        avatarUri.value = GithubIcon;
-    }
-    else {
-        avatarUri.value = newVal ? newVal : session.value?.avatar_url ?? GithubIcon;
-    }
-}, { immediate: true });
+const avatarUri = computed(() => props.overrideImage ?? store.user?.avatar_url ?? GithubIcon);
 </script>
 
 <style scoped lang="scss">

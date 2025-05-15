@@ -19,11 +19,15 @@ services:
             test: ["CMD", "curl", "-f", "http://localhost:8080/api/check"]
         extra_hosts:
             - "host.docker.internal:host-gateway"
+        environment:
+            - DATABASE_URL=mysql://root:localhost@repomanager-db:3306/repomanager
 
     worker:
         image: repomanager-dev-1.0.0
         volumes:
             - ./:/app/
+        environment:
+            - DATABASE_URL=mysql://root:localhost@repomanager-db:3306/repomanager
 
     db:
         image: mysql

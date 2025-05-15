@@ -6,4 +6,8 @@
 definePageMeta({
     layout: 'empty',
 });
+
+onMounted(() => {
+    window.close();
+});
 </script>

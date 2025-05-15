@@ -1,33 +1,22 @@
 import { prisma } from '~/server/prisma';
+import { UserFetchSelect } from '~/types/fetch';
 
 export default defineEventHandler(async event => {
-    const session = await requireUserSession(event);
+    const session = await requireUserSession(event).then(session => session).catch();
 
     if (!session.user?.userId) {
         throw createError({
-            statusCode: 401, // Changed from 400 to 401 Unauthorized
+            statusCode: 401,
             statusMessage: 'Not authenticated',
         });
     }
 
-    try {
-        const gitUsers = await prisma.gitUser.findMany({
-            where: {
-                owners: {
-                    some: {
-                        ownerId: session.user.userId,
-                    },
-                },
-            },
-        });
+    const dbUser = await prisma.user.findUnique({
+        where: {
+            git_id: session.secure?.githubId,
+        },
+        select: UserFetchSelect,
+    });
 
-        return gitUsers || [];
-    }
-    catch (error) {
-        console.error('Error fetching GitUsers:', error);
-        throw createError({
-            statusCode: 500,
-            statusMessage: 'Internal server error',
-        });
-    }
+    return dbUser;
 });

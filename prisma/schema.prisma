@@ -13,23 +13,30 @@ generator client {
 }
 
 model User {
-  id                Int                @id() @default(autoincrement())
-  email             String             @unique()
-  name              String?
-  username          String?
-  git_access_token  String?
-  created           DateTime           @default(now())
-  avatar_url        String?
-  notifications     Notification[]
-  groupInviteTokens GroupInviteToken[]
-  ownedGitUsers     GitUserOwner[]
-  ownedGitGroups    GitGroupOwner[]
+  id                  Int                @id() @default(autoincrement())
+  email               String?
+  name                String?
+  username            String?
+  git_id              Int?               @unique()
+  git_access_token    String?
+  git_refresh_token   String?
+  git_token_expires   DateTime?
+  git_refresh_expires DateTime?
+  created             DateTime           @default(now())
+  avatar_url          String?
+  hasInstallation     Boolean            @default(false)
+  installationId      Int?
+  notifications       Notification[]
+  groupInviteTokens   GroupInviteToken[]
+  ownedGitUsers       GitUserOwner[]
+  ownedGitGroups      GitGroupOwner[]
 }
 
 model GitUser {
   id               Int                     @id() @default(autoincrement())
   git_access_token String?
-  email            String                  @unique()
+  git_id           Int?                    @unique()
+  email            String?                 @unique()
   username         String
   name             String
   created          DateTime                @default(now())

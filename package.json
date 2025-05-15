@@ -22,7 +22,10 @@
     "zen": "yarn zenstack format && yarn zenstack generate",
     "zen-push": "yarn zen && yarn db-push",
     "zen-drop": "yarn zen && yarn db-drop",
-    "docker": "sudo docker compose -f docker-compose.yml -f .config/docker-compose.dev.yml up",
+    "docker-cmd": "sudo docker compose -f docker-compose.yml -f .config/docker-compose.dev.yml",
+    "docker": "yarn docker-cmd up",
+    "docker-down": "yarn docker-cmd down",
+    "dockerd": "yarn docker -d",
     "docker-build": "yarn docker --build"
   },
   "dependencies": {

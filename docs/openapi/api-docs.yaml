@@ -187,6 +187,46 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_id]
+          required: false
+          description: Equality filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lt]
+          required: false
+          description: Less-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lte]
+          required: false
+          description: Less-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gt]
+          required: false
+          description: Greater-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gte]
+          required: false
+          description: Greater-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[git_access_token]
           required: false
           description: Equality filter for "git_access_token"
@@ -235,6 +275,144 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_refresh_token]
+          required: false
+          description: Equality filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$contains]
+          required: false
+          description: String contains filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$icontains]
+          required: false
+          description: String case-insensitive contains filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$search]
+          required: false
+          description: String full-text search filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$startsWith]
+          required: false
+          description: String startsWith filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$endsWith]
+          required: false
+          description: String endsWith filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_token_expires]
+          required: false
+          description: Equality filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$lt]
+          required: false
+          description: Less-than filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$lte]
+          required: false
+          description: Less-than or equal filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$gt]
+          required: false
+          description: Greater-than filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$gte]
+          required: false
+          description: Greater-than or equal filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires]
+          required: false
+          description: Equality filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$lt]
+          required: false
+          description: Less-than filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$lte]
+          required: false
+          description: Less-than or equal filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$gt]
+          required: false
+          description: Greater-than filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$gte]
+          required: false
+          description: Greater-than or equal filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[created]
           required: false
           description: Equality filter for "created"
@@ -328,6 +506,54 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[hasInstallation]
+          required: false
+          description: Equality filter for "hasInstallation"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: boolean
+        - name: filter[installationId]
+          required: false
+          description: Equality filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$lt]
+          required: false
+          description: Less-than filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$lte]
+          required: false
+          description: Less-than or equal filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$gt]
+          required: false
+          description: Greater-than filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$gte]
+          required: false
+          description: Greater-than or equal filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[notifications]
           required: false
           description: Equality filter for "notifications"
@@ -698,6 +924,46 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_id]
+          required: false
+          description: Equality filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lt]
+          required: false
+          description: Less-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lte]
+          required: false
+          description: Less-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gt]
+          required: false
+          description: Greater-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gte]
+          required: false
+          description: Greater-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[git_access_token]
           required: false
           description: Equality filter for "git_access_token"
@@ -746,6 +1012,144 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_refresh_token]
+          required: false
+          description: Equality filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$contains]
+          required: false
+          description: String contains filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$icontains]
+          required: false
+          description: String case-insensitive contains filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$search]
+          required: false
+          description: String full-text search filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$startsWith]
+          required: false
+          description: String startsWith filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$endsWith]
+          required: false
+          description: String endsWith filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_token_expires]
+          required: false
+          description: Equality filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$lt]
+          required: false
+          description: Less-than filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$lte]
+          required: false
+          description: Less-than or equal filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$gt]
+          required: false
+          description: Greater-than filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$gte]
+          required: false
+          description: Greater-than or equal filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires]
+          required: false
+          description: Equality filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$lt]
+          required: false
+          description: Less-than filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$lte]
+          required: false
+          description: Less-than or equal filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$gt]
+          required: false
+          description: Greater-than filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$gte]
+          required: false
+          description: Greater-than or equal filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[created]
           required: false
           description: Equality filter for "created"
@@ -839,6 +1243,54 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[hasInstallation]
+          required: false
+          description: Equality filter for "hasInstallation"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: boolean
+        - name: filter[installationId]
+          required: false
+          description: Equality filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$lt]
+          required: false
+          description: Less-than filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$lte]
+          required: false
+          description: Less-than or equal filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$gt]
+          required: false
+          description: Greater-than filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$gte]
+          required: false
+          description: Greater-than or equal filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[notifications]
           required: false
           description: Equality filter for "notifications"
@@ -1061,6 +1513,46 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_id]
+          required: false
+          description: Equality filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lt]
+          required: false
+          description: Less-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lte]
+          required: false
+          description: Less-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gt]
+          required: false
+          description: Greater-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gte]
+          required: false
+          description: Greater-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[git_access_token]
           required: false
           description: Equality filter for "git_access_token"
@@ -1109,6 +1601,144 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_refresh_token]
+          required: false
+          description: Equality filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$contains]
+          required: false
+          description: String contains filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$icontains]
+          required: false
+          description: String case-insensitive contains filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$search]
+          required: false
+          description: String full-text search filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$startsWith]
+          required: false
+          description: String startsWith filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$endsWith]
+          required: false
+          description: String endsWith filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_token_expires]
+          required: false
+          description: Equality filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$lt]
+          required: false
+          description: Less-than filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$lte]
+          required: false
+          description: Less-than or equal filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$gt]
+          required: false
+          description: Greater-than filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$gte]
+          required: false
+          description: Greater-than or equal filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires]
+          required: false
+          description: Equality filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$lt]
+          required: false
+          description: Less-than filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$lte]
+          required: false
+          description: Less-than or equal filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$gt]
+          required: false
+          description: Greater-than filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$gte]
+          required: false
+          description: Greater-than or equal filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[created]
           required: false
           description: Equality filter for "created"
@@ -1202,6 +1832,54 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[hasInstallation]
+          required: false
+          description: Equality filter for "hasInstallation"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: boolean
+        - name: filter[installationId]
+          required: false
+          description: Equality filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$lt]
+          required: false
+          description: Less-than filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$lte]
+          required: false
+          description: Less-than or equal filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$gt]
+          required: false
+          description: Greater-than filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$gte]
+          required: false
+          description: Greater-than or equal filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[notifications]
           required: false
           description: Equality filter for "notifications"
@@ -1518,6 +2196,46 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_id]
+          required: false
+          description: Equality filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lt]
+          required: false
+          description: Less-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lte]
+          required: false
+          description: Less-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gt]
+          required: false
+          description: Greater-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gte]
+          required: false
+          description: Greater-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[git_access_token]
           required: false
           description: Equality filter for "git_access_token"
@@ -1566,6 +2284,144 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_refresh_token]
+          required: false
+          description: Equality filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$contains]
+          required: false
+          description: String contains filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$icontains]
+          required: false
+          description: String case-insensitive contains filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$search]
+          required: false
+          description: String full-text search filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$startsWith]
+          required: false
+          description: String startsWith filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$endsWith]
+          required: false
+          description: String endsWith filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_token_expires]
+          required: false
+          description: Equality filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$lt]
+          required: false
+          description: Less-than filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$lte]
+          required: false
+          description: Less-than or equal filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$gt]
+          required: false
+          description: Greater-than filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$gte]
+          required: false
+          description: Greater-than or equal filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires]
+          required: false
+          description: Equality filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$lt]
+          required: false
+          description: Less-than filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$lte]
+          required: false
+          description: Less-than or equal filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$gt]
+          required: false
+          description: Greater-than filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$gte]
+          required: false
+          description: Greater-than or equal filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[created]
           required: false
           description: Equality filter for "created"
@@ -1659,6 +2515,54 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[hasInstallation]
+          required: false
+          description: Equality filter for "hasInstallation"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: boolean
+        - name: filter[installationId]
+          required: false
+          description: Equality filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$lt]
+          required: false
+          description: Less-than filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$lte]
+          required: false
+          description: Less-than or equal filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$gt]
+          required: false
+          description: Greater-than filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$gte]
+          required: false
+          description: Greater-than or equal filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[notifications]
           required: false
           description: Equality filter for "notifications"
@@ -1881,6 +2785,46 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_id]
+          required: false
+          description: Equality filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lt]
+          required: false
+          description: Less-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lte]
+          required: false
+          description: Less-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gt]
+          required: false
+          description: Greater-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gte]
+          required: false
+          description: Greater-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[git_access_token]
           required: false
           description: Equality filter for "git_access_token"
@@ -1929,6 +2873,144 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_refresh_token]
+          required: false
+          description: Equality filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$contains]
+          required: false
+          description: String contains filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$icontains]
+          required: false
+          description: String case-insensitive contains filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$search]
+          required: false
+          description: String full-text search filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$startsWith]
+          required: false
+          description: String startsWith filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$endsWith]
+          required: false
+          description: String endsWith filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_token_expires]
+          required: false
+          description: Equality filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$lt]
+          required: false
+          description: Less-than filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$lte]
+          required: false
+          description: Less-than or equal filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$gt]
+          required: false
+          description: Greater-than filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$gte]
+          required: false
+          description: Greater-than or equal filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires]
+          required: false
+          description: Equality filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$lt]
+          required: false
+          description: Less-than filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$lte]
+          required: false
+          description: Less-than or equal filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$gt]
+          required: false
+          description: Greater-than filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$gte]
+          required: false
+          description: Greater-than or equal filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[created]
           required: false
           description: Equality filter for "created"
@@ -2022,6 +3104,54 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[hasInstallation]
+          required: false
+          description: Equality filter for "hasInstallation"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: boolean
+        - name: filter[installationId]
+          required: false
+          description: Equality filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$lt]
+          required: false
+          description: Less-than filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$lte]
+          required: false
+          description: Less-than or equal filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$gt]
+          required: false
+          description: Greater-than filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$gte]
+          required: false
+          description: Greater-than or equal filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[notifications]
           required: false
           description: Equality filter for "notifications"
@@ -2338,6 +3468,46 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_id]
+          required: false
+          description: Equality filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lt]
+          required: false
+          description: Less-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lte]
+          required: false
+          description: Less-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gt]
+          required: false
+          description: Greater-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gte]
+          required: false
+          description: Greater-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[git_access_token]
           required: false
           description: Equality filter for "git_access_token"
@@ -2386,6 +3556,144 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_refresh_token]
+          required: false
+          description: Equality filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$contains]
+          required: false
+          description: String contains filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$icontains]
+          required: false
+          description: String case-insensitive contains filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$search]
+          required: false
+          description: String full-text search filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$startsWith]
+          required: false
+          description: String startsWith filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$endsWith]
+          required: false
+          description: String endsWith filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_token_expires]
+          required: false
+          description: Equality filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$lt]
+          required: false
+          description: Less-than filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$lte]
+          required: false
+          description: Less-than or equal filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$gt]
+          required: false
+          description: Greater-than filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$gte]
+          required: false
+          description: Greater-than or equal filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires]
+          required: false
+          description: Equality filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$lt]
+          required: false
+          description: Less-than filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$lte]
+          required: false
+          description: Less-than or equal filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$gt]
+          required: false
+          description: Greater-than filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$gte]
+          required: false
+          description: Greater-than or equal filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[created]
           required: false
           description: Equality filter for "created"
@@ -2479,6 +3787,54 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[hasInstallation]
+          required: false
+          description: Equality filter for "hasInstallation"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: boolean
+        - name: filter[installationId]
+          required: false
+          description: Equality filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$lt]
+          required: false
+          description: Less-than filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$lte]
+          required: false
+          description: Less-than or equal filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$gt]
+          required: false
+          description: Greater-than filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$gte]
+          required: false
+          description: Greater-than or equal filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[notifications]
           required: false
           description: Equality filter for "notifications"
@@ -2701,6 +4057,46 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_id]
+          required: false
+          description: Equality filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lt]
+          required: false
+          description: Less-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lte]
+          required: false
+          description: Less-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gt]
+          required: false
+          description: Greater-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gte]
+          required: false
+          description: Greater-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[git_access_token]
           required: false
           description: Equality filter for "git_access_token"
@@ -2749,6 +4145,144 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_refresh_token]
+          required: false
+          description: Equality filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$contains]
+          required: false
+          description: String contains filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$icontains]
+          required: false
+          description: String case-insensitive contains filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$search]
+          required: false
+          description: String full-text search filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$startsWith]
+          required: false
+          description: String startsWith filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$endsWith]
+          required: false
+          description: String endsWith filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_token_expires]
+          required: false
+          description: Equality filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$lt]
+          required: false
+          description: Less-than filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$lte]
+          required: false
+          description: Less-than or equal filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$gt]
+          required: false
+          description: Greater-than filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$gte]
+          required: false
+          description: Greater-than or equal filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires]
+          required: false
+          description: Equality filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$lt]
+          required: false
+          description: Less-than filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$lte]
+          required: false
+          description: Less-than or equal filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$gt]
+          required: false
+          description: Greater-than filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$gte]
+          required: false
+          description: Greater-than or equal filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[created]
           required: false
           description: Equality filter for "created"
@@ -2842,6 +4376,54 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[hasInstallation]
+          required: false
+          description: Equality filter for "hasInstallation"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: boolean
+        - name: filter[installationId]
+          required: false
+          description: Equality filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$lt]
+          required: false
+          description: Less-than filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$lte]
+          required: false
+          description: Less-than or equal filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$gt]
+          required: false
+          description: Greater-than filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$gte]
+          required: false
+          description: Greater-than or equal filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[notifications]
           required: false
           description: Equality filter for "notifications"
@@ -3158,6 +4740,46 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_id]
+          required: false
+          description: Equality filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lt]
+          required: false
+          description: Less-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lte]
+          required: false
+          description: Less-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gt]
+          required: false
+          description: Greater-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gte]
+          required: false
+          description: Greater-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[git_access_token]
           required: false
           description: Equality filter for "git_access_token"
@@ -3206,6 +4828,144 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_refresh_token]
+          required: false
+          description: Equality filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$contains]
+          required: false
+          description: String contains filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$icontains]
+          required: false
+          description: String case-insensitive contains filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$search]
+          required: false
+          description: String full-text search filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$startsWith]
+          required: false
+          description: String startsWith filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$endsWith]
+          required: false
+          description: String endsWith filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_token_expires]
+          required: false
+          description: Equality filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$lt]
+          required: false
+          description: Less-than filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$lte]
+          required: false
+          description: Less-than or equal filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$gt]
+          required: false
+          description: Greater-than filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$gte]
+          required: false
+          description: Greater-than or equal filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires]
+          required: false
+          description: Equality filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$lt]
+          required: false
+          description: Less-than filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$lte]
+          required: false
+          description: Less-than or equal filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$gt]
+          required: false
+          description: Greater-than filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$gte]
+          required: false
+          description: Greater-than or equal filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[created]
           required: false
           description: Equality filter for "created"
@@ -3299,6 +5059,54 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[hasInstallation]
+          required: false
+          description: Equality filter for "hasInstallation"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: boolean
+        - name: filter[installationId]
+          required: false
+          description: Equality filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$lt]
+          required: false
+          description: Less-than filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$lte]
+          required: false
+          description: Less-than or equal filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$gt]
+          required: false
+          description: Greater-than filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$gte]
+          required: false
+          description: Greater-than or equal filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[notifications]
           required: false
           description: Equality filter for "notifications"
@@ -3521,6 +5329,46 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_id]
+          required: false
+          description: Equality filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lt]
+          required: false
+          description: Less-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lte]
+          required: false
+          description: Less-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gt]
+          required: false
+          description: Greater-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gte]
+          required: false
+          description: Greater-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[git_access_token]
           required: false
           description: Equality filter for "git_access_token"
@@ -3569,6 +5417,144 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_refresh_token]
+          required: false
+          description: Equality filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$contains]
+          required: false
+          description: String contains filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$icontains]
+          required: false
+          description: String case-insensitive contains filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$search]
+          required: false
+          description: String full-text search filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$startsWith]
+          required: false
+          description: String startsWith filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_refresh_token$endsWith]
+          required: false
+          description: String endsWith filter for "git_refresh_token"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: filter[git_token_expires]
+          required: false
+          description: Equality filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$lt]
+          required: false
+          description: Less-than filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$lte]
+          required: false
+          description: Less-than or equal filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$gt]
+          required: false
+          description: Greater-than filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_token_expires$gte]
+          required: false
+          description: Greater-than or equal filter for "git_token_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires]
+          required: false
+          description: Equality filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$lt]
+          required: false
+          description: Less-than filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$lte]
+          required: false
+          description: Less-than or equal filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$gt]
+          required: false
+          description: Greater-than filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[git_refresh_expires$gte]
+          required: false
+          description: Greater-than or equal filter for "git_refresh_expires"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[created]
           required: false
           description: Equality filter for "created"
@@ -3662,6 +5648,54 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[hasInstallation]
+          required: false
+          description: Equality filter for "hasInstallation"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: boolean
+        - name: filter[installationId]
+          required: false
+          description: Equality filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$lt]
+          required: false
+          description: Less-than filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$lte]
+          required: false
+          description: Less-than or equal filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$gt]
+          required: false
+          description: Greater-than filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[installationId$gte]
+          required: false
+          description: Greater-than or equal filter for "installationId"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[notifications]
           required: false
           description: Equality filter for "notifications"
@@ -3881,6 +5915,46 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_id]
+          required: false
+          description: Equality filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lt]
+          required: false
+          description: Less-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lte]
+          required: false
+          description: Less-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gt]
+          required: false
+          description: Greater-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gte]
+          required: false
+          description: Greater-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[email]
           required: false
           description: Equality filter for "email"
@@ -4390,6 +6464,46 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_id]
+          required: false
+          description: Equality filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lt]
+          required: false
+          description: Less-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lte]
+          required: false
+          description: Less-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gt]
+          required: false
+          description: Greater-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gte]
+          required: false
+          description: Greater-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[email]
           required: false
           description: Equality filter for "email"
@@ -4751,6 +6865,46 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_id]
+          required: false
+          description: Equality filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lt]
+          required: false
+          description: Less-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lte]
+          required: false
+          description: Less-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gt]
+          required: false
+          description: Greater-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gte]
+          required: false
+          description: Greater-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[email]
           required: false
           description: Equality filter for "email"
@@ -5206,6 +7360,46 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_id]
+          required: false
+          description: Equality filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lt]
+          required: false
+          description: Less-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lte]
+          required: false
+          description: Less-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gt]
+          required: false
+          description: Greater-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gte]
+          required: false
+          description: Greater-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[email]
           required: false
           description: Equality filter for "email"
@@ -5567,6 +7761,46 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_id]
+          required: false
+          description: Equality filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lt]
+          required: false
+          description: Less-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lte]
+          required: false
+          description: Less-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gt]
+          required: false
+          description: Greater-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gte]
+          required: false
+          description: Greater-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[email]
           required: false
           description: Equality filter for "email"
@@ -6022,6 +8256,46 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_id]
+          required: false
+          description: Equality filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lt]
+          required: false
+          description: Less-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lte]
+          required: false
+          description: Less-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gt]
+          required: false
+          description: Greater-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gte]
+          required: false
+          description: Greater-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[email]
           required: false
           description: Equality filter for "email"
@@ -6383,6 +8657,46 @@ paths:
           explode: false
           schema:
             type: string
+        - name: filter[git_id]
+          required: false
+          description: Equality filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lt]
+          required: false
+          description: Less-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$lte]
+          required: false
+          description: Less-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gt]
+          required: false
+          description: Greater-than filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
+        - name: filter[git_id$gte]
+          required: false
+          description: Greater-than or equal filter for "git_id"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: integer
         - name: filter[email]
           required: false
           description: Equality filter for "email"
@@ -14361,12 +16675,20 @@ components:
             - email
             - name
             - username
+            - git_id
             - git_access_token
+            - git_refresh_token
+            - git_token_expires
+            - git_refresh_expires
             - created
             - avatar_url
+            - hasInstallation
+            - installationId
           properties:
             email:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
             name:
               oneOf:
                 - type: "null"
@@ -14375,10 +16697,28 @@ components:
               oneOf:
                 - type: "null"
                 - type: string
+            git_id:
+              oneOf:
+                - type: "null"
+                - type: integer
             git_access_token:
               oneOf:
                 - type: "null"
                 - type: string
+            git_refresh_token:
+              oneOf:
+                - type: "null"
+                - type: string
+            git_token_expires:
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
+            git_refresh_expires:
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             created:
               type: string
               format: date-time
@@ -14386,6 +16726,12 @@ components:
               oneOf:
                 - type: "null"
                 - type: string
+            hasInstallation:
+              type: boolean
+            installationId:
+              oneOf:
+                - type: "null"
+                - type: integer
         relationships:
           type: object
           properties:
@@ -14414,11 +16760,11 @@ components:
               type: string
             attributes:
               type: object
-              required:
-                - email
               properties:
                 email:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 name:
                   oneOf:
                     - type: "null"
@@ -14427,10 +16773,28 @@ components:
                   oneOf:
                     - type: "null"
                     - type: string
+                git_id:
+                  oneOf:
+                    - type: "null"
+                    - type: integer
                 git_access_token:
                   oneOf:
                     - type: "null"
                     - type: string
+                git_refresh_token:
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                git_token_expires:
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
+                git_refresh_expires:
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 created:
                   type: string
                   format: date-time
@@ -14438,6 +16802,12 @@ components:
                   oneOf:
                     - type: "null"
                     - type: string
+                hasInstallation:
+                  type: boolean
+                installationId:
+                  oneOf:
+                    - type: "null"
+                    - type: integer
             relationships:
               type: object
               properties:
@@ -14473,7 +16843,9 @@ components:
               type: object
               properties:
                 email:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 name:
                   oneOf:
                     - type: "null"
@@ -14482,10 +16854,28 @@ components:
                   oneOf:
                     - type: "null"
                     - type: string
+                git_id:
+                  oneOf:
+                    - type: "null"
+                    - type: integer
                 git_access_token:
                   oneOf:
                     - type: "null"
                     - type: string
+                git_refresh_token:
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                git_token_expires:
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
+                git_refresh_expires:
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 created:
                   type: string
                   format: date-time
@@ -14493,6 +16883,12 @@ components:
                   oneOf:
                     - type: "null"
                     - type: string
+                hasInstallation:
+                  type: boolean
+                installationId:
+                  oneOf:
+                    - type: "null"
+                    - type: integer
             relationships:
               type: object
               properties:
@@ -14583,6 +16979,7 @@ components:
           type: object
           required:
             - git_access_token
+            - git_id
             - email
             - username
             - name
@@ -14594,8 +16991,14 @@ components:
               oneOf:
                 - type: "null"
                 - type: string
+            git_id:
+              oneOf:
+                - type: "null"
+                - type: integer
             email:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
             username:
               type: string
             name:
@@ -14638,7 +17041,6 @@ components:
             attributes:
               type: object
               required:
-                - email
                 - username
                 - name
               properties:
@@ -14646,8 +17048,14 @@ components:
                   oneOf:
                     - type: "null"
                     - type: string
+                git_id:
+                  oneOf:
+                    - type: "null"
+                    - type: integer
                 email:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 username:
                   type: string
                 name:
@@ -14699,8 +17107,14 @@ components:
                   oneOf:
                     - type: "null"
                     - type: string
+                git_id:
+                  oneOf:
+                    - type: "null"
+                    - type: integer
                 email:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 username:
                   type: string
                 name:

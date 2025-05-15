@@ -5,7 +5,7 @@
     >
         <div class="profile-hello">
             <common-git-profile-pic width="128px"/>
-            <h1>Welcome {{ user?.username }}</h1>
+            <h1>Welcome {{ store.user?.username }}</h1>
         </div>
         <common-button
             href="/dashboard"
@@ -18,6 +18,7 @@
             </template>
         </common-button>
         <view-theme/>
+        <view-installation-status/>
         <common-button
             type="secondary"
             width="128px"
@@ -30,6 +31,17 @@
     >
         <h1>You are not logged in!</h1>
         <common-button
+            href="/"
+            width="128px"
+        >
+            <template #default>
+                Home
+            </template>
+            <template #icon>
+                <home-icon/>
+            </template>
+        </common-button>
+        <common-button
             href="/login"
             width="128px"
         >Login</common-button>
@@ -41,8 +53,12 @@ import CommonButton from '~/components/common/CommonButton.vue';
 import CommonGitProfilePic from '~/components/common/CommonGitProfilePic.vue';
 import HomeIcon from '~/assets/icons/home.svg?component';
 import ViewTheme from '~/components/views/ViewTheme.vue';
+import ViewInstallationStatus from '~/components/views/ViewInstallationStatus.vue';
+import { useStore } from '~/store';
 
-const { loggedIn, user, clear } = useUserSession();
+const store = useStore();
+
+const { loggedIn, clear } = useUserSession();
 
 definePageMeta({
     layout: 'empty',

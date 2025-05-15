@@ -1500,7 +1500,7 @@
 
 "@octokit/auth-app@^7.2.1":
   version "7.2.1"
-  resolved "https://registry.npmjs.org/@octokit/auth-app/-/auth-app-7.2.1.tgz"
+  resolved "https://registry.yarnpkg.com/@octokit/auth-app/-/auth-app-7.2.1.tgz#ed3d3ae487c5b42db88b10e95175d1a8a8965cbf"
   integrity sha512-4jaopCVOtWN0V8qCx/1s2pkRqC6tcvIQM3kFB99eIpsP53GfsoIKO08D94b83n/V3iGihHmxWR2lXzE0NicUGg==
   dependencies:
     "@octokit/auth-oauth-app" "^8.1.4"

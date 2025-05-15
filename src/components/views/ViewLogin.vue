@@ -12,7 +12,7 @@
         >
             <template #default>
                 <div class="loggedin-view">
-                    {{ user?.username }}
+                    {{ store.user?.username }}
                     <div
                         v-if="notifications !== 0"
                         v-motion
@@ -47,8 +47,11 @@ import CommonButton from '~/components/common/CommonButton.vue';
 import CommonGitProfilePic from '../common/CommonGitProfilePic.vue';
 import { useCountNotification } from '~~/lib/hooks';
 import CommonLoader from '../common/CommonLoader.vue';
+import { useStore } from '~/store';
 
 const ready = ref(false);
+
+const store = useStore();
 
 const { loggedIn, user } = useUserSession();
 const { data: notifications } = useCountNotification({

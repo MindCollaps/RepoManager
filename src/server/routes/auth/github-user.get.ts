@@ -5,6 +5,7 @@ export default defineOAuthGitHubEventHandler({
     config: {
         emailRequired: true,
         scope: [],
+        redirectURL: process.env.PUBLIC_FQDN + '/auth/github-user',
     },
     async onSuccess(event, { user, tokens }) {
         if (!user.email) {
@@ -73,6 +74,7 @@ export default defineOAuthGitHubEventHandler({
                     name: user.name ?? 'No Name Provided',
                     git_access_token: tokens.access_token,
                     avatar_url: user.avatar_url,
+                    git_id: user.id,
                     groups: {
                         createMany: {
                             data: token.groups.map(x => ({ groupId: x.groupId, repoState: 0 })),
@@ -104,14 +106,13 @@ export default defineOAuthGitHubEventHandler({
 
         await setUserSession(event, {
             user: {
-                username: user.login,
                 logon: new Date(Date.now()),
                 userId: dbUser.id,
                 isUser: false,
             },
-            avatar_url: user.avatar_url,
             secure: {
-                email: user.email,
+                githubId: user.id,
+                userId: dbUser.id,
             },
         });
 

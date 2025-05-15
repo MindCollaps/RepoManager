@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-        <h1 v-if="isLoggedinUser">Welcome {{ user?.username }}!</h1>
+        <h1 v-if="isLoggedinUser">Welcome {{ store.user?.username }}!</h1>
         <h2 v-else>Login and give Access</h2>
         <common-button
             href="/"
@@ -22,7 +22,7 @@
             v-else
             type="secondary"
             width="256px"
-            @click="openInPopup('/auth/github')"
+            @click="openInPopup('/forgery/github')"
         >
             <template #default>
                 Login with GitHub
@@ -38,8 +38,12 @@
 import CommonButton from '~/components/common/CommonButton.vue';
 import GithubIcon from '/assets/icons/github.svg?component';
 import HomeIcon from 'assets/icons/home.svg?component';
+import { useStore } from '~/store';
+import { openInPopup } from '~/composables/frontend';
 
-const { loggedIn, user, clear, openInPopup } = useUserSession();
+const store = useStore();
+
+const { loggedIn, user, clear } = useUserSession();
 
 const wasLoggedIn = ref(loggedIn.value);
 

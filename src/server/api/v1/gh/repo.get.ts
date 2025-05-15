@@ -1,15 +1,29 @@
-import type { Octokit } from 'octokit';
-import requireGithub from '~/server/requirements/github';
 import { z } from 'zod';
+import { prisma } from '~/server/prisma';
+import { getInstallationById } from '~/utils/github';
 
 const QuerySchema = z.object({
     name: z.string(),
-    owner: z.string().optional(),
+    owner: z.string(),
 });
-export default defineEventHandler(async event => {
-    const query = await getValidatedQuery(event, query => QuerySchema.safeParse(query));
 
+export default defineEventHandler(async event => {
     const session = await requireUserSession(event);
+
+    const user = await prisma.user.findUnique({
+        where: {
+            git_id: session.secure?.githubId,
+        },
+    });
+
+    if (!user || !user.username) {
+        throw createError({
+            statusCode: 400,
+            statusMessage: 'Request invalid!',
+        });
+    }
+
+    const query = await getValidatedQuery(event, query => QuerySchema.safeParse(query));
 
     if (!query.success) {
         throw createError({
@@ -18,18 +32,22 @@ export default defineEventHandler(async event => {
         });
     }
 
-    await requireGithub(event);
-    const octo: Octokit = event.context.octo;
+    const owner = query.data.owner;
 
-    let owner = query.data.owner;
-    if (!owner || owner.length === 0) {
-        owner = session.user.username;
+    if (!user.installationId) {
+        throw createError({
+            statusCode: 400,
+            statusMessage: 'Installation invalid!',
+        });
     }
+
+    const octo = await getInstallationById(user.installationId);
 
     const repo = await octo.rest.repos.get({
         owner: owner,
         repo: query.data.name,
     }).catch(error => {
+        console.error(error);
         throw createError({
             statusCode: 404,
             statusMessage: 'Repo not found',
@@ -39,8 +57,9 @@ export default defineEventHandler(async event => {
     const { data } = await octo.rest.repos.getCollaboratorPermissionLevel({
         owner: owner,
         repo: query.data.name,
-        username: session.user.username,
+        username: user.username,
     }).catch(error => {
+        console.error(`Error in Requesting CollaboratorPermissionLevel\n${ JSON.stringify(error) }`);
         throw createError({
             statusCode: 401,
             statusMessage: 'Insufficent permissions on repository',

@@ -23,17 +23,23 @@ plugin hooks {
 }
 
 model User {
-    id                Int                @id @default(autoincrement())
-    email             String             @unique @email @lower
-    name              String?            @length(min: 3, max: 39)
-    username          String?            @length(min: 6, max: 39)
-    git_access_token  String?            @deny('read', true) @omit
-    created           DateTime           @default(now())
-    avatar_url        String?
-    notifications     Notification[]
-    groupInviteTokens GroupInviteToken[]
-    ownedGitUsers     GitUserOwner[]
-    ownedGitGroups    GitGroupOwner[]
+    id                  Int                @id @default(autoincrement())
+    email               String?            @email @lower
+    name                String?            @length(min: 3, max: 39)
+    username            String?            @length(min: 6, max: 39)
+    git_id              Int?               @unique @deny('read', true) @omit
+    git_access_token    String?            @deny('read', true) @omit
+    git_refresh_token   String?            @deny('read', true) @omit
+    git_token_expires   DateTime?          @deny('read', true) @omit
+    git_refresh_expires DateTime?          @deny('read', true) @omit
+    created             DateTime           @default(now())
+    avatar_url          String?
+    hasInstallation     Boolean            @deny('update', true) @default(false)
+    installationId      Int?               @deny('update', true) @omit
+    notifications       Notification[]
+    groupInviteTokens   GroupInviteToken[]
+    ownedGitUsers       GitUserOwner[]
+    ownedGitGroups      GitGroupOwner[]
 
     @@allow('all', auth().id == id)
 }
@@ -41,7 +47,8 @@ model User {
 model GitUser {
     id               Int                     @id @default(autoincrement())
     git_access_token String?
-    email            String                  @unique @email @lower
+    git_id           Int?                    @unique @deny('read', true) @omit
+    email            String?                 @unique @email @lower
     username         String                  @length(min: 6, max: 39)
     name             String                  @length(min: 3, max: 39)
     created          DateTime                @default(now())

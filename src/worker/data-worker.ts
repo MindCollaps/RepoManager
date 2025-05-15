@@ -10,6 +10,8 @@ function initTasks() {
     defineCronJob('*/10 * * * *', checkTokenExpiryState);
 }
 
+// TODO: Make task that checks if a installation is still present on user
+
 async function checkGroupExpiryState() {
     const now = new Date();
     const expiredGroups = await prisma.gitGroup.findMany({

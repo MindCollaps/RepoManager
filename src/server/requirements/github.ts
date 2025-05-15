@@ -41,7 +41,7 @@ export default defineEventHandler(async event => {
         }
     }
     catch (error) {
-        console.log(error);
+        console.error(error);
         throw createError({
             statusCode: 401,
             statusMessage: 'Unauthorized access',
