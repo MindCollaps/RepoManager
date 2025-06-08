@@ -1,4 +1,4 @@
-FROM node:23-alpine3.20
+FROM node:23-alpine3.20 AS build
 WORKDIR /app
 RUN corepack enable
 
@@ -14,3 +14,9 @@ COPY . .
 
 RUN yarn run build
  
+FROM node:23-alpine3.20
+
+WORKDIR /app
+
+COPY --from=build /app/.output ./.output
+COPY --from=build /app/.config ./.config

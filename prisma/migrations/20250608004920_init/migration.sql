@@ -1,14 +1,20 @@
 -- CreateTable
 CREATE TABLE `User` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `email` VARCHAR(191) NOT NULL,
+    `email` VARCHAR(191) NULL,
     `name` VARCHAR(191) NULL,
     `username` VARCHAR(191) NULL,
+    `git_id` INTEGER NULL,
     `git_access_token` VARCHAR(191) NULL,
+    `git_refresh_token` VARCHAR(191) NULL,
+    `git_token_expires` DATETIME(3) NULL,
+    `git_refresh_expires` DATETIME(3) NULL,
     `created` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `avatar_url` VARCHAR(191) NULL,
+    `hasInstallation` BOOLEAN NOT NULL DEFAULT false,
+    `installationId` INTEGER NULL,
 
-    UNIQUE INDEX `User_email_key`(`email`),
+    UNIQUE INDEX `User_git_id_key`(`git_id`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -16,13 +22,15 @@ CREATE TABLE `User` (
 CREATE TABLE `GitUser` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `git_access_token` VARCHAR(191) NULL,
-    `email` VARCHAR(191) NOT NULL,
+    `git_id` INTEGER NULL,
+    `email` VARCHAR(191) NULL,
     `username` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `created` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `avatar_url` VARCHAR(191) NULL,
     `custom` BOOLEAN NULL,
 
+    UNIQUE INDEX `GitUser_git_id_key`(`git_id`),
     UNIQUE INDEX `GitUser_email_key`(`email`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
