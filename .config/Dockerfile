@@ -1,8 +1,6 @@
-FROM node:23-alpine3.20
+FROM node:24-alpine3.21
 WORKDIR /app
 RUN corepack enable
-
-RUN apk add --no-cache curl
 
 COPY package.json yarn.lock ./
 RUN yarn install --immutable
