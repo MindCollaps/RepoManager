@@ -1,21 +1,33 @@
+import type { User } from '@zenstackhq/runtime/models';
 import { defineStore } from 'pinia';
-import type { FetchingUser } from '~/types/fetch';
+import { useFindUniqueUser } from '~~/lib/hooks';
 
 export const useStore = defineStore('index', {
     state: () => ({
         version: '',
         theme: 'default' as ThemesList,
         navigation: 'menu' as 'menu' | 'user' | 'token' & string,
-        user: {} as FetchingUser | undefined,
+        user: undefined as User | undefined,
     }),
     actions: {
         async fetchUser() {
-            try {
-                const userData = await $fetch<FetchingUser>('/api/v1/user');
-                this.user = userData ?? {};
-            }
-            catch (error) {
-                console.error('Error fetching user:', error);
+            const { loggedIn, user } = useUserSession();
+            if (loggedIn.value) {
+                try {
+                    const { data: userData, refetch } = useFindUniqueUser({
+                        where: {
+                            id: user.value?.userId,
+                        },
+                    });
+
+                    await refetch();
+
+                    this.user = userData.value;
+                    console.log(userData.value);
+                }
+                catch (error) {
+                    console.error('Error fetching user:', error);
+                }
             }
         },
     },

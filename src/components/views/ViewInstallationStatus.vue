@@ -19,12 +19,24 @@
             <common-button
                 href="/forgery/app"
                 primary-color="success600"
+                target="_blank"
             >
                 <template #default>
                     Install GitHub App
                 </template>
                 <template #icon>
                     <github-icon/>
+                </template>
+            </common-button>
+            <common-button
+                primary-color="info600"
+                @click="checkInstallation()"
+            >
+                <template #default>
+                    Check Installation
+                </template>
+                <template #icon>
+                    <refresh-icon/>
                 </template>
             </common-button>
         </div>
@@ -41,10 +53,16 @@
 <script setup lang="ts">
 import { useStore } from '~/store';
 import GithubIcon from '~/assets/icons/github.svg?component';
+import RefreshIcon from '~/assets/icons/refresh.svg?component';
 import CommonButton from '~/components/common/CommonButton.vue';
 
 const store = useStore();
 const ready = ref(false);
+
+function checkInstallation() {
+    fetch('/api/v1/installationref');
+    setTimeout(() => window.location.reload(), 1000);
+}
 
 onMounted(() => ready.value = true);
 </script>

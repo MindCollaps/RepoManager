@@ -1,4 +1,3 @@
-import { prisma } from '~/server/prisma';
 import { z } from 'zod';
 import { getInstallationData as getGitInstallation } from '~/utils/github';
 
@@ -37,26 +36,10 @@ export default defineEventHandler(async event => {
         return sendRedirect(event, '/login/install&error?msg=' + encodeURIComponent('We only can sign in users'));
     }
 
-    const dbUser = await prisma.user.findUnique({
-        where: {
-            git_id: userData.id,
-        },
-    });
-
-    if (dbUser) {
-        await prisma.user.update({
-            where: {
-                git_id: userData.id,
-            },
-            data: {
-                hasInstallation: true,
-                installationId: installationId,
-            },
-        });
+    if (await addUserInstallationToUser(userData.id, installationId)) {
+        return sendRedirect(event, '/profile');
     }
     else {
         return sendRedirect(event, '/login');
     }
-
-    return sendRedirect(event, '/profile');
 });

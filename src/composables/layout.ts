@@ -64,8 +64,8 @@ export const useLayout = () => {
     });
 
     onMounted(() => {
-        watch(loggedIn, newValue => {
-            if (newValue) {
+        watch(loggedIn, val => {
+            if (val) {
                 store.fetchUser();
             }
             else {

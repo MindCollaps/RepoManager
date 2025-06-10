@@ -2,7 +2,7 @@
     <div class="error">
         <p v-if="message">{{ message }}</p>
         <p v-else>Login Failed</p>
-        <common-button @click="close()">Try again</common-button>
+        <common-button @click="isInstallation ? router.push('/profile') : close()">Try again</common-button>
     </div>
 </template>
 
@@ -10,12 +10,14 @@
 import CommonButton from '~/components/common/CommonButton.vue';
 
 const route = useRoute();
+const router = useRouter();
 
 definePageMeta({
     layout: 'empty',
 });
 
 const message = ref(route.query.msg as string);
+const isInstallation = ref(route.query.install !== undefined);
 
 function close() {
     window.close();

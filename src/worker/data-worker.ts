@@ -2,15 +2,19 @@ import { Octokit } from 'octokit';
 import { prisma } from '~/server/prisma';
 import type { NotificationStyle } from '~/types';
 import { defineCronJob } from './cron';
+import { checkUpdateUserInstallation } from '~/utils/github';
 
 initTasks();
 
 function initTasks() {
     defineCronJob('*/30 * * * *', checkGroupExpiryState);
     defineCronJob('*/10 * * * *', checkTokenExpiryState);
+    defineCronJob('*/30 * * * *', checkInstallationStatus);
 }
 
-// TODO: Make task that checks if a installation is still present on user
+async function checkInstallationStatus() {
+    (await prisma.user.findMany()).forEach(usr => usr.git_id ? checkUpdateUserInstallation(usr.git_id) : () => {});
+}
 
 async function checkGroupExpiryState() {
     const now = new Date();
