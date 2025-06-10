@@ -15,7 +15,6 @@ export default defineEventHandler(async event => {
     const installationId = parseInt(query.data.installation_id);
 
     if (!query.success) {
-        console.log(JSON.stringify(query));
         return sendRedirect(event, '/login/error?install&msg=' + encodeURIComponent('GitHub Auth Failed'));
     }
 

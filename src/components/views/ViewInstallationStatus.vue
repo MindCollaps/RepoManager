@@ -28,17 +28,6 @@
                     <github-icon/>
                 </template>
             </common-button>
-            <common-button
-                primary-color="info600"
-                @click="checkInstallation()"
-            >
-                <template #default>
-                    Check Installation
-                </template>
-                <template #icon>
-                    <refresh-icon/>
-                </template>
-            </common-button>
         </div>
     </template>
     <div
@@ -48,6 +37,17 @@
         <div class="installation_check installation_check--ready"/>
         Checking installation
     </div>
+    <common-button
+        primary-color="info600"
+        @click="checkInstallation()"
+    >
+        <template #default>
+            Check Installation
+        </template>
+        <template #icon>
+            <refresh-icon/>
+        </template>
+    </common-button>
 </template>
 
 <script setup lang="ts">
