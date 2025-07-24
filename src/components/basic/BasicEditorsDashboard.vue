@@ -260,7 +260,7 @@ function saveAnimation() {
         border-radius: 12px;
 
         background: linear-gradient(145deg, $darkgray875, $darkgray850);
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 6px 16px rgb(0, 0, 0, 0.15);
 
         &-controls {
             display: flex;

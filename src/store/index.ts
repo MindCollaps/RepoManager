@@ -23,7 +23,6 @@ export const useStore = defineStore('index', {
                     await refetch();
 
                     this.user = userData.value;
-                    console.log(userData.value);
                 }
                 catch (error) {
                     console.error('Error fetching user:', error);

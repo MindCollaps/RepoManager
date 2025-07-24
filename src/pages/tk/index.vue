@@ -107,7 +107,7 @@ definePageMeta({
     layout: 'empty',
 });
 
-const { loggedIn, user, openInPopup } = useUserSession();
+const { loggedIn, user, openInPopup, fetch } = useUserSession();
 
 const route = useRoute();
 const url = useRequestURL();
@@ -156,6 +156,16 @@ function login() {
     tokenCookie.value = token.value?.token;
 
     openInPopup('/auth/github-user');
+
+    checkLoginState();
+}
+
+function checkLoginState() {
+    setTimeout(() => {
+        fetch();
+        loadQuery();
+        checkLoginState();
+    }, 1000);
 }
 
 function copy() {

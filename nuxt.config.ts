@@ -19,7 +19,7 @@ export default defineNuxtConfig({
     prisma: {
         autoSetupPrisma: true,
     },
-    compatibilityDate: '2024-11-01',
+    compatibilityDate: '2025-07-01',
     devtools: { enabled: true },
     srcDir: 'src/',
     modules: ['@nuxt/devtools', '@nuxt/eslint', '@nuxtjs/stylelint-module', '@pinia/nuxt', 'nuxt-auth-utils', '@prisma/nuxt', '@nuxt/image', '@vueuse/motion/nuxt'],

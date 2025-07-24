@@ -1,9 +1,15 @@
 import { prisma } from '~/server/prisma';
 import { TokenCookieName } from '~/types';
+import { generateRandomState } from '~/utils/github';
 
 export default defineOAuthGitHubEventHandler({
     config: {
         emailRequired: true,
+        clientId: process.env.NUXT_GITHUB_APP_CLIENT_ID,
+        clientSecret: process.env.NUXT_GITHUB_APP_CLIENT_SECRET,
+        authorizationParams: {
+            state: generateRandomState(),
+        },
         scope: [],
         redirectURL: process.env.PUBLIC_FQDN + '/auth/github-user',
     },
@@ -47,17 +53,29 @@ export default defineOAuthGitHubEventHandler({
         });
 
         if (dbUser) {
+            const dbUserr = dbUser;
+            const connectOrCreateArray = token.groups.map(group => ({
+                where: {
+                    userId_groupId: {
+                        userId: dbUserr.id,
+                        groupId: group.groupId,
+                    },
+                },
+                create: {
+                    groupId: group.groupId,
+                    repoState: 0,
+                },
+            }));
+
             dbUser = await prisma.gitUser.update({
                 where: {
-                    email: user.email.toLowerCase(),
+                    id: dbUser.id,
                 },
                 data: {
                     git_access_token: tokens.access_token,
                     avatar_url: user.avatar_url,
                     groups: {
-                        createMany: {
-                            data: token.groups.map(x => ({ groupId: x.groupId, repoState: 0 })),
-                        },
+                        connectOrCreate: connectOrCreateArray,
                     },
                 },
             });

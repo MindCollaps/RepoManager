@@ -167,7 +167,7 @@ const getAttrs = computed(() => {
     appearance: none;
     background: var(--primary-color);
     outline: none;
-    box-shadow: 2px 2px 2px rgba(0,0,0, 0.25);
+    box-shadow: 2px 2px 2px rgb(0,0,0, 0.25);
 
     &_content {
         width: 100%;

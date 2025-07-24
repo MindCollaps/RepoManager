@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-        <h1 v-if="isLoggedinUser">Welcome {{ store.user?.username }}!</h1>
+        <h1 v-if="loggedIn">Welcome {{ store.user?.username }}!</h1>
         <h2 v-else>Login and give Access</h2>
         <common-button
             href="/"
@@ -13,7 +13,7 @@
             </template>
         </common-button>
         <common-button
-            v-if="isLoggedinUser"
+            v-if="loggedIn"
             type="secondary-875"
             width="128px"
             @click="clear"
@@ -22,7 +22,7 @@
             v-else
             type="secondary"
             width="256px"
-            @click="openInPopup('/forgery/github')"
+            @click="login()"
         >
             <template #default>
                 Login with GitHub
@@ -43,23 +43,31 @@ import { openInPopup } from '~/composables/frontend';
 
 const store = useStore();
 
-const { loggedIn, user, clear } = useUserSession();
-
-const wasLoggedIn = ref(loggedIn.value);
-
-const isLoggedinUser = computed(() => loggedIn && user.value?.userId);
+const { loggedIn, clear, fetch } = useUserSession();
 
 watch(loggedIn, () => {
-    if (!wasLoggedIn.value) {
-        if (wasLoggedIn.value !== loggedIn.value) {
-            navigateTo('/dashboard');
-        }
+    if (loggedIn.value) {
+        window.location.replace('/dashboard');
     }
 });
 
 definePageMeta({
     layout: 'empty',
 });
+
+async function login() {
+    openInPopup('/forgery/github');
+    checkLoginState();
+}
+
+function checkLoginState() {
+    setTimeout(() => {
+        fetch();
+        if (!loggedIn.value) {
+            checkLoginState();
+        }
+    }, 1000);
+}
 </script>
 
 <style scoped lang="scss">

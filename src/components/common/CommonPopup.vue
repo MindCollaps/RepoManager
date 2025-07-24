@@ -117,7 +117,7 @@ defineSlots<{
     width: 100vw;
     height: 100vh;
 
-    background: rgba(212, 238, 247, 0.1);
+    background: rgb(212, 238, 247, 0.1);
 
     &-content {
         padding: 32px;

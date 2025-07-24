@@ -1,14 +1,16 @@
+import { generateRandomState } from '~/utils/github';
+
 export default defineEventHandler(async event => {
     const clientId = process.env.NUXT_GITHUB_APP_CLIENT_ID;
-    const publicFqdn = process.env.PUBLIC_FQDN + '/auth/github';
+    const redirectUri = process.env.PUBLIC_FQDN + '/auth/github';
 
-    if (!clientId || !publicFqdn) {
+    if (!clientId || !redirectUri) {
         return sendRedirect(event, '/login/error?msg=' + encodeURIComponent('GitHub Auth Failed'));
     }
 
     const params = new URLSearchParams({
         client_id: clientId,
-        redirect_uri: publicFqdn,
+        redirect_uri: redirectUri,
         state: generateRandomState(),
     });
 
@@ -17,8 +19,3 @@ export default defineEventHandler(async event => {
     return sendRedirect(event, githubAuthUrl);
 });
 
-function generateRandomState(length = 32) {
-    return Array.from(crypto.getRandomValues(new Uint8Array(length)))
-        .map(b => b.toString(16).padStart(2, '0'))
-        .join('');
-}
