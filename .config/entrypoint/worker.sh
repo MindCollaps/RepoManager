@@ -1,3 +1,3 @@
 #!/bin/sh
 
-exec node --import=tsx /app/app/worker/data-worker.ts
+exec node --import=tsx /app/src/worker/data-worker.ts

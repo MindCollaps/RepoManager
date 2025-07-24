@@ -21,7 +21,8 @@ export default defineNuxtConfig({
     },
     compatibilityDate: '2024-11-01',
     devtools: { enabled: true },
-    modules: ['@nuxt/devtools', '@nuxt/eslint', '@nuxtjs/stylelint-module', '@pinia/nuxt', 'nuxt-auth-utils', '@prisma/nuxt', '@nuxt/image', '@vueuse/motion/nuxt', '~/modules/styles'],
+    srcDir: 'src/',
+    modules: ['@nuxt/devtools', '@nuxt/eslint', '@nuxtjs/stylelint-module', '@pinia/nuxt', 'nuxt-auth-utils', '@prisma/nuxt', '@nuxt/image', '@vueuse/motion/nuxt'],
     eslint: {
         checker: {
             configType: 'flat',
@@ -47,6 +48,7 @@ export default defineNuxtConfig({
             preprocessorMaxWorkers: true,
             preprocessorOptions: {
                 scss: {
+                    api: 'modern-compiler',
                     additionalData: `@use "~/scss/colors.scss" as *;@use "~/scss/variables.scss" as *;`,
                 },
             },

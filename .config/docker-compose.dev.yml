@@ -13,7 +13,7 @@ services:
         volumes:
             - ./:/app/
         healthcheck:
-            test: ["CMD", "curl", "-f", "http://localhost:8080/api/health"]
+            test: ["CMD", "curl", "-f", "http://localhost:8080/api/check"]
         extra_hosts:
             - "host.docker.internal:host-gateway"
         environment:

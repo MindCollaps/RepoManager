@@ -61,7 +61,7 @@ export default withNuxt([
             'import/no-mutable-exports': 'off',
             'prefer-const': ['error', { destructuring: 'all' }],
             camelcase: ['off'],
-            '@/func-call-spacing': 'off',
+            'stylistic/func-call-spacing': 'error',
             'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
             'import/exports-last': 'off',
             'import/first': 'error',
@@ -126,7 +126,6 @@ export default withNuxt([
             'stylistic/type-named-tuple-spacing': 'error',
             'stylistic/wrap-iife': 'error',
             'stylistic/member-delimiter-style': 'error',
-            'vue/multi-word-component-names': 'off',
             'vue/component-name-in-template-casing': [
                 'error', 'kebab-case', {
                     registeredComponentsOnly: false,
