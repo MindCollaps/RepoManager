@@ -40,10 +40,12 @@
         </template>
         <template #item="{ item }">
             <div class="group-dashboard-item">
-                {{ item.name }} <common-button
+                {{ item.name }}
+                <common-button
                     :href="`https://github.com/${ item.repoOwner }/${ item.repoName }`"
                     type="transparent"
-                >{{ item.repoOwner }} / {{ item.repoName }}</common-button>
+                >{{ item.repoOwner }} / {{ item.repoName }}
+                </common-button>
             </div>
         </template>
     </basic-dashboard>

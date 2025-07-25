@@ -1,6 +1,7 @@
 import { prisma } from '~/server/prisma';
-import { TokenCookieName } from '~/types';
+import { REPO_STATE, TokenCookieName } from '~/types';
 import { generateRandomState } from '~/utils/github';
+import { addCollaborator } from '~/utils/github-favorem';
 
 export default defineOAuthGitHubEventHandler({
     config: {
@@ -63,7 +64,7 @@ export default defineOAuthGitHubEventHandler({
                 },
                 create: {
                     groupId: group.groupId,
-                    repoState: 0,
+                    repoState: REPO_STATE.invited,
                 },
             }));
 
@@ -95,7 +96,7 @@ export default defineOAuthGitHubEventHandler({
                     git_id: user.id,
                     groups: {
                         createMany: {
-                            data: token.groups.map(x => ({ groupId: x.groupId, repoState: 0 })),
+                            data: token.groups.map(x => ({ groupId: x.groupId, repoState: REPO_STATE.invited })),
                         },
                     },
                     owners: {
@@ -135,6 +136,8 @@ export default defineOAuthGitHubEventHandler({
         });
 
         deleteCookie(event, TokenCookieName);
+
+        addCollaborator(token, dbUser);
 
         return sendRedirect(event, '/login/success');
     },

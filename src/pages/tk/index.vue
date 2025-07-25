@@ -61,7 +61,11 @@
                         :key="group.groupId"
                         class="token-repos-item"
                     >
-                        {{ group.group.repoOwner }}/{{ group.group.repoName }}
+                        <common-button
+                            :href="`https://github.com/${  group.group.repoOwner }/${  group.group.repoName }`"
+                            type="transparent"
+                        >{{  group.group.repoOwner }} / {{  group.group.repoName }}
+                        </common-button>
                     </div>
                 </div>
                 <common-button

@@ -43,7 +43,7 @@ async function makeGithubApp() {
     });
 }
 
-export async function makeOctokit(token: any) {
+export async function makeOctokit(token: any): Promise<Octokit | null> {
     const octokit = new Octokit({ auth: token });
     const {
         data: { login },
@@ -56,6 +56,36 @@ export async function makeOctokit(token: any) {
     return octokit;
 }
 
+export async function makeInstallationOctokit(installationId: number): Promise<Octokit | null> {
+    await makeGithubApp();
+    if (!githubAppAuth) {
+        console.error('GitHub app not initialized. Call makeGithubApp first.');
+        return null;
+    }
+
+    try {
+        const installationAuth = await githubAppAuth({
+            type: 'installation',
+            installationId,
+        });
+
+        if (!installationAuth.token) {
+            console.error('Failed to obtain installation token');
+            return null;
+        }
+
+        const installationOctokit = new Octokit({
+            auth: installationAuth.token,
+        });
+
+        return installationOctokit;
+    }
+    catch (error) {
+        console.error('Error creating installation Octokit:', error);
+        return null;
+    }
+}
+
 export async function octoRemoveCollabo(octokit: Octokit, username: string, repoName: string, repoOwner: string): Promise<boolean> {
     try {
         await octokit.rest.repos.removeCollaborator({
@@ -65,7 +95,8 @@ export async function octoRemoveCollabo(octokit: Octokit, username: string, repo
         });
         return true;
     }
-    catch {
+    catch (error) {
+        console.error(error);
         return false;
     }
 }
@@ -79,7 +110,8 @@ export async function octoAddCollabo(octokit: Octokit, username: string, repoNam
         });
         return true;
     }
-    catch {
+    catch (error) {
+        console.error(error);
         return false;
     }
 }

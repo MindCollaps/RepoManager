@@ -1,8 +1,7 @@
-import { Octokit } from 'octokit';
 import { prisma } from '~/server/prisma';
 import type { NotificationStyle } from '~/types';
 import { defineCronJob } from './cron';
-import { checkUpdateUserInstallation } from '~/utils/github';
+import { checkUpdateUserInstallation, makeInstallationOctokit, octoRemoveCollabo } from '~/utils/github';
 
 initTasks();
 
@@ -40,7 +39,17 @@ async function checkGroupExpiryState() {
     });
 
     for (const grp of expiredGroups) {
-        const octokit = new Octokit({ auth: grp.owners[0].owner.git_access_token });
+        const installationId = grp.owners[0].owner.installationId;
+
+        if (!installationId) {
+            continue;
+        }
+
+        const octokit = await makeInstallationOctokit(installationId);
+
+        if (!octokit) {
+            continue;
+        }
 
         let error = false;
         if (grp.deleteUsers) {
