@@ -4,7 +4,7 @@ import { getInstallationById } from '~/utils/github';
 
 const QuerySchema = z.object({
     name: z.string(),
-    owner: z.string(),
+    owner: z.string().optional(),
 });
 
 export default defineEventHandler(async event => {
@@ -32,13 +32,17 @@ export default defineEventHandler(async event => {
         });
     }
 
-    const owner = query.data.owner;
+    let owner = query.data.owner;
 
     if (!user.installationId) {
         throw createError({
             statusCode: 400,
             statusMessage: 'Installation invalid!',
         });
+    }
+
+    if (!owner) {
+        owner = user.username;
     }
 
     const octo = await getInstallationById(user.installationId);

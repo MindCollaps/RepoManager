@@ -2,6 +2,7 @@ import { Octokit } from 'octokit';
 import { createAppAuth, createOAuthUserAuth } from '@octokit/auth-app';
 import type { GitHubAppUserAuthenticationWithExpiration } from '@octokit/auth-app';
 import { prisma } from '~/server/prisma';
+import type { RestEndpointMethodTypes } from '@octokit/plugin-rest-endpoint-methods';
 
 type AppAuth = ReturnType<typeof createAppAuth>;
 
@@ -86,7 +87,12 @@ export async function makeInstallationOctokit(installationId: number): Promise<O
     }
 }
 
-export async function octoRemoveCollabo(octokit: Octokit, username: string, repoName: string, repoOwner: string): Promise<boolean> {
+export async function octoRemoveCollabo(
+    octokit: Octokit,
+    username: string,
+    repoName: string,
+    repoOwner: string,
+): Promise<boolean> {
     try {
         await octokit.rest.repos.removeCollaborator({
             username: username,
@@ -101,7 +107,12 @@ export async function octoRemoveCollabo(octokit: Octokit, username: string, repo
     }
 }
 
-export async function octoAddCollabo(octokit: Octokit, username: string, repoName: string, repoOwner: string): Promise<boolean> {
+export async function octoAddCollabo(
+    octokit: Octokit,
+    username: string,
+    repoName: string,
+    repoOwner: string,
+): Promise<boolean> {
     try {
         await octokit.rest.repos.addCollaborator({
             username: username,
@@ -113,6 +124,53 @@ export async function octoAddCollabo(octokit: Octokit, username: string, repoNam
     catch (error) {
         console.error(error);
         return false;
+    }
+}
+
+export type Collaborator = RestEndpointMethodTypes['repos']['listCollaborators']['response']['data'][number];
+export type Invitations = RestEndpointMethodTypes['repos']['listInvitations']['response']['data'][number];
+
+export async function fetchRepoCollaborators(
+    octokit: Octokit,
+    repoOwner: string,
+    repoName: string,
+): Promise<Collaborator[]> {
+    try {
+        const collaborators = await octokit.paginate(
+            octokit.rest.repos.listCollaborators,
+            {
+                owner: repoOwner,
+                repo: repoName,
+                per_page: 100,
+            },
+        );
+        return collaborators;
+    }
+    catch (error) {
+        console.error(error);
+        return [];
+    }
+}
+
+export async function fetchRepoInvites(
+    octokit: Octokit,
+    repoOwner: string,
+    repoName: string,
+): Promise<Invitations[]> {
+    try {
+        const collaborators = await octokit.paginate(
+            octokit.rest.repos.listInvitations,
+            {
+                owner: repoOwner,
+                repo: repoName,
+                per_page: 100,
+            },
+        );
+        return collaborators;
+    }
+    catch (error) {
+        console.error(error);
+        return [];
     }
 }
 

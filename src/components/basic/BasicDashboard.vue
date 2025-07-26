@@ -45,6 +45,15 @@
                         </template>
                     </common-button>
                     <common-button
+                        v-if="settings"
+                        primary-color="info500"
+                        @click="$emit('settings', i.id)"
+                    >
+                        <template #icon>
+                            <settings-icon/>
+                        </template>
+                    </common-button>
+                    <common-button
                         v-if="deletable"
                         primary-color="error600"
                         @click="$emit('delete', i.id)"
@@ -71,6 +80,7 @@ import CommonButton from '~/components/common/CommonButton.vue';
 import DeleteIcon from '~/assets/icons/delete.svg?component';
 import AddIcon from '~/assets/icons/add.svg?component';
 import EditIcon from '~/assets/icons/edit.svg?component';
+import SettingsIcon from '~/assets/icons/settings.svg?component';
 import type { PropType } from 'vue';
 
 const props = defineProps({
@@ -89,6 +99,10 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    settings: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const emit = defineEmits({
@@ -96,6 +110,9 @@ const emit = defineEmits({
         return true;
     },
     edit(id: number) {
+        return true;
+    },
+    settings(id: number) {
         return true;
     },
     create() {

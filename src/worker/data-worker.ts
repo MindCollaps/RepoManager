@@ -1,18 +1,95 @@
 import { prisma } from '~/server/prisma';
+import { REPO_STATE } from '~/types';
 import type { NotificationStyle } from '~/types';
 import { defineCronJob } from './cron';
-import { checkUpdateUserInstallation, makeInstallationOctokit, octoRemoveCollabo } from '~/utils/github';
+import { checkUpdateUserInstallation, makeInstallationOctokit, octoRemoveCollabo, fetchRepoCollaborators, fetchRepoInvites } from '~/utils/github';
 
 initTasks();
 
 function initTasks() {
     defineCronJob('*/30 * * * *', checkGroupExpiryState);
     defineCronJob('*/10 * * * *', checkTokenExpiryState);
+    defineCronJob('*/3 * * * *', checkGitStatus);
     defineCronJob('*/30 * * * *', checkInstallationStatus);
 }
 
 async function checkInstallationStatus() {
     (await prisma.user.findMany()).forEach(usr => usr.git_id ? checkUpdateUserInstallation(usr.git_id) : () => {});
+}
+
+async function checkGitStatus() {
+    const groups = await prisma.gitGroup.findMany({
+        include: {
+            users: {
+                include: {
+                    user: true,
+                },
+            },
+            owners: {
+                include: {
+                    owner: true,
+                },
+            },
+        },
+    });
+
+    for (const group of groups) {
+        if (!group.owners[0].owner.installationId) {
+            // TODO: Take action
+            continue;
+        }
+
+        const favorem = await makeInstallationOctokit(group.owners[0].owner.installationId);
+
+        if (!favorem) {
+            // TODO: Take action
+            continue;
+        }
+
+        const collaborators = await fetchRepoCollaborators(favorem, group.repoOwner, group.repoName);
+        const invitations = await fetchRepoInvites(favorem, group.repoOwner, group.repoName);
+
+        const updatePromises = [];
+
+        for (const user of group.users) {
+            const userId = user.user.id;
+            const gitId = user.user.git_id;
+
+            const userCollabo = collaborators.find(x => x.id === gitId);
+            const userInvited = invitations.find(x => x.invitee?.id === gitId);
+
+            let newRepoState;
+
+            if (userCollabo) {
+                newRepoState = REPO_STATE.collabo;
+            }
+            else if (userInvited) {
+                newRepoState = REPO_STATE.invited;
+            }
+            else {
+                newRepoState = REPO_STATE.not_invited;
+            }
+
+            updatePromises.push(prisma.gitUserGroup.update({
+                where: {
+                    userId_groupId: {
+                        userId: userId,
+                        groupId: group.id,
+                    },
+                },
+                data: {
+                    repoState: newRepoState,
+                },
+            }));
+        }
+
+        try {
+            await prisma.$transaction(updatePromises);
+        }
+        catch (e) {
+            console.error(`Failed to update repoState for group ${ group.id }:`, e);
+        }
+    }
 }
 
 async function checkGroupExpiryState() {

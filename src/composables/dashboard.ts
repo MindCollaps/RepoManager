@@ -14,11 +14,6 @@ export interface DashboardPage {
 export const useDashboard = () => computed<DashboardPage[]>(() => {
     const dashboard: DashboardPage[] = [
         {
-            title: 'Users',
-            content: UsersDashboard,
-            icon: UserIcon,
-        },
-        {
             title: 'Groups',
             content: GroupDashboard,
             icon: GroupIcon,
@@ -27,6 +22,11 @@ export const useDashboard = () => computed<DashboardPage[]>(() => {
             title: 'Group Invites',
             content: TokenDashboard,
             icon: KeyIcon,
+        },
+        {
+            title: 'Users',
+            content: UsersDashboard,
+            icon: UserIcon,
         },
     ];
 

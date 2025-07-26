@@ -3,8 +3,10 @@
         :default-values="defaultGroup"
         editable
         :fetched-data="gitGroups"
+        settings
         @create="createGroup()"
         @edit="editGroup"
+        @settings="settingsGroup"
     >
         <template #popup>
             <common-input-text v-model="newGroup.groupName">Group Name</common-input-text>
@@ -169,6 +171,10 @@ async function checkGit() {
 
 function editGroup(id: number) {
     navigateTo(`/dashboard/group-${ id }`);
+}
+
+function settingsGroup(id: number) {
+    navigateTo(`/dashboard/gsettings-${ id }`);
 }
 </script>
 
