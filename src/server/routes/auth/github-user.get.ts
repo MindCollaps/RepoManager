@@ -1,6 +1,6 @@
 import { prisma } from '~/server/prisma';
 import { REPO_STATE, TokenCookieName } from '~/types';
-import { generateRandomState } from '~/utils/github';
+import { generateRandomString } from '~/utils/github';
 import { addCollaborator } from '~/utils/github-favorem';
 
 export default defineOAuthGitHubEventHandler({
@@ -9,7 +9,7 @@ export default defineOAuthGitHubEventHandler({
         clientId: process.env.NUXT_GITHUB_APP_CLIENT_ID,
         clientSecret: process.env.NUXT_GITHUB_APP_CLIENT_SECRET,
         authorizationParams: {
-            state: generateRandomState(),
+            state: generateRandomString(),
         },
         scope: [],
         redirectURL: process.env.PUBLIC_FQDN + '/auth/github-user',

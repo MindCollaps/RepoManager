@@ -249,7 +249,7 @@ export async function removeUserInstallationFromUser(gitId: number): Promise<boo
                 git_id: gitId,
             },
             data: {
-                hasInstallation: true,
+                hasInstallation: false,
                 installationId: undefined,
             },
         });
@@ -269,8 +269,9 @@ export async function getInstallations() {
 
 export async function checkUpdateUserInstallation(gitId: number) {
     const installations = await getInstallations();
+    console.log(JSON.stringify(installations))
 
-    const userInstallation = installations.find(x => x.target_type === 'User' && x.target_id === gitId);
+    const userInstallation = installations.find(x => x.target_type === 'User' && x.account?.id === gitId);
 
     if (userInstallation) {
         addUserInstallationToUser(gitId, userInstallation.id);
@@ -280,7 +281,7 @@ export async function checkUpdateUserInstallation(gitId: number) {
     }
 }
 
-export function generateRandomState(length = 32) {
+export function generateRandomString(length = 32) {
     return Array.from(crypto.getRandomValues(new Uint8Array(length)))
         .map(b => b.toString(16).padStart(2, '0'))
         .join('');

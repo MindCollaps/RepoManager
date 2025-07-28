@@ -1247,9 +1247,9 @@
     "@octokit/webhooks" "^14.0.0"
 
 "@octokit/auth-app@^8.0.1":
-  version "8.0.1"
-  resolved "https://registry.yarnpkg.com/@octokit/auth-app/-/auth-app-8.0.1.tgz#8d34ba9fe4c9d8ae492ade0d3f2c522fe068ccd6"
-  integrity sha512-P2J5pB3pjiGwtJX4WqJVYCtNkcZ+j5T2Wm14aJAEIC3WJOrv12jvBley3G1U/XI8q9o1A7QMG54LiFED2BiFlg==
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/@octokit/auth-app/-/auth-app-8.0.2.tgz#d44d59697421a4456e345e959a96a635e5e73bef"
+  integrity sha512-dLTmmA9gUlqiAJZgozfOsZFfpN/OldH3xweb7lqSnngax5Rs+PfO5dDlokaBfc41H1xOtsLYV5QqR0DkBAtPmw==
   dependencies:
     "@octokit/auth-oauth-app" "^9.0.1"
     "@octokit/auth-oauth-user" "^6.0.0"
@@ -1306,9 +1306,9 @@
     "@octokit/types" "^14.0.0"
 
 "@octokit/core@^7.0.2":
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/@octokit/core/-/core-7.0.2.tgz#d5e44841bcb323fa95f7bd1d73ff29046381f1f0"
-  integrity sha512-ODsoD39Lq6vR6aBgvjTnA3nZGliknKboc9Gtxr7E4WDNqY24MxANKcuDQSF0jzapvGb3KWOEDrKfve4HoWGK+g==
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/@octokit/core/-/core-7.0.3.tgz#0b5288995fed66920128d41cfeea34979d48a360"
+  integrity sha512-oNXsh2ywth5aowwIa7RKtawnkdH6LgU1ztfP9AIUCQCvzysB+WeU8o2kyyosDPwBZutPpjZDKPQGIzzrfTWweQ==
   dependencies:
     "@octokit/auth-token" "^6.0.0"
     "@octokit/graphql" "^9.0.1"
@@ -1380,9 +1380,9 @@
   integrity sha512-crfpnIoFiBtRkvPqOyLOsw12XsveYuY2ieP6uYDosoUegBJpSVxGwut9sxUgFFcll3VTOTqpUf8yGd8x1OmAkQ==
 
 "@octokit/plugin-paginate-rest@^13.0.0":
-  version "13.0.1"
-  resolved "https://registry.yarnpkg.com/@octokit/plugin-paginate-rest/-/plugin-paginate-rest-13.0.1.tgz#5ed914064fea62694e7def7bb19bcc8cd17ad504"
-  integrity sha512-m1KvHlueScy4mQJWvFDCxFBTIdXS0K1SgFGLmqHyX90mZdCIv6gWBbKRhatxRjhGlONuTK/hztYdaqrTXcFZdQ==
+  version "13.1.1"
+  resolved "https://registry.yarnpkg.com/@octokit/plugin-paginate-rest/-/plugin-paginate-rest-13.1.1.tgz#ca5bb1c7b85a583691263c1f788f607e9bcb74b3"
+  integrity sha512-q9iQGlZlxAVNRN2jDNskJW/Cafy7/XE52wjZ5TTvyhyOD904Cvx//DNyoO3J/MXJ0ve3rPoNWKEg5iZrisQSuw==
   dependencies:
     "@octokit/types" "^14.1.0"
 
@@ -1418,9 +1418,9 @@
     "@octokit/types" "^14.0.0"
 
 "@octokit/request@^10.0.2":
-  version "10.0.2"
-  resolved "https://registry.yarnpkg.com/@octokit/request/-/request-10.0.2.tgz#29187c12e7320aa56129c42e797d179035b573bb"
-  integrity sha512-iYj4SJG/2bbhh+iIpFmG5u49DtJ4lipQ+aPakjL9OKpsGY93wM8w06gvFbEQxcMsZcCvk5th5KkIm2m8o14aWA==
+  version "10.0.3"
+  resolved "https://registry.yarnpkg.com/@octokit/request/-/request-10.0.3.tgz#2ffdb88105ce20d25dcab8a592a7040ea48306c7"
+  integrity sha512-V6jhKokg35vk098iBqp2FBKunk3kMTXlmq+PtbV9Gl3TfskWlebSofU9uunVKhUN7xl+0+i5vt0TGTG8/p/7HA==
   dependencies:
     "@octokit/endpoint" "^11.0.0"
     "@octokit/request-error" "^7.0.0"
@@ -1441,9 +1441,9 @@
   integrity sha512-MFlzzoDJVw/GcbfzVC1RLR36QqkTLUf79vLVO3D+xn7r0QgxnFoLZgtrzxiQErAjFUOdH6fas2KeQJ1yr/qaXQ==
 
 "@octokit/webhooks@^14.0.0":
-  version "14.0.2"
-  resolved "https://registry.yarnpkg.com/@octokit/webhooks/-/webhooks-14.0.2.tgz#df4c3abe0033ae1ec97823d10c26f51166eaee6d"
-  integrity sha512-16TtZXNOfH8RaRsV+iag5dTYeJvdOdZDBcpEPCULdKS3eTRJqAYxBNZPFaDJ3cx3WNyvbaQ0IxsPpnaR/tgGFA==
+  version "14.1.1"
+  resolved "https://registry.yarnpkg.com/@octokit/webhooks/-/webhooks-14.1.1.tgz#88b873779acdddcc568a20ebb32aa72c1afa4b7c"
+  integrity sha512-4kN/yPhcZEP+X7iMMuBTk+dD4ZGOpU57F7kHKrFlD2SSY/Sxh01t79oVn4npchLdPIXvLKrQw0uBXhmEaiZAdw==
   dependencies:
     "@octokit/openapi-webhooks-types" "12.0.3"
     "@octokit/request-error" "^7.0.0"
@@ -2140,9 +2140,9 @@
     tslib "^2.4.0"
 
 "@types/aws-lambda@^8.10.83":
-  version "8.10.149"
-  resolved "https://registry.yarnpkg.com/@types/aws-lambda/-/aws-lambda-8.10.149.tgz#77c7bde809425546d03626e51bab8181bc5d24c9"
-  integrity sha512-NXSZIhfJjnXqJgtS7IwutqIF/SOy1Wz5Px4gUY1RWITp3AYTyuJS4xaXr/bIJY1v15XMzrJ5soGnPM+7uigZjA==
+  version "8.10.152"
+  resolved "https://registry.yarnpkg.com/@types/aws-lambda/-/aws-lambda-8.10.152.tgz#f68424a8175f0a54a2a941e65b76c3f51f3bd89d"
+  integrity sha512-soT/c2gYBnT5ygwiHPmd9a1bftj462NWVk2tKCc1PYHSIacB2UwbTS2zYG4jzag1mRDuzg/OjtxQjQ2NKRB6Rw==
 
 "@types/bytes@^3.1.5":
   version "3.1.5"

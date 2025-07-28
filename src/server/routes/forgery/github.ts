@@ -1,4 +1,4 @@
-import { generateRandomState } from '~/utils/github';
+import { generateRandomString } from '~/utils/github';
 
 export default defineEventHandler(async event => {
     const clientId = process.env.NUXT_GITHUB_APP_CLIENT_ID;
@@ -11,7 +11,7 @@ export default defineEventHandler(async event => {
     const params = new URLSearchParams({
         client_id: clientId,
         redirect_uri: redirectUri,
-        state: generateRandomState(),
+        state: generateRandomString(),
     });
 
     const githubAuthUrl = `https://github.com/login/oauth/authorize?${ params.toString() }`;

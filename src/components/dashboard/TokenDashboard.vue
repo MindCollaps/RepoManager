@@ -7,10 +7,18 @@
         @create="createToken()"
         @delete="deleteToken"
         @edit="editToken"
+        @close="reset()"
     >
         <template #popup>
             <common-input-text v-model="newToken.name">Name</common-input-text>
-            <common-input-text v-model="newToken.token">Token</common-input-text>
+            <div class="token-generate">
+                <common-input-text v-model="newToken.token">Token</common-input-text>
+                <common-button @click="generateToken()">
+                    <template #icon>
+                        <refresh-icon/>
+                    </template>
+                </common-button>
+            </div>
             <common-date-picker
                 v-model="newToken.expiryDate"
             >Expiry Date</common-date-picker>
@@ -42,6 +50,7 @@
 
 <script setup lang="ts">
 import SearchIcon from '~/assets/icons/search.svg?component';
+import RefreshIcon from '~/assets/icons/refresh.svg?component';
 import CommonInputText from '~/components/common/CommonInputText.vue';
 import CommonDatePicker from '../common/CommonDatePicker.vue';
 import BasicDashboard from '../basic/BasicDashboard.vue';
@@ -77,6 +86,15 @@ function editToken(id: number) {
     navigateTo(`/dashboard/token-${ id }`);
 }
 
+function generateToken() {
+    newToken.value.token = generateRandomString(6);
+}
+
+function reset() {
+    newToken.value = defaultToken;
+    generateToken();
+}
+
 async function createToken() {
     await createInviteToken.mutateAsync({
         data: {
@@ -97,6 +115,7 @@ async function createToken() {
         },
     }).then(() => {
         refetch();
+        reset();
     }).catch(error => {
         if (error && error.info.zodErrors && Array.isArray(error.info.zodErrors.issues)) {
             const messages = error.info.zodErrors.issues.map((issue: ZodIssue) => `${ issue.path.join('.') }: ${ issue.message }`).join('\n');
@@ -121,4 +140,17 @@ async function deleteToken(id: number) {
         });
     }
 }
+
+onMounted(() => {
+    generateToken();
+});
 </script>
+<style scoped lang="scss">
+.token-generate {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    flex-direction: row;
+    gap: 8px;
+}
+</style>
