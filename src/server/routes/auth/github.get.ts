@@ -41,7 +41,8 @@ export default defineEventHandler(async event => {
 
     const userData = authData.data;
 
-    if (!userData.id || userData.id === 0) {
+    if (!userData?.id || userData?.id === 0) {
+        console.error(`Did not receive auth data from github`);
         return sendRedirect(event, '/login/error?msg=' + encodeURIComponent('GitHub read user failed'));
     }
 
